@@ -1,0 +1,32 @@
+.auth__content{
+
+    .auth__link{
+        text-align: center;
+        margin-bottom: 3rem;
+        display: flex;
+        gap: 2rem;
+        width: 100%;
+        flex-direction: row;
+
+        & *{
+            width: 100%;
+        }
+
+        & a{
+            color: $color1;
+
+            &:hover{
+                color: lighten($color: $color1, $amount: 20);
+            }
+
+        }
+
+        @media (min-width: $bk-780){
+            & *{
+                width: unset;
+            }
+        }
+
+    }
+
+}

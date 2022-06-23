@@ -1,0 +1,80 @@
+.auth{
+    height: 100vh;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 33.33%);
+
+    &__sider{
+        background-color: $color2;
+        color: $color1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        max-height: 30rem;
+
+        & h1{
+            font-size: 4.6rem;
+            color: $dark-title1;
+            padding: 0;
+            margin: 0;
+
+            @media (min-width: $bk-300){
+                font-size: 5.2rem;
+            }
+
+        }
+
+        & h3.ant-typography{
+            font-size: 2.8rem;
+            color: $color1;
+            padding: 0;
+            margin: 0;
+
+            @media (min-width: $bk-1000){
+                color: $color2;
+            }
+
+        }
+
+        &--icon{
+            font-size: 3rem;
+        }
+
+    }
+
+    &__content{
+        background: $color2;
+        grid-row: 2/4;
+        width: 100%;
+    }
+
+    @media (min-width: $bk-480){
+        &__content{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10rem;
+        }
+    }
+
+    @media (min-width: $bk-1000) {
+        &{
+            grid-template-columns: repeat(6,1fr);
+            grid-template-rows: unset;
+        }
+        &__sider{
+            color: $color2;
+            background: $color1;
+            grid-column: 1/3;
+            max-height: unset;
+        }
+        &__content{
+            grid-column: 3/7;
+            grid-row: unset;
+        }
+    }
+
+}
