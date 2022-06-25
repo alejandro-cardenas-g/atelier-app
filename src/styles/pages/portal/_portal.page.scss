@@ -1,0 +1,116 @@
+.portal{
+    width: 100%;
+    min-height: 100vh;
+    // position: relative;
+
+    &__sider{
+        position: absolute;
+        position: fixed;
+        overflow-y: auto;
+        // display: block;
+        width: 100%;
+        height: 100%;
+        background-color: $color1;
+        box-sizing: content-box;
+        transition: transform 0.3s ease;
+        overflow-wrap: break-word;
+                
+        &::-webkit-scrollbar{
+            width: 8px
+        };
+        &::-webkit-scrollbar-track{
+            background-color: $dark-title2;
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: $color3;
+            border-radius: 20px;
+            border: 2px solid $dark-title2;
+        }
+
+        &--hide{
+            transform: translate(-100%);
+        }
+
+        &-content{
+            padding: 5rem 0;
+        }
+
+        @media(min-width: $bk-480){
+            &{
+                width: $ps-300;
+
+                &--hide{
+                    transform: translate(-$ps-300);
+                }
+
+                &-content{
+                    padding: 0 0rem;
+                }
+            }
+        }
+
+        @media(min-width: $bk-780){
+            width: $ps-260;
+
+            &--hide{
+                transform: translate(-$ps-260);
+            }
+        }
+    
+        
+
+    }
+
+}
+
+.toggle__sider{
+    color: $color2;
+    background-color: $color1;
+    height: 40px;
+    width: 40px;
+    position: fixed;
+    left: 0;
+    top: calc(1%);
+    cursor: pointer;
+    font-size: 2rem;
+    border: 1px solid darken($color: $color1, $amount: 8);
+
+    &:hover{
+        background-color: darken($color: $color1, $amount: 3);
+    }
+
+    &--hide{
+        border: unset;
+        left: 0;
+        transform: translate(calc(100% - 40px));
+    }
+
+    @media(min-width: $bk-480){
+        &{
+            font-size: 1.8rem;
+            left: 300px;
+            height: 35px;
+            width: 35px;
+            transition: transform 0.3s ease;
+            top: calc(2%);
+            border: none;
+            
+            &--hide{
+                transform: translate(-300px);
+            }
+
+        }
+    }
+
+    @media(min-width: $bk-780){
+        &{
+            left: 260px;
+            
+            &--hide{
+                transform: translate(-260px);
+            }
+
+        }
+    }
+
+}

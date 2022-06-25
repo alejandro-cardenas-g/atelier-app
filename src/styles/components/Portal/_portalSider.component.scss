@@ -1,0 +1,48 @@
+.portal__sider-content{
+
+    .ant-menu-dark.ant-menu-inline .ant-menu-item,
+    .ant-menu-dark.ant-menu-inline .ant-menu-submenu-title{
+        color: $color2;
+    }
+
+    .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected{
+        background-color: $color3;
+    }
+
+    .ant-menu-root.ant-menu-vertical, 
+    .ant-menu-root.ant-menu-vertical-left, 
+    .ant-menu-root.ant-menu-vertical-right, 
+    .ant-menu-root.ant-menu-inline, 
+    .ant-menu-dark .ant-menu-inline.ant-menu-sub{
+        background-color: transparent;
+    }
+
+    .portal__sider-info{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 0;
+        flex-direction: column;
+
+        .portal__sider-auth-logo{
+            color: $color2;
+            font-size: 2rem;
+            background-color: $color3;
+            width: 3rem;
+            height: 3rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+    
+        .portal__sider-title{
+            color: $color2;
+            cursor: default;
+            user-select: none;
+        }
+
+    }
+
+}
