@@ -7,6 +7,12 @@
         gap: 2rem;
         width: 100%;
         flex-direction: row;
+        
+        &--info{
+            color: $dark-title1;
+            cursor: default;
+            user-select: none;
+        }
 
         & *{
             width: 100%;

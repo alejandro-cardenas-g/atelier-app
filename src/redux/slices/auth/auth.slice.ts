@@ -4,7 +4,7 @@ const authSlice = createSlice({
     name: 'auth',
     initialState: {
         loading: false,
-        isLogged: false
+        isLogged: true
     },
     reducers: {
         SET:(state,action) => {
