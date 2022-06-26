@@ -4,7 +4,9 @@ const authSlice = createSlice({
     name: 'auth',
     initialState: {
         loading: false,
-        isLogged: true
+        isLogged: true,
+        session_type: 1,
+        type: 1
     },
     reducers: {
         SET:(state,action) => {
@@ -21,4 +23,6 @@ export const { SET } = authSlice.actions;
 interface IState {
     loading: boolean;
     isLogged: boolean;
+    session_type: number;
+    type: number;
 }

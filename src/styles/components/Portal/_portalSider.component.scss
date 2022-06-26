@@ -30,17 +30,18 @@
             background-color: $color3;
             width: 3rem;
             height: 3rem;
-            text-align: center;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
+            text-align: center;
         }
     
         .portal__sider-title{
             color: $color2;
             cursor: default;
             user-select: none;
+            text-align: center;
         }
 
     }

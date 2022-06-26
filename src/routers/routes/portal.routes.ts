@@ -8,7 +8,7 @@ export const portalRoutes:IRoutes[] = [
     {
         path: ROUTES.PORTAL,
         isIndexComponent: IS_INDEX_COMPONENT.COMPONENT,
-        index: Nullish,
+        index: lazy(() => import('../../components/Pages/portal/Home/home.component')),
         indexHasLayout: true,
         layout: PortalPage,
         isPrivate: true,

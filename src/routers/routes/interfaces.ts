@@ -15,7 +15,7 @@ export interface IRoutes{
     indexHasLayout: boolean;
     layout: (props:any) => ReactElement;
     isPrivate: boolean;
-    index: JSXComponent;
+    index:  React.LazyExoticComponent<JSXComponent> | JSXComponent;
     redirect: PATHNAMES;
     routes: IRoute[];
 }
