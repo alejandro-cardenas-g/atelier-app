@@ -1,4 +1,5 @@
 import { createSlice, Reducer } from '@reduxjs/toolkit'
+import { TYPE_SESSION, TYPE_USER } from '../../../locales/auth/auth.locales';
 
 const authSlice = createSlice({
     name: 'auth',
@@ -23,6 +24,6 @@ export const { SET } = authSlice.actions;
 interface IState {
     loading: boolean;
     isLogged: boolean;
-    session_type: number;
-    type: number;
+    session_type: TYPE_SESSION;
+    type: TYPE_USER;
 }

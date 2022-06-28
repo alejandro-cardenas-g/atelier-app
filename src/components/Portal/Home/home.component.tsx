@@ -1,5 +1,5 @@
 import { Typography } from "antd";
-import { PORTAL_LOCALES } from "../../../../locales/portal/portal.locales";
+import { PORTAL_LOCALES } from "../../../locales/portal/portal.locales";
 import { HomeGrid } from "./homeGrid.component";
 
 const Texts = PORTAL_LOCALES['home'];
