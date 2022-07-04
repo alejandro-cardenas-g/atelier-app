@@ -1,7 +1,7 @@
-import { createSlice, Reducer } from '@reduxjs/toolkit'
+import { createSlice, Reducer, SliceCaseReducers } from '@reduxjs/toolkit'
 import { TYPE_SESSION, TYPE_USER } from '../../../locales/auth/auth.locales';
 
-const authSlice = createSlice({
+const authSlice = createSlice<IState, SliceCaseReducers<IState>>({
     name: 'auth',
     initialState: {
         loading: false,

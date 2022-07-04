@@ -19,7 +19,7 @@ export const LoginContent = () => {
     const [enterAs, setEnterAs] = useState<string>('');
 
     useEffect(() => {
-        console.log(typeSession);
+
         if(typeSession === TYPE_SESSION.ADMIN){
             setRoutePortal(PATHNAMES.AUTH_CLIENTE_LOGIN);
             setRoutePortalText(AUTHLOCALES['portalLink']['admin']['link']);
@@ -32,10 +32,8 @@ export const LoginContent = () => {
         } 
     }, [typeSession]);
 
-    console.log(routePortal);
-
     const handleSubmit = ({email, password, remember}: ILoginForm) => {
-        console.log(email, password, remember);
+
     }
 
     return (
