@@ -1,0 +1,68 @@
+.portal-usuarios{
+
+    &__info{
+
+        .ant-btn[ant-click-animating-without-extra-node='true']::after{display: none;}
+
+        width: 100%;
+
+        @media(min-width: $bk-1000){
+            width: 80%;
+        }
+
+        &-actions{
+            margin-top: 3rem;
+            display: flex;
+            justify-content: center;
+            flex-direction: column-reverse;
+            width: 100%;
+            gap: 1rem;
+
+            @media (min-width: $bk-480){
+                flex-direction: row;
+                justify-content: space-between;
+                gap: unset;
+            }
+
+        }
+
+    }
+
+    &__search{
+
+        .ant-input{
+            border-right: 1px solid $color1;
+        }
+
+        .ant-input:focus, .ant-input-focused, .ant-input:hover{
+            box-shadow: none;
+            border: 1px solid $color1;
+        }
+
+        .ant-btn:hover, .ant-btn:focus{
+            border-color: $color1;
+            background: #fff;
+            border-left-color: $color1 !important;
+        }
+
+        width: 100%;
+
+        @media (min-width: $bk-480){
+            &{
+                width: 25rem;
+            }
+        }
+    }
+
+    &__table{
+
+        width: 100%;
+        overflow: hidden;
+
+        @media (min-width: $bk-1000){
+            width: 80%;
+        }
+
+    }
+
+}

@@ -1,0 +1,31 @@
+.custom-table{
+
+    width: 100%;
+    overflow: auto;
+
+    thead.ant-table-thead{
+
+        th{
+            border: none;
+            background-color: $color3;
+            color: white;
+
+        }
+
+    }
+
+    .custom-table-menu{ 
+        .ant-btn{
+            border: 1px solid $color3;
+
+            &:hover{
+                border-color: red;
+            }
+        }
+    }
+
+}
+
+.custom-table__row{
+    background-color: $color2;
+}
