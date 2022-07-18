@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useLocation, Link } from 'react-router-dom'
 
-import { TYPE_SESSION, AUTHLOCALES } from "../../../locales/auth/auth.locales";
-import { identifyTypeSession } from "../../../utils/auth/identifyTypeSession";
+import { TYPE_SESSION, AUTHLOCALS } from "../../../locales/auth/auth.locals";
+import { identifyTypeSession } from "../../../utils/auth/identifyTypeSession.util";
 import { PATHNAMES } from '../../../routers/routes.enum';
 import { ILoginForm } from "../../../interfaces/auth/authLogin.interface";
 import { LoginForm } from "./";
@@ -22,13 +22,13 @@ export const LoginContent = () => {
 
         if(typeSession === TYPE_SESSION.ADMIN){
             setRoutePortal(PATHNAMES.AUTH_CLIENTE_LOGIN);
-            setRoutePortalText(AUTHLOCALES['portalLink']['admin']['link']);
-            setEnterAs(AUTHLOCALES['portalLink']['admin']['role']);
+            setRoutePortalText(AUTHLOCALS['portalLink']['admin']['link']);
+            setEnterAs(AUTHLOCALS['portalLink']['admin']['role']);
         } 
         else{
             setRoutePortal(PATHNAMES.AUTH_LOGIN);
-            setRoutePortalText(AUTHLOCALES['portalLink']['client']['link']);
-            setEnterAs(AUTHLOCALES['portalLink']['client']['role']);
+            setRoutePortalText(AUTHLOCALS['portalLink']['client']['link']);
+            setEnterAs(AUTHLOCALS['portalLink']['client']['role']);
         } 
     }, [typeSession]);
 

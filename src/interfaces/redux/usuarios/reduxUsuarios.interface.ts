@@ -1,6 +1,11 @@
 export interface IUsers{
     name: string;
-    lastName: string;
+    lastname: string;
     email: string;
-    type: string;
+    type: number;
+}
+
+export interface IUserDetail{
+    name: string;
+    lastname: string;
 }

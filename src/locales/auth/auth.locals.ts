@@ -1,4 +1,4 @@
-export const AUTHLOCALES =  {
+export const AUTHLOCALS =  {
     portal: {
         admin: 'Admin',
         client: 'Clientes'

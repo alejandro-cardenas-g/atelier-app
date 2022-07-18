@@ -1,0 +1,41 @@
+.pagination{
+    margin-top: 2rem;
+
+    .ant-pagination-item a,
+    .ant-pagination-prev button,
+    .ant-pagination-next button{
+        color: $color3;
+        border: unset;
+        font-size: 1.2rem;
+    }
+
+    .ant-pagination-item,
+    .ant-pagination-prev,
+    .ant-pagination-next {
+
+        &:hover{
+            border: 1px solid $color3;
+            color: $color3;
+            font-size: 1.2rem;
+        }
+
+        & button:hover{
+            color: $color3;
+            font-size: 1.2rem;
+        }
+
+    }
+
+    .ant-pagination-item-active{
+        border: 1px solid $color3;
+        background-color: $color3;
+
+        & span,
+        button,
+        a{
+            color: $color2;
+        }
+
+    }
+
+}

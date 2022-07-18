@@ -1,0 +1,16 @@
+.ani-cont{
+
+    animation-name: opacity;
+    animation-duration: 1.3s;
+    transition: opacity ease-in;
+
+    @keyframes opacity {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+}

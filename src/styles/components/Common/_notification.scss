@@ -1,0 +1,41 @@
+.notification-1{
+
+    width: 100%;
+    font-size: 1.2rem;
+    padding: 1rem;
+    
+    .ant-notification-notice-message{
+        font-size: 1.2rem;
+        margin-left: 0;
+        color: red;
+
+        @media (min-width: $bk-380){
+            font-size: 1.4rem;
+            margin-left: 4rem;
+        }
+    }
+
+    .ant-notification-notice-description{
+        font-size: 1.2rem;
+        margin-left: 0;
+
+        @media (min-width: $bk-380){
+            font-size: 1.4rem;
+        }
+    }
+
+    .anticon.anticon-close-circle.ant-notification-notice-icon.ant-notification-notice-icon-error{
+        display: none;
+        @media (min-width: $bk-380){
+            display: block;
+        }
+    }
+
+    .ant-notification-notice-close{
+        display: none;
+    }
+
+    @media (min-width: $bk-380){
+        width: 25rem;
+    }
+}

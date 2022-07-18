@@ -1,9 +1,15 @@
 import { Layout } from "antd"
-import { ReactElement } from "react"
+import { ReactElement, useEffect } from 'react';
 import { PortalContent } from "../../components/Pages/portal/portalContent.component"
 import { PortalSider } from "../../components/Pages/portal/portalSider.component"
+import { dispatchGetCommon } from "../../redux/dispatchers/portal/common.dispatch"
 
 export const PortalPage = ({children}: IProps) => {
+
+    useEffect(() => {
+        dispatchGetCommon();
+    }, [dispatchGetCommon])
+
     return (
         <Layout className='portal'>
             

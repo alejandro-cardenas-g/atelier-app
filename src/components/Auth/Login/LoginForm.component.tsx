@@ -1,7 +1,7 @@
 import { Button, Checkbox, Form, Input } from 'antd'
 
 import { ILoginForm } from '../../../interfaces/auth/authLogin.interface'
-import { validateEmail } from '../../../utils/auth/loginForm.validator'
+import { validateEmail } from '../../../utils/auth/loginForm.validator.util'
 
 export const LoginForm = ({handleSubmit}:IProps) => {
 

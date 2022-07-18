@@ -1,5 +1,5 @@
 import { PATHNAMES } from '../../routers/routes.enum';
-import { TYPE_SESSION } from '../../locales/auth/auth.locales';
+import { TYPE_SESSION } from '../../locales/auth/auth.locals';
 
 export const identifyTypeSession = (pathname: string): number => {
 

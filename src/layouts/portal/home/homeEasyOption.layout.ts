@@ -1,8 +1,8 @@
 import { DeploymentUnitOutlined, CalendarOutlined, ScheduleOutlined } from '@ant-design/icons';
-import { TYPE_USER } from '../../locales/auth/auth.locales';
-import { PORTAL_LOCALES } from '../../locales/portal/portal.locales';
+import { TYPE_USER } from '../../../locales/auth/auth.locals';
+import { PORTAL_LOCALS } from '../../../locales/portal/portal.locals';
 
-const OPTIONS = PORTAL_LOCALES['home']['options'];
+const OPTIONS = PORTAL_LOCALS['home']['options'];
 
 type UserTypes = {
     [key in TYPE_USER]: [IhomeEasyOptionLayout,IhomeEasyOptionLayout,IhomeEasyOptionLayout];

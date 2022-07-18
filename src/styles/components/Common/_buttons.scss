@@ -13,4 +13,22 @@
 
     }
 
+    &__black{
+        color: white !important;
+        background-color: $color3 !important;
+        border: none;
+
+        &:hover{
+            color: white !important;
+            background-color: darken($color: $color3, $amount: 5) !important;
+            border: none !important;
+        }
+
+        &--r2{
+            border-top-right-radius: 1px;
+            border-bottom-right-radius: 1px;
+        }
+
+    }
+
 }

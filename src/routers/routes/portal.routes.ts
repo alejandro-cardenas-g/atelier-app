@@ -17,7 +17,7 @@ export const portalRoutes:IRoutes[] = [
             {
                 path: ROUTES.PORTAL_USERS,
                 isPrivate: true,
-                component: lazy(() => import('../../components/Portal/Usuarios/usuarios.component')),
+                component: lazy(() => import('../../components/Portal/Users/users.component')),
                 layout: PortalPage,
                 props: {
 

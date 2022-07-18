@@ -1,7 +1,7 @@
 import { createSlice, Reducer, SliceCaseReducers } from '@reduxjs/toolkit'
-import { TYPE_SESSION, TYPE_USER } from '../../../locales/auth/auth.locales';
+import { TYPE_SESSION, TYPE_USER } from '../../../locales/auth/auth.locals';
 
-const authSlice = createSlice<IState, SliceCaseReducers<IState>>({
+const authSlice = createSlice<IStateAuth, SliceCaseReducers<IStateAuth>>({
     name: 'auth',
     initialState: {
         loading: false,
@@ -17,11 +17,11 @@ const authSlice = createSlice<IState, SliceCaseReducers<IState>>({
     }
 });
 
-export const authReducer:Reducer<IState> = authSlice.reducer
+export const authReducer:Reducer<IStateAuth> = authSlice.reducer
 
 export const { SET } = authSlice.actions;
 
-interface IState {
+export interface IStateAuth {
     loading: boolean;
     isLogged: boolean;
     session_type: TYPE_SESSION;

@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import { Nullish } from "../../components/Common/Nullish.component";
-import { AUTHLOCALES } from "../../locales/auth/auth.locales";
+import { AUTHLOCALS } from "../../locales/auth/auth.locals";
 import { AuthPage } from "../../pages/auth/authPage.page";
 import { IRoutes, IS_INDEX_COMPONENT } from "./interfaces";
 import { ROUTES, PATHNAMES } from '../routes.enum';
@@ -24,7 +24,7 @@ export const authRoutes:IRoutes[] = [
                 component: LoginContent,
                 layout: AuthPage,
                 props: {
-                    text: AUTHLOCALES['portal']['admin']
+                    text: AUTHLOCALS['portal']['admin']
                 }
             },
             {
@@ -33,7 +33,7 @@ export const authRoutes:IRoutes[] = [
                 component: LoginContent,
                 layout: AuthPage,
                 props: {
-                    text: AUTHLOCALES['portal']['client']
+                    text: AUTHLOCALS['portal']['client']
                 }
             }
         ]

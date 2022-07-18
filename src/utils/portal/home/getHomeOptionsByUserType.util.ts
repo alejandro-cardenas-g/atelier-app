@@ -1,5 +1,5 @@
-import { homeEasyOptionLayouts } from "../../../layouts/portal/homeEasyOption.layout";
-import { TYPE_USER } from "../../../locales/auth/auth.locales";
+import { homeEasyOptionLayouts } from "../../../layouts/portal/home/homeEasyOption.layout";
+import { TYPE_USER } from "../../../locales/auth/auth.locals";
 
 
 export function getHomeOptionsByUserType(userType: TYPE_USER,){
