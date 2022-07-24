@@ -4,41 +4,21 @@ import { Row, Dropdown } from 'antd'
 import { ColumnsType } from 'antd/lib/table';
 import { MenuTable } from './menuTable.component';
 import { useSelector } from 'react-redux';
+import { useNavigate } from "react-router-dom"
 
-import { IRowUsuarioDataType } from '../../../interfaces/portal/usuarios/rowDataType.interface';
+import { IRowUsuarioDataType } from '../../../interfaces/portal/users/rowDataType.interface';
 import { getUsersPortal } from '../../../redux/selectors/portal.selector';
 import { PORTAL_LOCALS } from '../../../locales/portal/portal.locals';
-import { dispatchGetUsers } from '../../../redux/dispatchers/portal/users.dispatch';
+import { dispatchGetUsers, setUserDispatch } from '../../../redux/dispatchers/portal/users.dispatch';
 import { CustomTable } from '../../Common/CustomTable.component';
 import { getUserTypes } from '../../../redux/selectors/common.selector';
+import { EDropDownMenuItemsTable } from "../../../interfaces/portal/users/users.interface";
 
 const TABLE_COLUMNS_LOCALES = PORTAL_LOCALS['users']['tableColumns'];
 
-const columns: ColumnsType<IRowUsuarioDataType> = [
-    {
-        title: TABLE_COLUMNS_LOCALES['name']['title'],
-        dataIndex: TABLE_COLUMNS_LOCALES['name']['dataIndex'],
-        render: (text: string) => <p>{text}</p>,
-    },
-    {
-        title: TABLE_COLUMNS_LOCALES['type']['title'],
-        dataIndex: TABLE_COLUMNS_LOCALES['type']['dataIndex'],
-    },
-    {
-        title: TABLE_COLUMNS_LOCALES['email']['title'],
-        dataIndex: TABLE_COLUMNS_LOCALES['email']['dataIndex'],
-    },
-    {
-        title: TABLE_COLUMNS_LOCALES['dropdown']['title'],
-        dataIndex: TABLE_COLUMNS_LOCALES['dropdown']['dataIndex'],
-        render: () => <Dropdown.Button 
-                overlay={MenuTable} icon={<MoreOutlined/>} placement='bottomLeft'>
-            </Dropdown.Button>
-    }
-];
-
 export const UsersTable = () => {
     
+    const navigate = useNavigate();
     const {users:usuarios, total, isLoading} = useSelector(getUsersPortal);
     const userTypes = useSelector(getUserTypes);
 
@@ -55,7 +35,7 @@ export const UsersTable = () => {
             name: `${usuario.name} ${usuario.lastname}`,
             type: userType ? userType.value : 'No definido',
             email: `${usuario.email}`,
-            dropdown: null
+            dropdown: usuario.id
         }
     })
 
@@ -66,6 +46,41 @@ export const UsersTable = () => {
     const handleSelection = (selectedRowKeys: React.Key[], selectedRows: IRowUsuarioDataType[]) => {
         console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
     }
+
+    const handleClick = (key: string, userId:number) => {
+        switch(key){
+            case EDropDownMenuItemsTable.DETAIL:
+                setUserDispatch(userId);
+                navigate(`/usuarios/?type=2`);
+            case EDropDownMenuItemsTable.EVENTS:
+                break;
+            case EDropDownMenuItemsTable.DELETE:
+                break;
+        }
+    }
+
+    const columns: ColumnsType<IRowUsuarioDataType> = [
+        {
+            title: TABLE_COLUMNS_LOCALES['name']['title'],
+            dataIndex: TABLE_COLUMNS_LOCALES['name']['dataIndex'],
+            render: (text: string) => <p>{text}</p>,
+        },
+        {
+            title: TABLE_COLUMNS_LOCALES['type']['title'],
+            dataIndex: TABLE_COLUMNS_LOCALES['type']['dataIndex'],
+        },
+        {
+            title: TABLE_COLUMNS_LOCALES['email']['title'],
+            dataIndex: TABLE_COLUMNS_LOCALES['email']['dataIndex'],
+        },
+        {
+            title: TABLE_COLUMNS_LOCALES['dropdown']['title'],
+            dataIndex: TABLE_COLUMNS_LOCALES['dropdown']['dataIndex'],
+            render: (id) => <Dropdown.Button 
+                    overlay={MenuTable({handleClick, userId: id})} icon={<MoreOutlined/>} placement='bottomLeft'>
+                </Dropdown.Button>
+        }
+    ];
     
     return (
 

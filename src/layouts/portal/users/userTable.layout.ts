@@ -1,22 +1,23 @@
 import { DeleteOutlined, MenuOutlined, ScheduleOutlined } from "@ant-design/icons";
 import { JSXElementConstructor } from "react";
+import { EDropDownMenuItemsTable } from "../../../interfaces/portal/users/users.interface";
 
 export const dropDownMenuItems: IDropDownMenuItems[] = [
     {
         label: 'Detalles',
-        key: '1',
+        key: EDropDownMenuItemsTable.DETAIL,
         icon: MenuOutlined,
         danger: false
     },
     {
         label: 'Eventos',
-        key: '2',
+        key: EDropDownMenuItemsTable.EVENTS,
         icon: ScheduleOutlined,
         danger: false
     },
     {
         label: 'Eliminar',
-        key: '3',
+        key: EDropDownMenuItemsTable.DELETE,
         icon: DeleteOutlined,
         danger: true
     },
@@ -24,7 +25,7 @@ export const dropDownMenuItems: IDropDownMenuItems[] = [
 
 interface IDropDownMenuItems{
     label: string;
-    key: string;
+    key: string | number;
     icon: JSXElementConstructor<any>,
     danger: boolean;
 }

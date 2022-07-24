@@ -9,13 +9,14 @@ export const CustomForm = ({
     initialValues,
     handleSubmit,
     LAYOUT,
-    form
+    form,
+    className = ''
 }:IProps) => {
 
     return (
         
         <Form
-            className='form-users'
+            className={`custom-form ${className}`}
             name="basic"
             initialValues={initialValues}
             autoComplete="off"
@@ -98,5 +99,6 @@ interface IProps{
     initialValues: Object;
     handleSubmit: (values: any) => void;
     LAYOUT: IFormLayout[];
-    form: FormInstance
+    form: FormInstance;
+    className: string
 }

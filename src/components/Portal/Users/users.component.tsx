@@ -5,7 +5,7 @@ import { USUARIOS_CONTENT } from '../../../layouts/portal/users/userContent.layo
 import { EUsersContent, PATH_USERS_TYPE } from '../../../locales/portal/portalUsers.locals';
 import { UsuariosInfo } from './usersInfo.component';
 import { parse } from 'query-string'
-import { IUsersContent } from '../../../interfaces/portal/usuarios/contentUsers.interface';
+import { IUsersContent } from '../../../interfaces/portal/users/contentUsers.interface';
 import { Nullish } from '../../Common/Nullish.component';
 
 export const Users = () => {

@@ -1,8 +1,9 @@
 import { lazy } from "react";
-import { IUsersContent } from "../../../interfaces/portal/usuarios/contentUsers.interface";
+import { IUsersContent } from "../../../interfaces/portal/users/contentUsers.interface";
 import { EUsersContent } from "../../../locales/portal/portalUsers.locals";
 
 const UsersRegister = lazy(() => import('../../../components/Portal/Users/userRegister.component'));
+const UsersDetails = lazy(() => import('../../../components/Portal/Users/userDetails.component'));
 
 export const USUARIOS_CONTENT:IUsersContent[] = [
     {
@@ -16,7 +17,7 @@ export const USUARIOS_CONTENT:IUsersContent[] = [
         props: {} 
     },
     {
-        Component: UsersRegister,
+        Component: UsersDetails,
         action: EUsersContent.UPDATE,
         props: {} 
     }

@@ -3,6 +3,7 @@ export interface IUsers{
     lastname: string;
     email: string;
     type: number;
+    id: number;
 }
 
 export interface IUserDetail{

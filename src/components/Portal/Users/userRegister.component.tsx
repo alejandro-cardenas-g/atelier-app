@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Form } from "antd"
 import { RcFile, UploadFile } from "antd/lib/upload/interface"
-import { IRegisterForm } from "../../../interfaces/portal/usuarios/contentUsers.interface";
+import { IRegisterForm } from "../../../interfaces/portal/users/contentUsers.interface";
 import { UserRegisterForm } from "./userRegisterForm.component";
 
 export const UserRegister = () => {
@@ -16,7 +16,7 @@ export const UserRegister = () => {
     type: 0,
     phone: '',
     job: '',
-    address: ''     
+    address: ''
   }
 
   const handleSubmit = (values: IRegisterForm, file: UploadFile | null) => {
@@ -31,8 +31,6 @@ export const UserRegister = () => {
       password,
       phone
     } = values;
-
-    console.log(values);
 
     const data = new FormData();
     (address) && data.append('address',address);

@@ -3,5 +3,5 @@ export interface IRowUsuarioDataType {
     name: string;
     type: string;
     email: string;
-    dropdown: null;
+    dropdown: number;
 }

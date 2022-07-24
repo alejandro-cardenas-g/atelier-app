@@ -2,12 +2,12 @@ import { createSlice, Reducer, SliceCaseReducers } from '@reduxjs/toolkit';
 import { IUsers } from '../../../interfaces/redux/usuarios/reduxUsuarios.interface';
 import { extraReducer } from '../../extraReducers/portal/users/users.extraReducers';
 
-const usuariosSlice = createSlice<IStateUsers, SliceCaseReducers<IStateUsers>>({
+const usersSlice = createSlice<IStateUsers, SliceCaseReducers<IStateUsers>>({
     name: 'users',
     initialState: {
         users: [],
         isLoading: false,
-        userDetail: {},
+        activeUser: null,
         total: 0
     },
     reducers: {
@@ -19,20 +19,24 @@ const usuariosSlice = createSlice<IStateUsers, SliceCaseReducers<IStateUsers>>({
         },
         SET_USERS: (state, action) => {
             state.users = action.payload;
+        },
+        SET_ACTIVE_USER: (state, action: {payload: number}) => {
+            state.activeUser = action.payload;
         }
     },
     extraReducers: extraReducer
 });
 
-export const usuariosReducer:Reducer<IStateUsers> = usuariosSlice.reducer;
+export const usuariosReducer:Reducer<IStateUsers> = usersSlice.reducer;
 
 export const {
-    SET_USERS
-} = usuariosSlice.actions;
+    SET_USERS,
+    SET_ACTIVE_USER
+} = usersSlice.actions;
 
 export interface IStateUsers {
     users: IUsers[];
     isLoading: boolean;
-    userDetail: Object;
+    activeUser: number | null;
     total: number;
 }

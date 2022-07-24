@@ -8,7 +8,7 @@ export enum PATHNAMES {
         PORTAL_USERS = '/usuarios',
         PORTAL_CLIENTS = '/clientes',
         PORTAL_EQUIPOS = '/equipos',
-        PORTAL_EVENTOS = '/eventos'
+        PORTAL_EVENTOS = '/eventos',
 }
 
 export enum ROUTES{
