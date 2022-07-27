@@ -7,6 +7,17 @@ export interface IUsers{
 }
 
 export interface IUserDetail{
+    id: number;
     name: string;
     lastname: string;
+    type: number;
+    job: string;
+    email: string;
+    phone: string | null;
+    address: string | null;
 }
+
+export enum EUserDetailSection {
+    BASIC = 1,
+    CONTACT = 2
+} 

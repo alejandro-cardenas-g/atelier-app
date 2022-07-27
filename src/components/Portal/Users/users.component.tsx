@@ -9,7 +9,7 @@ import { IUsersContent } from '../../../interfaces/portal/users/contentUsers.int
 import { Nullish } from '../../Common/Nullish.component';
 
 export const Users = () => {
-        
+
     const location = useLocation();
     const navigate = useNavigate();
 

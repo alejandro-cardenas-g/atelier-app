@@ -1,5 +1,5 @@
 import { createSlice, Reducer, SliceCaseReducers } from '@reduxjs/toolkit';
-import { IUsers } from '../../../interfaces/redux/usuarios/reduxUsuarios.interface';
+import { EUserDetailSection, IUserDetail, IUsers } from '../../../interfaces/redux/usuarios/reduxUsuarios.interface';
 import { extraReducer } from '../../extraReducers/portal/users/users.extraReducers';
 
 const usersSlice = createSlice<IStateUsers, SliceCaseReducers<IStateUsers>>({
@@ -7,22 +7,17 @@ const usersSlice = createSlice<IStateUsers, SliceCaseReducers<IStateUsers>>({
     initialState: {
         users: [],
         isLoading: false,
-        activeUser: null,
-        total: 0
+        total: null,
+        detailSection: null,
+        userDetail: null
     },
     reducers: {
-        START_LOADING: (state, action) => {
-            state.isLoading = true
-        },
-        FINISH_LOADING: (state, action) => {
-            state.isLoading = false
-        },
         SET_USERS: (state, action) => {
             state.users = action.payload;
         },
-        SET_ACTIVE_USER: (state, action: {payload: number}) => {
-            state.activeUser = action.payload;
-        }
+        SET_USER_DETAIL_SECTION: (state, action: {payload: EUserDetailSection | null}) => {
+            state.detailSection = action.payload;
+        },
     },
     extraReducers: extraReducer
 });
@@ -31,12 +26,14 @@ export const usuariosReducer:Reducer<IStateUsers> = usersSlice.reducer;
 
 export const {
     SET_USERS,
-    SET_ACTIVE_USER
+    SET_ACTIVE_USER,
+    SET_USER_DETAIL_SECTION
 } = usersSlice.actions;
 
 export interface IStateUsers {
     users: IUsers[];
     isLoading: boolean;
-    activeUser: number | null;
-    total: number;
+    total: number | null;
+    detailSection: EUserDetailSection | null;
+    userDetail: IUserDetail | null;
 }

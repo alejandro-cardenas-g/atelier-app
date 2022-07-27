@@ -33,7 +33,7 @@ export const WritOptionInfo = () => {
     const navigate = useNavigate()
 
     const handleNavigate = () => {
-        navigate(PATH_USERS_TYPE[EUsersContent.READ]);
+        navigate(-1);
     }
 
     return (

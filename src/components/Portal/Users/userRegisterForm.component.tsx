@@ -25,20 +25,20 @@ export const UserRegisterForm = ({
     //HANDLEGENERATEPASSWORD
     const handleGeneratePassword = () => {
         form.setFieldsValue({
-        ...form.getFieldsValue(),
-        password: generateRandomString()
+            ...form.getFieldsValue(),
+            password: generateRandomString()
         })
     }
 
     //BUILDING NEW LAYOUT
     const newLayout = userRegistryFormLayout.map( (item) => {
         if(item.type === ETypeFormItem.INPUT || item.type ===  ETypeFormItem.DIVPASSWORD){
-        if(item.inputPrefix){
-            item.propsInput = {
-            ...item.propsInput!,
-            prefix: <item.inputPrefix/> 
+            if(item.inputPrefix){
+                item.propsInput = {
+                ...item.propsInput!,
+                prefix: <item.inputPrefix/> 
+                }
             }
-        }
         }
         if(item.key === 'divpassword'){
             item.Cop = ComponentForPassword(handleGeneratePassword);

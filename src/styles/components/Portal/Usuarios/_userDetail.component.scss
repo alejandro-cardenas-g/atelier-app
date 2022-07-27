@@ -1,0 +1,331 @@
+.portal-usuarios__details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+    .user-details-basic,
+    .user-details-contact,
+    .user-details-security{
+        max-width: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .form-details{
+            display: grid;
+            grid-template-columns: 1fr;
+            max-width: 100%;
+            width: 100%;
+        
+            @media(min-width: $bk-1000){
+                width: 80%;
+            }
+        }
+    }
+
+    .user-details-basic{
+        
+        .form-details{
+
+            &__item{
+
+                &-saveButton{
+                    max-width: 100%;
+                    width: 100%;
+                    display: block;
+                    .custom-btn__save{
+                        width: 100%;
+                    }
+                }
+
+                &-name,
+                &-lastname,
+                &-area,
+                &-job{
+                    max-width: 100%;
+                    display: block;
+                }
+
+            }
+
+            .separator-users{
+                &__basic{
+                    color: $dark-title3;
+                    font-weight: 300;
+                    font-size: 2.2rem;
+                    text-align: center;
+                }
+    
+                &__basic{
+                    margin-bottom: 2rem;
+                }
+    
+            }
+
+            @media(min-width: $bk-300){
+                &__item{
+
+                    &-saveButton{
+
+                        .custom-btn__save{
+                            width: 10rem;
+                        }
+                    }
+                }
+            }
+    
+            @media (min-width: $bk-480){
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+                grid-template-areas: 
+                    "basic basic"
+                    "name lastname"
+                    "area job"
+                    "saveButton saveButton";
+    
+                &__item{
+        
+                    &-name{
+                        grid-area: name;
+                    }
+        
+                    &-lastname{
+                        grid-area: lastname; 
+                    }
+        
+                    &-area{
+                        grid-area: area;
+                    }
+        
+                    &-job{
+                        grid-area: job;
+                    }
+
+                    &-saveButton{
+                        grid-area: saveButton;
+
+                        .ant-form-item-control-input-content{
+                            display: flex;
+                            justify-content: flex-end;
+                        }
+
+                    }
+
+                }
+
+                .separator-users{
+                    &__basic{
+                        grid-area: basic;
+                        font-size: 2.2rem;
+                        text-align: left;
+                        margin: 0;
+                    }
+                }
+
+            }
+
+        }
+        
+    }
+
+    .user-details-contact{
+        
+        .form-details{
+        
+            &__item{
+
+                &-saveButton{
+                    max-width: 100%;
+                    width: 100%;
+                    display: block;
+                    .custom-btn__save{
+                        width: 100%;
+                    }
+                }
+
+                &-email,
+                &-address,
+                &-phone{
+                    max-width: 100%;
+                    display: block;
+                }
+
+            }
+        
+            .separator-users{
+                &__contact{
+                    color: $dark-title3;
+                    font-weight: 300;
+                    font-size: 2.2rem;
+                    text-align: center;
+                }
+    
+                &__contact{
+                    margin-bottom: 2rem;
+                }
+    
+            }
+
+            @media(min-width: $bk-300){
+                &__item{
+
+                    &-saveButton{
+
+                        .custom-btn__save{
+                            width: 10rem;
+                        }
+                    }
+                }
+            }
+
+            @media (min-width: $bk-480){
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+                grid-template-areas: 
+                    "contact contact"
+                    "email phone"
+                    "address address"
+                    "saveButton saveButton";
+    
+                &__item{
+        
+                    &-email{
+                        grid-area: email;
+                    }
+        
+                    &-address{
+                        grid-area: address; 
+                    }
+        
+                    &-phone{
+                        grid-area: phone;
+                    }
+
+                    &-saveButton{
+                        grid-area: saveButton;
+
+                        .ant-form-item-control-input-content{
+                            display: flex;
+                            justify-content: flex-end;
+                        }
+
+                    }
+
+                }
+
+                .separator-users{
+                    &__contact{
+                        grid-area: contact;
+                        font-size: 2.2rem;
+                        text-align: left;
+                        margin: 0;
+                    }
+                }
+
+            }
+
+            @media (min-width: $bk-680){
+                grid-template-areas: 
+                "contact contact"
+                "email phone"
+                "address none"
+                "saveButton saveButton";
+            }
+
+        }
+    }
+
+    .user-details-security{
+        
+        .form-details{
+        
+            &__item{
+                &-saveButton{
+                    max-width: 100%;
+                    width: 100%;
+                    display: block;
+                    .custom-btn__save{
+                        width: 100%;
+                    }
+                }
+
+                &-password{
+                    max-width: 100%;
+                    display: block;
+                }
+            }
+
+            .separator-users{
+                &__security{
+                    color: $dark-title3;
+                    font-weight: 300;
+                    font-size: 2.2rem;
+                    text-align: center;
+                }
+    
+                &__security{
+                    margin-bottom: 2rem;
+                }
+    
+            }
+
+            @media(min-width: $bk-300){
+                &__item{
+
+                    &-saveButton{
+
+                        .custom-btn__save{
+                            width: 10rem;
+                        }
+                    }
+                }
+            }
+
+            @media (min-width: $bk-480){
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+                grid-template-areas: 
+                    "security security"
+                    "password password"
+                    "saveButton saveButton";
+    
+                &__item{
+        
+                    &-password{
+                        grid-area: password;
+                    }
+
+                    &-saveButton{
+                        grid-area: saveButton;
+
+                        .ant-form-item-control-input-content{
+                            display: flex;
+                            justify-content: flex-end;
+                        }
+
+                    }
+
+                }
+
+                .separator-users{
+                    &__security{
+                        grid-area: security;
+                        font-size: 2.2rem;
+                        text-align: left;
+                        margin: 0;
+                    }
+                }
+
+            }
+
+            @media (min-width: $bk-680){
+                grid-template-areas: 
+                "security security"
+                "password none"
+                "saveButton saveButton";
+            }
+        }
+    }
+
+}

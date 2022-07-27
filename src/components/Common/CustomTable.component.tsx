@@ -3,27 +3,28 @@ import { ColumnsType } from "antd/lib/table";
 import { RowSelectMethod } from "antd/lib/table/interface";
 
 export const CustomTable = ({
-    total,
+    total = 0,
     handlePageNumber,
     loading,
     columns,
     data,
-    handleSelection
+    handleSelection,
+    currentPage
 }:IProps) => {
     return (
         <>
-                <Table
-            className='custom-table'
-            rowClassName='custom-table__row'
-            pagination={false}
-            rowSelection={{
-                type: 'checkbox',
-                onChange: handleSelection
-            }}
-            sticky
-            loading={loading}
-            columns={columns}
-            dataSource={data}
+            <Table
+                className='custom-table'
+                rowClassName='custom-table__row'
+                pagination={false}
+                rowSelection={{
+                    type: 'checkbox',
+                    onChange: handleSelection
+                }}
+                sticky
+                loading={loading}
+                columns={columns}
+                dataSource={data}
             />
 
             <Pagination
@@ -32,6 +33,8 @@ export const CustomTable = ({
                 onChange={(pageNumber) => handlePageNumber(pageNumber)}
                 pageSize={10}
                 showSizeChanger={false}
+                current={currentPage}
+                hideOnSinglePage
             />
         </>
     )
@@ -43,5 +46,6 @@ interface IProps{
     loading: boolean;
     columns: ColumnsType<any>;
     data: any[] | undefined;
-    handleSelection: (selectedRowKeys: React.Key[], selectedRows: any[], info: { type: RowSelectMethod; }) => void
+    handleSelection: (selectedRowKeys: React.Key[], selectedRows: any[], info: { type: RowSelectMethod; }) => void;
+    currentPage: number;
 }

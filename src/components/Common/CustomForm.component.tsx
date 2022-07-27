@@ -4,24 +4,26 @@ import Dragger from 'antd/lib/upload/Dragger';
 import React from 'react';
 import { IFormLayout } from '../../interfaces/layouts/formLayout.interface';
 import { ETypeFormItem } from '../../locales/portal/portalUsers.locals';
+import { SaveButton } from './saveButton.component';
 
 export const CustomForm = ({
     initialValues,
     handleSubmit,
     LAYOUT,
     form,
-    className = ''
+    className = '',
+    onFieldsChange = () => {}
 }:IProps) => {
 
     return (
         
         <Form
             className={`custom-form ${className}`}
-            name="basic"
             initialValues={initialValues}
             autoComplete="off"
             onFinish={handleSubmit}
             form={form}
+            onFieldsChange={onFieldsChange}
         >
             {
                 LAYOUT.map((item, index) => {
@@ -83,6 +85,16 @@ export const CustomForm = ({
                                 </Form.Item>
                             </React.Fragment>
 
+                        case ETypeFormItem.SAVE_BUTTON:
+
+                            const visible = item.propsInput?.visible ? 'block' : 'none';
+
+                            return <React.Fragment key={item.key}>
+                            <Form.Item {...item.props} style={{display: visible}}>
+                                <SaveButton {...item.propsInput}/>
+                            </Form.Item>
+                        </React.Fragment>
+
                         default:
                             return null;
                     }
@@ -100,5 +112,6 @@ interface IProps{
     handleSubmit: (values: any) => void;
     LAYOUT: IFormLayout[];
     form: FormInstance;
-    className: string
+    className: string;
+    onFieldsChange?: () => void;
 }

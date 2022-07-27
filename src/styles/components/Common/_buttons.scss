@@ -31,4 +31,24 @@
 
     }
 
+    &__save{
+        color: $dark-title3 !important;
+        background-color: darken($color: $background-gray, $amount: 5) !important;
+        transition-property: color, background-color;
+        transition-duration: 0.5s;
+        transition-timing-function: ease-in-out;
+        border: none;
+
+        &:hover{
+            color: lighten($color: $dark-title3, $amount: 5) !important;
+            background-color: darken($color: $background-gray, $amount: 9) !important;
+            border: none !important;
+        }
+
+        &--r2{
+            border-top-right-radius: 1px;
+            border-bottom-right-radius: 1px;
+        }
+    }
+
 }

@@ -17,5 +17,6 @@ export enum ETypeFormItem{
     SELECT = 4,
     UPLOAD = 5,
     BUTTON = 6,
+    SAVE_BUTTON = 7,
     NONE = 7
 }

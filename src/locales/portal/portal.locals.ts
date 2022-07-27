@@ -108,6 +108,20 @@ export const PORTAL_LOCALS = {
                 },
                 button: 'Crear usuario'
             }
+        },
+        details: {
+            form: {
+                saveButton: 'Guardar'
+            },
+            basic: {
+                description: 'Información Básica'
+            },
+            contact: {
+                description: 'Información de contacto'
+            },
+            security: {
+                description: 'Seguridad'
+            }
         }
     }
 }

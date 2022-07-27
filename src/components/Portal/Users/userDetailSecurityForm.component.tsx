@@ -2,35 +2,49 @@ import { Form } from "antd";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { EUserDetailSection, IUserDetail } from "../../../interfaces/redux/usuarios/reduxUsuarios.interface";
-import { userDetailPersonalFormLayout } from "../../../layouts/portal/users/userDetailPersonalForm.layout";
+import { userDetailSecurityFormLayout } from "../../../layouts/portal/users/userDetailSecurityForm.layout";
 import { ETypeFormItem } from "../../../locales/portal/portalUsers.locals";
 import { setUserDetailSection } from "../../../redux/dispatchers/portal/users.dispatch";
-import { getUserTypes } from "../../../redux/selectors/common.selector";
 import { getUserDetailsSection } from "../../../redux/selectors/users.selector";
+import { generateRandomString } from "../../../utils/stringTools/generateRandomString.util";
 import { CustomForm } from "../../Common/CustomForm.component";
+import { ComponentForPassword, PasswordVisibleComponent } from "./userRegisterFormSubComponent.component";
 
-export const UserDetailsPersonalForm = ({userDetail}: IProps) => {
+export const UserDetailsSecurityForm = ({userDetail}: IProps) => {
     
     const { 
         detailSection,
         isLoading
     } = useSelector(getUserDetailsSection);
-    const types = useSelector(getUserTypes);
 
     const [form] = Form.useForm();
 
     const [ hasChanged, setHasChanged ] = useState<boolean>(false);
 
+    const [showPassword, setShowPassword] = useState<boolean>(false);
+    const [typePassword, SetTypePassword] = useState<'password' | 'text'>('password');
+
+    //HANDLEGENERATEPASSWORD
+    const handleGeneratePassword = () => {
+        form.setFieldsValue({
+            ...form.getFieldsValue(),
+            password: generateRandomString()
+        })
+    }
+
     const initialValues: IInitialValues = {
-        name: userDetail.name || '',
-        lastname: userDetail.lastname || '',
-        type: userDetail.type || 0,
-        job: userDetail.job || ''
+        password: ''
     }
 
     //BUILDING NEW LAYOUT
-    const newLayout = userDetailPersonalFormLayout.map( (item) => {
-        if(item.type === ETypeFormItem.INPUT){
+    const newLayout = userDetailSecurityFormLayout.map( (item) => {
+        if(item.type === ETypeFormItem.DIVPASSWORD){
+            item.Cop = ComponentForPassword(handleGeneratePassword);
+            item.propsInput = {
+                ...item.propsInput,
+                addonAfter: PasswordVisibleComponent(showPassword, setShowPassword, SetTypePassword),
+                type: typePassword
+            }
             if(item.inputPrefix){
                 item.propsInput = {
                 ...item.propsInput!,
@@ -42,19 +56,7 @@ export const UserDetailsPersonalForm = ({userDetail}: IProps) => {
             item.propsInput = {
                 ...item.propsInput,
                 visible: hasChanged,
-                loading: isLoading && EUserDetailSection.BASIC === detailSection
-            }
-        }
-        if(item.key === 'select-area'){
-            item.propsInput = {
-                ...item.propsInput,
-                options: types.map((item) => {
-                    return {
-                        label: item.value,
-                        value: item.id,
-                        children: item.value
-                    }
-                })
+                loading: isLoading && EUserDetailSection.CONTACT === detailSection
             }
         }
         return item;
@@ -67,11 +69,11 @@ export const UserDetailsPersonalForm = ({userDetail}: IProps) => {
 
     const handleChange = () => {
         setHasChanged(true);
-        setUserDetailSection(EUserDetailSection.BASIC); 
+        setUserDetailSection(EUserDetailSection.CONTACT); 
     } 
 
     return (
-        <div className='user-details-basic'>
+        <div className='user-details-security'>
 
             <CustomForm
                 className="form-details"
@@ -91,8 +93,5 @@ interface IProps{
 }
 
 interface IInitialValues{
-    name: string;
-    lastname: string;
-    job: string;
-    type: number;
+    password: string;
 }

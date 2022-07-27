@@ -4,31 +4,42 @@ import { Row, Dropdown } from 'antd'
 import { ColumnsType } from 'antd/lib/table';
 import { MenuTable } from './menuTable.component';
 import { useSelector } from 'react-redux';
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 
 import { IRowUsuarioDataType } from '../../../interfaces/portal/users/rowDataType.interface';
-import { getUsersPortal } from '../../../redux/selectors/portal.selector';
+import { getUsersPortal } from '../../../redux/selectors/users.selector';
 import { PORTAL_LOCALS } from '../../../locales/portal/portal.locals';
-import { dispatchGetUsers, setUserDispatch } from '../../../redux/dispatchers/portal/users.dispatch';
+import { dispatchGetUserDetail, dispatchGetUsers } from '../../../redux/dispatchers/portal/users.dispatch';
 import { CustomTable } from '../../Common/CustomTable.component';
 import { getUserTypes } from '../../../redux/selectors/common.selector';
 import { EDropDownMenuItemsTable } from "../../../interfaces/portal/users/users.interface";
+import { parse } from 'query-string';
 
 const TABLE_COLUMNS_LOCALES = PORTAL_LOCALS['users']['tableColumns'];
 
 export const UsersTable = () => {
     
     const navigate = useNavigate();
-    const {users:usuarios, total, isLoading} = useSelector(getUsersPortal);
+    const location = useLocation();
+    const { page } = parse(location.search);
+    const {users, total, isLoading} = useSelector(getUsersPortal);
     const userTypes = useSelector(getUserTypes);
 
-    const [ page, setPage ] = useState(1);
+    const [ currentPage, setCurrentPage ] = useState<number>((typeof(page) === 'string') ? Number.parseInt(page) : 1);
 
     useEffect(() => {
-        dispatchGetUsers(page);
-    }, [page]);
+        if(total && users.length === 0 && currentPage !== 1){
+            setCurrentPage(1);
+            navigate(`/usuarios?type=0&page=${1}`)
+        }
+    }, [users, currentPage, total])
 
-    const data: IRowUsuarioDataType[] = usuarios.map((usuario, index) => {
+    useEffect(() => {
+        navigate(`/usuarios?type=0&page=${currentPage}`)
+        dispatchGetUsers(currentPage);
+    }, [currentPage]);
+
+    const data: IRowUsuarioDataType[] = users.map((usuario, index) => {
         const userType = userTypes.find((item) => item.id === usuario.type);
         return {
             key: index,
@@ -40,7 +51,7 @@ export const UsersTable = () => {
     })
 
     const handlePageNumber = (pageNumber: number) => {
-        setPage(pageNumber);
+        setCurrentPage(pageNumber);
     }
 
     const handleSelection = (selectedRowKeys: React.Key[], selectedRows: IRowUsuarioDataType[]) => {
@@ -50,7 +61,7 @@ export const UsersTable = () => {
     const handleClick = (key: string, userId:number) => {
         switch(key){
             case EDropDownMenuItemsTable.DETAIL:
-                setUserDispatch(userId);
+                dispatchGetUserDetail(userId);
                 navigate(`/usuarios/?type=2`);
             case EDropDownMenuItemsTable.EVENTS:
                 break;
@@ -92,7 +103,8 @@ export const UsersTable = () => {
                 handlePageNumber={handlePageNumber}
                 handleSelection={handleSelection}
                 loading={isLoading}
-                total={total}
+                total={total || 0}
+                currentPage={currentPage}
             />
 
         </Row>

@@ -1,6 +1,9 @@
 import { store } from "../../../store/store";
-import { getUsers } from "../../thunks/users.thunk";
-import { SET_ACTIVE_USER } from "../../slices/portal/usuarios.slice";
+import { getUserDetail, getUsers } from "../../thunks/users.thunk";
+import { SET_ACTIVE_USER, SET_USER_DETAIL_SECTION } from "../../slices/portal/users.slice";
+import { EUserDetailSection } from "../../../interfaces/redux/usuarios/reduxUsuarios.interface";
 
 export const dispatchGetUsers = (page: number) => store.dispatch(getUsers(page));
-export const setUserDispatch = (userId: number) => store.dispatch(SET_ACTIVE_USER(userId));
+export const setUserDetailSection = (section: EUserDetailSection | null) => 
+    store.dispatch(SET_USER_DETAIL_SECTION(section));
+export const dispatchGetUserDetail = (id: number) => store.dispatch(getUserDetail(id));

@@ -5,7 +5,9 @@ import { IRegisterForm } from "../../../interfaces/portal/users/contentUsers.int
 import { UserRegisterForm } from "./userRegisterForm.component";
 
 export const UserRegister = () => {
-  
+
+  window.scrollTo({top: 0, behavior: 'smooth'});
+
   const [form] = Form.useForm();
 
   const initialValues:IRegisterForm = {

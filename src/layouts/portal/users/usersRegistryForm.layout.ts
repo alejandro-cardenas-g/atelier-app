@@ -61,18 +61,7 @@ export const userRegistryFormLayout:IFormLayout[] = [
                 value: number;
                 children: string;
             } | undefined) => (option!.children as unknown as string).toLowerCase().includes(input.toLowerCase()),
-            options: [
-              {
-                label: 'Administración',
-                value: 1,
-                children: 'Administración'
-              },
-              {
-                label: 'Mantenimiento',
-                value: 2,
-                children: 'Mantenimiento'
-              }
-            ]
+            options: []
         },
         
     },
@@ -164,7 +153,8 @@ export const userRegistryFormLayout:IFormLayout[] = [
         propsInput: {
             placeholder: formLocals['phone']['placeholder'],
             'aria-label': formLocals['phone']['ariaLabel'],
-            type: 'number'
+            type: 'number',
+            min: 0
         },
         inputPrefix: PhoneOutlined,
     },
