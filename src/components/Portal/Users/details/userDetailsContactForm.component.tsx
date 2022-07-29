@@ -1,12 +1,12 @@
 import { Form } from "antd";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { EUserDetailSection, IUserDetail } from "../../../interfaces/redux/usuarios/reduxUsuarios.interface";
-import { userDetailContactFormLayout } from "../../../layouts/portal/users/userDetailContactForm.layout";
-import { ETypeFormItem } from "../../../locales/portal/portalUsers.locals";
-import { setUserDetailSection } from "../../../redux/dispatchers/portal/users.dispatch";
-import { getUserDetailsSection } from "../../../redux/selectors/users.selector";
-import { CustomForm } from "../../Common/CustomForm.component";
+import { EUserDetailSection, IUserDetail } from "../../../../interfaces/redux/usuarios/reduxUsuarios.interface";
+import { userDetailContactFormLayout } from "../../../../layouts/portal/users/userDetailContactForm.layout";
+import { ETypeFormItem } from "../../../../locales/portal/portalUsers.locals";
+import { setUserDetailSection } from "../../../../redux/dispatchers/portal/users.dispatch";
+import { getUserDetailsSection } from "../../../../redux/selectors/users.selector";
+import { CustomForm } from "../../../Common/CustomForm.component";
 
 export const UserDetailsContactForm = ({userDetail}: IProps) => {
     

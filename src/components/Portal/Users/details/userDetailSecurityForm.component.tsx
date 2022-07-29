@@ -1,14 +1,14 @@
 import { Form } from "antd";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { EUserDetailSection, IUserDetail } from "../../../interfaces/redux/usuarios/reduxUsuarios.interface";
-import { userDetailSecurityFormLayout } from "../../../layouts/portal/users/userDetailSecurityForm.layout";
-import { ETypeFormItem } from "../../../locales/portal/portalUsers.locals";
-import { setUserDetailSection } from "../../../redux/dispatchers/portal/users.dispatch";
-import { getUserDetailsSection } from "../../../redux/selectors/users.selector";
-import { generateRandomString } from "../../../utils/stringTools/generateRandomString.util";
-import { CustomForm } from "../../Common/CustomForm.component";
-import { ComponentForPassword, PasswordVisibleComponent } from "./userRegisterFormSubComponent.component";
+import { EUserDetailSection, IUserDetail } from "../../../../interfaces/redux/usuarios/reduxUsuarios.interface";
+import { userDetailSecurityFormLayout } from "../../../../layouts/portal/users/userDetailSecurityForm.layout";
+import { ETypeFormItem } from "../../../../locales/portal/portalUsers.locals";
+import { setUserDetailSection } from "../../../../redux/dispatchers/portal/users.dispatch";
+import { getUserDetailsSection } from "../../../../redux/selectors/users.selector";
+import { generateRandomString } from "../../../../utils/stringTools/generateRandomString.util";
+import { CustomForm } from "../../../Common/CustomForm.component";
+import { ComponentForPassword, PasswordVisibleComponent } from "../utils/usersFormUtils.component";
 
 export const UserDetailsSecurityForm = ({userDetail}: IProps) => {
     
@@ -56,7 +56,7 @@ export const UserDetailsSecurityForm = ({userDetail}: IProps) => {
             item.propsInput = {
                 ...item.propsInput,
                 visible: hasChanged,
-                loading: isLoading && EUserDetailSection.CONTACT === detailSection
+                loading: isLoading && EUserDetailSection.PRIVACY === detailSection
             }
         }
         return item;
@@ -69,7 +69,7 @@ export const UserDetailsSecurityForm = ({userDetail}: IProps) => {
 
     const handleChange = () => {
         setHasChanged(true);
-        setUserDetailSection(EUserDetailSection.CONTACT); 
+        setUserDetailSection(EUserDetailSection.PRIVACY); 
     } 
 
     return (

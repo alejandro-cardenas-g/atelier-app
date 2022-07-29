@@ -1,8 +1,8 @@
 import { Col, Row, Typography } from 'antd'
-import { UsersInfoContentLayout } from '../../../layouts/portal/users/userInfoContent.layout'
-import { EUsersContent } from '../../../locales/portal/portalUsers.locals'
+import { UsersInfoContentLayout } from '../../../../layouts/portal/users/userInfoContent.layout'
+import { EUsersContent } from '../../../../locales/portal/portalUsers.locals'
 import { useEffect, useState } from 'react';
-import { PORTAL_LOCALS } from '../../../locales/portal/portal.locals';
+import { PORTAL_LOCALS } from '../../../../locales/portal/portal.locals';
 
 const OPTION_LOCALES = PORTAL_LOCALS['users']['info'];
 

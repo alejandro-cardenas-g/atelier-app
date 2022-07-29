@@ -1,5 +1,5 @@
 import { Menu } from "antd"
-import { dropDownMenuItems } from "../../../layouts/portal/users/userTable.layout"
+import { dropDownMenuItems } from "../../../../layouts/portal/users/userTable.layout"
 
 export const MenuTable = ({handleClick, userId}: IProps) => {
 

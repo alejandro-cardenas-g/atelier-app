@@ -6,13 +6,13 @@ import { MenuTable } from './menuTable.component';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from "react-router-dom"
 
-import { IRowUsuarioDataType } from '../../../interfaces/portal/users/rowDataType.interface';
-import { getUsersPortal } from '../../../redux/selectors/users.selector';
-import { PORTAL_LOCALS } from '../../../locales/portal/portal.locals';
-import { dispatchGetUserDetail, dispatchGetUsers } from '../../../redux/dispatchers/portal/users.dispatch';
-import { CustomTable } from '../../Common/CustomTable.component';
-import { getUserTypes } from '../../../redux/selectors/common.selector';
-import { EDropDownMenuItemsTable } from "../../../interfaces/portal/users/users.interface";
+import { IRowUsuarioDataType } from '../../../../interfaces/portal/users/rowDataType.interface';
+import { getUsersPortal } from '../../../../redux/selectors/users.selector';
+import { PORTAL_LOCALS } from '../../../../locales/portal/portal.locals';
+import { dispatchGetUserDetail, dispatchGetUsers } from '../../../../redux/dispatchers/portal/users.dispatch';
+import { CustomTable } from '../../../Common/CustomTable.component';
+import { getUserTypes } from '../../../../redux/selectors/common.selector';
+import { EDropDownMenuItemsTable } from "../../../../interfaces/portal/users/users.interface";
 import { parse } from 'query-string';
 
 const TABLE_COLUMNS_LOCALES = PORTAL_LOCALS['users']['tableColumns'];
@@ -62,7 +62,7 @@ export const UsersTable = () => {
         switch(key){
             case EDropDownMenuItemsTable.DETAIL:
                 dispatchGetUserDetail(userId);
-                navigate(`/usuarios/?type=2`);
+                navigate(`/usuarios?type=2`);
             case EDropDownMenuItemsTable.EVENTS:
                 break;
             case EDropDownMenuItemsTable.DELETE:

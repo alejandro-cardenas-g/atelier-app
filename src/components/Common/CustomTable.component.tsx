@@ -25,6 +25,9 @@ export const CustomTable = ({
                 loading={loading}
                 columns={columns}
                 dataSource={data}
+                scroll={{
+                    x:true
+                }}
             />
 
             <Pagination

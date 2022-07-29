@@ -1,14 +1,14 @@
 import { useState } from "react"
 import { FormInstance } from "antd"
 import { UploadChangeParam, UploadFile } from "antd/lib/upload/interface"
-import { generateRandomString } from "../../../utils/stringTools/generateRandomString.util"
-import { CustomForm } from "../../Common/CustomForm.component"
-import { userRegistryFormLayout } from "../../../layouts/portal/users/usersRegistryForm.layout"
-import { ETypeFormItem } from "../../../locales/portal/portalUsers.locals"
-import { IRegisterForm } from "../../../interfaces/portal/users/contentUsers.interface";
-import { ComponentForPassword, PasswordVisibleComponent, UploadBody } from "./userRegisterFormSubComponent.component";
+import { generateRandomString } from "../../../../utils/stringTools/generateRandomString.util"
+import { CustomForm } from "../../../Common/CustomForm.component"
+import { userRegistryFormLayout } from "../../../../layouts/portal/users/usersRegistryForm.layout"
+import { ETypeFormItem } from "../../../../locales/portal/portalUsers.locals"
+import { IRegisterForm } from "../../../../interfaces/portal/users/contentUsers.interface";
+import { ComponentForPassword, PasswordVisibleComponent, UploadBody } from "../utils/usersFormUtils.component";
 import { useSelector } from 'react-redux'
-import { getUserTypes } from "../../../redux/selectors/common.selector";
+import { getUserTypes } from "../../../../redux/selectors/common.selector";
 
 export const UserRegisterForm = ({
     form,

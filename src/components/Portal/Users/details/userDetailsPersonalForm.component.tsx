@@ -1,13 +1,13 @@
 import { Form } from "antd";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { EUserDetailSection, IUserDetail } from "../../../interfaces/redux/usuarios/reduxUsuarios.interface";
-import { userDetailPersonalFormLayout } from "../../../layouts/portal/users/userDetailPersonalForm.layout";
-import { ETypeFormItem } from "../../../locales/portal/portalUsers.locals";
-import { setUserDetailSection } from "../../../redux/dispatchers/portal/users.dispatch";
-import { getUserTypes } from "../../../redux/selectors/common.selector";
-import { getUserDetailsSection } from "../../../redux/selectors/users.selector";
-import { CustomForm } from "../../Common/CustomForm.component";
+import { EUserDetailSection, IUserDetail } from "../../../../interfaces/redux/usuarios/reduxUsuarios.interface";
+import { userDetailPersonalFormLayout } from "../../../../layouts/portal/users/userDetailPersonalForm.layout";
+import { ETypeFormItem } from "../../../../locales/portal/portalUsers.locals";
+import { setUserDetailSection } from "../../../../redux/dispatchers/portal/users.dispatch";
+import { getUserTypes } from "../../../../redux/selectors/common.selector";
+import { getUserDetailsSection } from "../../../../redux/selectors/users.selector";
+import { CustomForm } from "../../../Common/CustomForm.component";
 
 export const UserDetailsPersonalForm = ({userDetail}: IProps) => {
     

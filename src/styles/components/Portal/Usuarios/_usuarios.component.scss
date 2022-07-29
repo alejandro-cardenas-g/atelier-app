@@ -65,7 +65,8 @@
 
     }
 
-    &__registry{
+    &__registry,
+    &__details{
         width: 100%;
 
         @media (min-width: $bk-1000){

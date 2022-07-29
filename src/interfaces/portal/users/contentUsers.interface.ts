@@ -15,5 +15,5 @@ export interface IRegisterForm{
     job: string,
     type: number,
     address: string | null,
-    phone: string | null,
+    phone: string | null
 }

@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { Form } from "antd"
 import { RcFile, UploadFile } from "antd/lib/upload/interface"
-import { IRegisterForm } from "../../../interfaces/portal/users/contentUsers.interface";
+import { IRegisterForm } from "../../../../interfaces/portal/users/contentUsers.interface";
 import { UserRegisterForm } from "./userRegisterForm.component";
 
-export const UserRegister = () => {
+window.scrollTo({top: 0, behavior: 'smooth'});
 
-  window.scrollTo({top: 0, behavior: 'smooth'});
+export const UserRegister = () => {
 
   const [form] = Form.useForm();
 
@@ -21,7 +21,7 @@ export const UserRegister = () => {
     address: ''
   }
 
-  const handleSubmit = (values: IRegisterForm, file: UploadFile | null) => {
+  const handleSubmit = async(values: IRegisterForm, file: UploadFile | null) => {
 
     const {
       address,
@@ -45,11 +45,13 @@ export const UserRegister = () => {
     data.append('password',password);
     (file) && data.append('file', file?.originFileObj as RcFile);
 
-    axios.post('http://localhost:3000/data', data,{
+    const a = await axios.post('http://localhost:3000/data', data, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
-    })
+    });
+
+    console.log(a)
 
   }
 

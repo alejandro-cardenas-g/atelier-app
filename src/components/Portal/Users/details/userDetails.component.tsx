@@ -2,11 +2,12 @@ import { Divider } from "antd";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getUserDetails } from "../../../redux/selectors/users.selector";
-import { Spinner } from "../../Common/Spinner.component";
+import { getUserDetails } from "../../../../redux/selectors/users.selector";
+import { Spinner } from "../../../Common/Spinner.component";
 import { UserDetailsContactForm } from "./userDetailsContactForm.component";
 import { UserDetailsSecurityForm } from "./userDetailSecurityForm.component";
 import { UserDetailsPersonalForm } from "./userDetailsPersonalForm.component";
+import { UserDetailsUploadForm } from "./userDetailsUploadForm.component";
 
 export const UserDetails = () => {
 
@@ -28,6 +29,8 @@ export const UserDetails = () => {
             <UserDetailsContactForm userDetail={details!}/>
             <Divider/>
             <UserDetailsSecurityForm userDetail={details!}/>
+            <Divider/>
+            <UserDetailsUploadForm userDetail={details!}/>
         </div>
     )
 }

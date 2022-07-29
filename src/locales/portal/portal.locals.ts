@@ -26,7 +26,7 @@ export const PORTAL_LOCALS = {
     users: {
         tableColumns: {
             name: {
-                title: 'Nombre Completo',
+                title: 'Nombre',
                 dataIndex: 'name'
             },
             type: {

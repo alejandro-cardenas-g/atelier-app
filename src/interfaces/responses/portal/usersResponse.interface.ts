@@ -14,4 +14,6 @@ export interface IUserDetailResponse{
     email: string;
     address: string | null;
     phone: string | null;
+    filename: string | null;
+    fileUrl: string | null;
 }

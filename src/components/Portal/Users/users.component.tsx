@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { USUARIOS_CONTENT } from '../../../layouts/portal/users/userContent.layout';
 import { EUsersContent, PATH_USERS_TYPE } from '../../../locales/portal/portalUsers.locals';
-import { UsuariosInfo } from './usersInfo.component';
+import { UsuariosInfo } from './utils/usersInfo.component';
 import { parse } from 'query-string'
 import { IUsersContent } from '../../../interfaces/portal/users/contentUsers.interface';
 import { Nullish } from '../../Common/Nullish.component';

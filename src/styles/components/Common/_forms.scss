@@ -32,15 +32,16 @@
 
     & input
     {
-        padding: 0.3rem 0 !important;
+        padding: 0.02rem 0 !important;
     }
 
     & .ant-select-single:not(.ant-select-customize-input) .ant-select-selector{
-        height: 3.7rem !important;
+        // height: 3.7rem !important;
+        height: 3.2rem !important;
     }
 
     .ant-select-single .ant-select-selector .ant-select-selection-item, .ant-select-single .ant-select-selector .ant-select-selection-placeholder{
-        line-height: 3.5rem !important;
+        line-height: 3.1rem !important;
     }
 
     .ant-input-group-addon{

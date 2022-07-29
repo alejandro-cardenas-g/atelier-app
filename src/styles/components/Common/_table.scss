@@ -6,10 +6,16 @@
     thead.ant-table-thead{
 
         th{
+            font-size: 1.1rem !important;
             border: none;
             background-color: $color3;
             color: white;
-
+            
+            @media(min-width: $bk-680){
+                &{
+                    font-size: 1.4rem !important;
+                }
+            }
         }
 
     }
@@ -28,4 +34,11 @@
 
 .custom-table__row{
     background-color: $color2;
+    font-size: 1.1rem !important;
+
+    @media(min-width: $bk-680){
+        &{
+            font-size: 1.4rem !important;
+        }
+    }
 }
