@@ -11,7 +11,6 @@ const authSlice = createSlice<IStateAuth, SliceCaseReducers<IStateAuth>>({
     },
     reducers: {
         SET:(state,action) => {
-            console.log(action.payload)
             state.loading = !state.loading
         },
     }

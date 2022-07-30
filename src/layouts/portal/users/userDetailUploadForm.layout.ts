@@ -1,4 +1,3 @@
-import { CloudDownloadOutlined } from "@ant-design/icons";
 import { IFormLayout } from "../../../interfaces/layouts/formLayout.interface";
 import { PORTAL_LOCALS } from "../../../locales/portal/portal.locals";
 import { ETypeFormItem } from "../../../locales/portal/portalUsers.locals";
@@ -27,7 +26,7 @@ export const userDetailUploadFormLayout:IFormLayout[] = [
         key: 'dragger-file',
         type: ETypeFormItem.UPLOAD,
         props: {
-            className: 'form-details__item-file'
+            className: 'form-details__item-file',
         },
         propsInput: {
             multiple: false,

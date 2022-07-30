@@ -1,5 +1,4 @@
-import { Button, Form, FormInstance, Select, SelectProps, Typography } from 'antd'
-import Input from 'antd/lib/input/Input';
+import { Button, Form, FormInstance, Input, Select, SelectProps, Typography } from 'antd'
 import Dragger from 'antd/lib/upload/Dragger';
 import React from 'react';
 import { IFormLayout } from '../../interfaces/layouts/formLayout.interface';
@@ -58,7 +57,7 @@ export const CustomForm = ({
                             return <React.Fragment key={item.key}>
                                 <div {...item.propsDiv}>
                                     <Form.Item {...item.props}>
-                                        <Input {...item.propsInput}/>
+                                        <Input.Password {...item.propsInput}/>
                                     </Form.Item>
                                     {
                                         item.Cop && <item.Cop/>

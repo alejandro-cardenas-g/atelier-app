@@ -1,5 +1,5 @@
 import { Form, Modal } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { EUserDetailSection, IUserDetail } from "../../../../interfaces/redux/usuarios/reduxUsuarios.interface";
 import { userDetailSecurityFormLayout } from "../../../../layouts/portal/users/userDetailSecurityForm.layout";
@@ -8,7 +8,7 @@ import { dispatchPatchSimpleUserDetail, setUserDetailSection } from "../../../..
 import { getUserDetailsSection } from "../../../../redux/selectors/users.selector";
 import { generateRandomString } from "../../../../utils/stringTools/generateRandomString.util";
 import { CustomForm } from "../../../Common/CustomForm.component";
-import { ComponentForPassword, PasswordVisibleComponent, UserInfoConfirmation } from "../utils/usersFormUtils.component";
+import { ComponentForPassword, UserInfoConfirmation } from "../utils/usersFormUtils.component";
 
 export const UserDetailsSecurityForm = ({userDetail}: IProps) => {
 
@@ -20,10 +20,8 @@ export const UserDetailsSecurityForm = ({userDetail}: IProps) => {
     const [form] = Form.useForm();
 
     const [ hasChanged, setHasChanged ] = useState<boolean>(false);
-
-    const [showPassword, setShowPassword] = useState<boolean>(false);
-    const [typePassword, SetTypePassword] = useState<'password' | 'text'>('password');
     const [showModal, setShowModal] = useState<boolean>(false);
+    const [password, setPassword] = useState<string | null>(null);
 
     //HANDLEGENERATEPASSWORD
     const handleGeneratePassword = () => {
@@ -41,12 +39,7 @@ export const UserDetailsSecurityForm = ({userDetail}: IProps) => {
     //BUILDING NEW LAYOUT
     const newLayout = userDetailSecurityFormLayout.map( (item) => {
         if(item.type === ETypeFormItem.DIVPASSWORD){
-            item.Cop = ComponentForPassword(handleGeneratePassword);
-            item.propsInput = {
-                ...item.propsInput,
-                addonAfter: PasswordVisibleComponent(showPassword, setShowPassword, SetTypePassword),
-                type: typePassword
-            }
+            item.Cop = ComponentForPassword({handleGeneratePassword});
             if(item.inputPrefix){
                 item.propsInput = {
                 ...item.propsInput!,
@@ -69,6 +62,7 @@ export const UserDetailsSecurityForm = ({userDetail}: IProps) => {
             password: form.getFieldValue('password')
         }}).then(result => {
             if(result.meta.requestStatus === "fulfilled"){
+                setPassword(form.getFieldValue('password'));
                 setShowModal(true);
                 setHasChanged(false);
                 setUserDetailSection(null);
@@ -88,6 +82,14 @@ export const UserDetailsSecurityForm = ({userDetail}: IProps) => {
 
     return (
         <div className='user-details-security'>
+            <CustomForm
+                className="form-details"
+                form={form}
+                initialValues={initialValues}
+                handleSubmit={handleSubmit}
+                LAYOUT={newLayout}
+                onFieldsChange={handleChange}
+            />
             <Modal 
                 confirmLoading={isLoading && EUserDetailSection.PRIVACY === detailSection}
                 visible={showModal}
@@ -98,22 +100,13 @@ export const UserDetailsSecurityForm = ({userDetail}: IProps) => {
                 footer={null}
                 children={
                 <UserInfoConfirmation 
-                    password={form.getFieldValue('password')}
+                    password={password}
                     email={userDetail.email}
                     name={`${userDetail.name} ${userDetail.lastname}`}
                     onClose={handleReset}
                 />
                 }
             />
-            <CustomForm
-                className="form-details"
-                form={form}
-                initialValues={initialValues}
-                handleSubmit={handleSubmit}
-                LAYOUT={newLayout}
-                onFieldsChange={handleChange}
-            />
-
         </div>
     )
 }

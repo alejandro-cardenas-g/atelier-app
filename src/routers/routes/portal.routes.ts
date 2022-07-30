@@ -24,6 +24,15 @@ export const portalRoutes:IRoutes[] = [
                 }
             },
             {
+                path: ROUTES.PORTAL_USER_DETAIL,
+                isPrivate: true,
+                component: lazy(() => import('../../components/Portal/Users/users.component')),
+                layout: PortalPage,
+                props: {
+                    
+                } 
+            },
+            {
                 path: ROUTES.PORTAL_CLIENTS,
                 isPrivate: true,
                 component: Nullish,

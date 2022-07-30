@@ -5,9 +5,7 @@ import { UserRegisterForm } from "./userRegisterForm.component";
 import { usePostAxios } from '../../../../hooks/usePostAxios.hook';
 import { privateApi } from '../../../../api/config';
 import { UserInfoConfirmation } from "../utils/usersFormUtils.component";
-import { PORTAL_LOCALS } from "../../../../locales/portal/portal.locals";
-
-const registryLocals =  PORTAL_LOCALS['users']['registry'];
+import { useEffect, useState } from "react";
 
 window.scrollTo({top: 0, behavior: 'smooth'});
 
@@ -16,6 +14,12 @@ export const UserRegister = () => {
   const {execute, loading, result, reset} = usePostAxios<FormData, any>(privateApi, {
     messageOnError: true
   });
+
+  const [modalInfo, setModalInfo] = useState<Record<string, string | null>>({
+    name: null,
+    email: null,
+    password: null
+  })
 
   const [form] = Form.useForm();
 
@@ -60,6 +64,13 @@ export const UserRegister = () => {
       }
     });
 
+    setModalInfo(prev => ({
+      ...prev,
+      name: `${name} ${lastname}`,
+      email,
+      password
+    }))
+
   }
 
   const handleReset = () => {
@@ -79,9 +90,9 @@ export const UserRegister = () => {
         footer={null}
         children={
           <UserInfoConfirmation 
-            name={`${form.getFieldValue('name')} ${form.getFieldValue('lastname')}`}
-            email={form.getFieldValue('email')}
-            password={form.getFieldValue('password')}
+            name={modalInfo.name}
+            email={modalInfo.email}
+            password={modalInfo.password}
             onClose={handleReset}
           />
         }

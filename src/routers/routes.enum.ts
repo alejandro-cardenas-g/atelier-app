@@ -12,6 +12,8 @@ export enum PATHNAMES {
 }
 
 export enum ROUTES{
+        //COMMON ROUTES
+        ID = ':id',
         //AUTH_ROUTES
         AUTH = 'auth',
         AUTH_LOGIN = 'login',
@@ -19,7 +21,10 @@ export enum ROUTES{
         //PORTAL_ROUTES
         PORTAL = '/',
         PORTAL_SETTINGS = 'settings',
+        // PORTAL USER ROUTES
         PORTAL_USERS = 'usuarios',
+        PORTAL_USER_DETAIL = 'usuarios/:id',
+        // PORTAL CLIENT ROUTES
         PORTAL_CLIENTS = 'clientes',
         PORTAL_EQUIPOS = 'equipos',
         PORTAL_EVENTOS = 'eventos'

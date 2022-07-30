@@ -6,7 +6,6 @@ import { RootState } from "../../store/store";
 
 export const getCommon = createAsyncThunk('common/get', async() => {
     try{
-        console.log("llegó");
         const response = await privateApi.get<ICommonResponse>(`/commons`);
         const { data } = response;
         return data;
@@ -19,7 +18,6 @@ export const getCommon = createAsyncThunk('common/get', async() => {
     condition: (_, api) => {
         const { common } = api.getState() as (RootState);
         if(common.exists){
-            console.log("no llegó");
             return false;
         }
         return true;

@@ -6,7 +6,7 @@ import { CustomForm } from "../../../Common/CustomForm.component"
 import { userRegistryFormLayout } from "../../../../layouts/portal/users/usersRegistryForm.layout"
 import { ETypeFormItem } from "../../../../locales/portal/portalUsers.locals"
 import { IRegisterForm } from "../../../../interfaces/portal/users/contentUsers.interface";
-import { ComponentForPassword, PasswordVisibleComponent, UploadBody } from "../utils/usersFormUtils.component";
+import { ComponentForPassword, UploadBody } from "../utils/usersFormUtils.component";
 import { useSelector } from 'react-redux'
 import { getUserTypes } from "../../../../redux/selectors/common.selector";
 
@@ -17,9 +17,6 @@ export const UserRegisterForm = ({
 
     const types = useSelector(getUserTypes);
 
-    const [showPassword, setShowPassword] = useState<boolean>(false);
-    const [typePassword, SetTypePassword] = useState<'password' | 'text'>('password');
-  
     const [file, setFile] = useState<UploadFile | null>(null)
 
     //HANDLEGENERATEPASSWORD
@@ -41,12 +38,7 @@ export const UserRegisterForm = ({
             }
         }
         if(item.key === 'divpassword'){
-            item.Cop = ComponentForPassword(handleGeneratePassword);
-            item.propsInput = {
-                ...item.propsInput,
-                addonAfter: PasswordVisibleComponent(showPassword, setShowPassword, SetTypePassword),
-                type: typePassword
-            }
+            item.Cop = ComponentForPassword({handleGeneratePassword});
         }
         if(item.key === 'dragger-file'){
         item.Cop = UploadBody;

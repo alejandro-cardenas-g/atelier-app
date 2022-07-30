@@ -1,5 +1,4 @@
 import { EUsersContent } from "../../../locales/portal/portalUsers.locals"
-import { ReactElement } from 'react';
 import { ReadOptionInfo, WritOptionInfo } from "../../../components/Portal/Users/utils/userInfoOption.component";
 import { JSXComponent } from '../../../interfaces/common/common.interface';
 

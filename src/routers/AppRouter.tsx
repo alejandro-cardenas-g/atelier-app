@@ -52,6 +52,7 @@ export const AppRouter = () => {
                                         childroutes && 
 
                                         childroutes.map(({props, path, layout:Layout, isPrivate, component:Component}) => {
+
                                             return(
                                                 <Route path={path} key={path} element={
                                                     <AuthNavigation isPrivate={isPrivate}>

@@ -12,8 +12,6 @@ type MenuItem = Required<MenuProps>['items'][number];
 export const PortalSider = () => {
 
     const { pathname } = useLocation();
-    console.log(pathname)
-    console.log(PATHNAMES)
     const navigate = useNavigate();
 
     const [show, setShow] = useState(false);
