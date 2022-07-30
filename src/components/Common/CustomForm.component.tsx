@@ -24,6 +24,7 @@ export const CustomForm = ({
             onFinish={handleSubmit}
             form={form}
             onFieldsChange={onFieldsChange}
+            onChange={onFieldsChange}
         >
             {
                 LAYOUT.map((item, index) => {

@@ -19,9 +19,15 @@ export interface IUserDetail{
     fileUrl: string | null;
 }
 
+type IUserDetailSendBase = Omit<IUserDetail, "filename" | "fileUrl">;
+
+export interface IUserDetailSend extends IUserDetailSendBase{
+    password: string
+};
+
 export enum EUserDetailSection {
     BASIC = 1,
     CONTACT = 2,
     PRIVACY = 3,
     UPLOAD = 4
-} 
+}

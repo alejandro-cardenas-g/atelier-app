@@ -41,3 +41,19 @@ export const getUserDetailRejected = (state: IStateUsers, action: any): void => 
     state.detailSection = null;
     notificationErrorV1(action.error.message, 2.1);
 }
+
+// patchSimpleUserDetail
+
+export const patchSimpleUserDetailPending = (state: IStateUsers, action: PayloadAction<any>): void => {
+    state.isLoading = true;
+}
+
+export const patchSimpleUserDetailFullfilled = (state: IStateUsers, action: PayloadAction<IUserDetailResponse,any>): void => {
+    state.isLoading = false;
+    state.userDetail = action.payload;
+}
+
+export const patchSimpleUserDetailRejected = (state: IStateUsers, action: any): void => {
+    state.isLoading = false;
+    notificationErrorV1(action.error.message, 2.1);
+}

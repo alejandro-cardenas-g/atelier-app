@@ -156,5 +156,70 @@
 
     }
 
+    &-modal{
+        z-index: 888;
+
+        .user-info-conf{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            &__title{
+                color: $dark-title3;
+                font-weight: 700;
+                font-size: 1.8rem;
+                text-align: center;
+                user-select: none;
+                @media (min-width: $bk-480){
+                    font-size: 2.2rem;
+                }
+            }
+
+            &__details{
+                margin: 2rem 0;
+                display: flex;
+                font-size: 1.2rem;
+                flex-direction: column-reverse;
+                align-items: center;
+                justify-content: center;
+                
+                .details-key{
+                    color: $color1;
+                }
+                .details-value{
+                    color: $dark-title3;
+                }
+
+                @media (min-width: $bk-300){
+                    flex-direction: row;
+                    align-items: unset;
+                    justify-content: center;
+                    gap: 2rem;
+                    font-size: 1.4rem;
+                }
+
+            }
+
+            &__text{
+                user-select: none;
+                color: $primary-color;
+                font-size: 1.2rem;
+                @media (min-width: $bk-300){
+                    font-size: 1.4rem;
+                }
+            }
+
+            & button{
+                max-width: 100%;
+                width: 100%;
+                @media (min-width: $bk-380){
+                    max-width: 15rem;
+                }
+            }
+
+        }
+
+    }
+
 }
 

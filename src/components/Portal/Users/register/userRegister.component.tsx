@@ -1,12 +1,21 @@
-import axios from 'axios';
-import { Form } from "antd"
+import { Form, Modal, Spin } from "antd"
 import { RcFile, UploadFile } from "antd/lib/upload/interface"
 import { IRegisterForm } from "../../../../interfaces/portal/users/contentUsers.interface";
 import { UserRegisterForm } from "./userRegisterForm.component";
+import { usePostAxios } from '../../../../hooks/usePostAxios.hook';
+import { privateApi } from '../../../../api/config';
+import { UserInfoConfirmation } from "../utils/usersFormUtils.component";
+import { PORTAL_LOCALS } from "../../../../locales/portal/portal.locals";
+
+const registryLocals =  PORTAL_LOCALS['users']['registry'];
 
 window.scrollTo({top: 0, behavior: 'smooth'});
 
 export const UserRegister = () => {
+
+  const {execute, loading, result, reset} = usePostAxios<FormData, any>(privateApi, {
+    messageOnError: true
+  });
 
   const [form] = Form.useForm();
 
@@ -15,7 +24,7 @@ export const UserRegister = () => {
     lastname: '',
     email: '',
     password: '',
-    type: 0,
+    type: null,
     phone: '',
     job: '',
     address: ''
@@ -45,24 +54,45 @@ export const UserRegister = () => {
     data.append('password',password);
     (file) && data.append('file', file?.originFileObj as RcFile);
 
-    const a = await axios.post('http://localhost:3000/data', data, {
+    execute('/data', data, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
     });
 
-    console.log(a)
+  }
 
+  const handleReset = () => {
+    reset();
+    form.setFieldsValue(initialValues);
   }
 
   return (
-
-    <UserRegisterForm 
-      form={form}
-      handleSubmit={handleSubmit}
-      initialValues={initialValues}
-    />
-  
+    <>
+      <Modal 
+        confirmLoading={loading}
+        visible={!!result}
+        closable={false}
+        destroyOnClose
+        maskClosable={false}
+        className='portal-usuarios__registry-modal'
+        footer={null}
+        children={
+          <UserInfoConfirmation 
+            name={`${form.getFieldValue('name')} ${form.getFieldValue('lastname')}`}
+            email={form.getFieldValue('email')}
+            password={form.getFieldValue('password')}
+            onClose={handleReset}
+          />
+        }
+      />
+      <Spin spinning={loading}/>
+      <UserRegisterForm 
+        form={form}
+        handleSubmit={handleSubmit}
+        initialValues={initialValues}
+      />
+    </>
   )
 }
 

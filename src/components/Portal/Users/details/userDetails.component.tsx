@@ -9,9 +9,10 @@ import { UserDetailsSecurityForm } from "./userDetailSecurityForm.component";
 import { UserDetailsPersonalForm } from "./userDetailsPersonalForm.component";
 import { UserDetailsUploadForm } from "./userDetailsUploadForm.component";
 
+window.scrollTo({top: 0, behavior: 'smooth'});
+
 export const UserDetails = () => {
 
-    window.scrollTo({top: 0, behavior: 'smooth'});
     const details = useSelector(getUserDetails);
     const navigate = useNavigate();
     useEffect(() => {

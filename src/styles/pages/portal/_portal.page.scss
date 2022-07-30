@@ -14,7 +14,7 @@
         box-sizing: content-box;
         transition: transform 0.3s ease;
         overflow-wrap: break-word;
-        z-index: 99998;
+        z-index: 300;
                 
         &::-webkit-scrollbar{
             width: 8px
@@ -65,7 +65,7 @@
 }
 
 .toggle__sider{
-    z-index: 99999;
+    z-index: 300;
     color: $color2;
     background-color: $color1;
     height: 40px;

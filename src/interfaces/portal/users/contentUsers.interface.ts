@@ -13,7 +13,7 @@ export interface IRegisterForm{
     email: string,
     password: string,
     job: string,
-    type: number,
+    type: number | null,
     address: string | null,
     phone: string | null
 }

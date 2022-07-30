@@ -107,6 +107,15 @@ export const PORTAL_LOCALS = {
                     text: 'Subir documento de identidad'
                 },
                 button: 'Crear usuario'
+            },
+            modal: {
+                copied: 'Copiado',
+                button: 'Copiar y cerrar',
+                text: 'Esta información es importante, copiela y compartala con quien requiera.',
+                email: 'Email: ',
+                password: 'Contraseña: ',
+                name: 'Nombre: ',
+                title: 'Información del usuario'
             }
         },
         details: {
