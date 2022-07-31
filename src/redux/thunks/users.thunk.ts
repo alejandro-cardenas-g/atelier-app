@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { AxiosError } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 import { privateApi } from "../../api/config";
 import { IUserDetail, IUserDetailSend } from "../../interfaces/redux/usuarios/reduxUsuarios.interface";
 import { IPatchRequest } from "../../interfaces/redux/usuarios/usersPayload.interface";
@@ -16,9 +16,14 @@ export const getUsers = createAsyncThunk('users/fetchusers', async(page: number)
     }
 });
 
-export const getUserDetail = createAsyncThunk('users/fetchuserDetail', async(id: number) => {
+export const getUserDetail = createAsyncThunk('users/fetchuserDetail', async(id: string | number) => {
     try{
-        const response = await privateApi.get<IUserDetail>(`/user/${id}`)
+        let response: AxiosResponse<IUserDetail, any>;
+        if(typeof(id) === 'number'){
+            response = await privateApi.get<IUserDetail>(`/user/${id}`);
+        }else{
+            response = await privateApi.get<IUserDetail>(`/user/slug/${id}`);
+        }
         const { data } = response;
         return data;
     }catch(error) {

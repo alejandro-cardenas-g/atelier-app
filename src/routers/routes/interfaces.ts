@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import { ROUTES, PATHNAMES } from '../routes.enum';
 
-type JSXComponent = () => ReactElement;
+type JSXComponent = (props?: any) => ReactElement;
 
 export enum IS_INDEX_COMPONENT {
     COMPONENT,
@@ -26,6 +26,9 @@ interface IRoute{
     component: React.LazyExoticComponent<JSXComponent> | JSXComponent;
     layout:  (props:any) => ReactElement;
     props: {
+        [key: string]: any
+    },
+    componentProps?: {
         [key: string]: any
     }
 }

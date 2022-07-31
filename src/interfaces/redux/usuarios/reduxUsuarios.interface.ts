@@ -4,6 +4,7 @@ export interface IUsers{
     email: string;
     type: number;
     id: number;
+    slug: string;
 }
 
 export interface IUserDetail{

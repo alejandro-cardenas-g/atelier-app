@@ -8,30 +8,32 @@ import { parse } from 'query-string'
 import { IUsersContent } from '../../../interfaces/portal/users/contentUsers.interface';
 import { Nullish } from '../../Common/Nullish.component';
 
-export const Users = ({type}:IProps) => {
+export const Users = () => {
 
     const location = useLocation();
     const navigate = useNavigate();
 
+    const { type } = parse(location.search);
+
     const [content, setContent] = useState<IUsersContent | null>(null);
     const [actionType, setActionType] = useState<EUsersContent>(EUsersContent.READ);
     
-    // useEffect(() => {
-    //     if(!type) navigate(`/usuarios${PATH_USERS_TYPE[EUsersContent.READ]}`);
-    // })
+    useEffect(() => {
+        if(!type) navigate(`/usuarios${PATH_USERS_TYPE[EUsersContent.READ]}`);
+    })
 
     useEffect(() => {
         
-        // if(typeof(type) !== 'string') return;
+        if(typeof(type) !== 'string') return;
 
-        const contentObject = USUARIOS_CONTENT.find(cont => cont.action == (type));
+        const contentObject = USUARIOS_CONTENT.find(cont => cont.action == (Number.parseInt(type) as EUsersContent));
 
         if(!contentObject) return;
         
-        setActionType(type);
+        setActionType(Number.parseInt(type) as EUsersContent);
         setContent(contentObject);
 
-    }, [])
+    }, [type])
 
     return (
         <div className='portal-usuarios portal-container'>
@@ -50,10 +52,6 @@ export const Users = ({type}:IProps) => {
 
         </div>
     )
-}
-
-interface IProps{
-    type: EUsersContent;
 }
 
 export default Users;
