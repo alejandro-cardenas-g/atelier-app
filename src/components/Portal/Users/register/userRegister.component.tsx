@@ -5,12 +5,10 @@ import { UserRegisterForm } from "./userRegisterForm.component";
 import { usePostAxios } from '../../../../hooks/usePostAxios.hook';
 import { privateApi } from '../../../../api/config';
 import { UserInfoConfirmation } from "../utils/usersFormUtils.component";
-import { useEffect, useState } from "react";
-
-window.scrollTo({top: 0, behavior: 'smooth'});
+import { useState } from "react";
 
 export const UserRegister = () => {
-
+  window.scrollTo({top: 0, behavior: 'smooth'});
   const {execute, loading, result, reset} = usePostAxios<FormData, any>(privateApi, {
     messageOnError: true
   });

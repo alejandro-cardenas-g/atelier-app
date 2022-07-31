@@ -26,4 +26,10 @@ export const getUserDetailsSection = (state:RootState) => {
     }
 };
 
-export const getUserDetails = (state:RootState) => state.users.userDetail;
+export const getUserDetails = (state:RootState) => {
+    const {
+        userDetail,
+        active
+    } = state.users;
+    return {userDetail, active}
+}

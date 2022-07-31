@@ -8,6 +8,7 @@ const usersSlice = createSlice<IStateUsers, SliceCaseReducers<IStateUsers>>({
         users: [],
         isLoading: false,
         total: null,
+        active: null,
         detailSection: null,
         userDetail: null
     },
@@ -17,6 +18,9 @@ const usersSlice = createSlice<IStateUsers, SliceCaseReducers<IStateUsers>>({
         },
         SET_USER_DETAIL_SECTION: (state, action: {payload: EUserDetailSection | null}) => {
             state.detailSection = action.payload;
+        },
+        SET_ACTIVE_USER: (state, action: {payload: number}) => {
+            state.active = action.payload;
         },
     },
     extraReducers: extraReducer
@@ -36,4 +40,5 @@ export interface IStateUsers {
     total: number | null;
     detailSection: EUserDetailSection | null;
     userDetail: IUserDetail | null;
+    active: number | null;
 }

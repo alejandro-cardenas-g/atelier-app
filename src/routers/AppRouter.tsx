@@ -51,13 +51,13 @@ export const AppRouter = () => {
                                     {
                                         childroutes && 
 
-                                        childroutes.map(({props, path, layout:Layout, isPrivate, component:Component}) => {
+                                        childroutes.map(({props, path, layout:Layout, isPrivate, component:Component, componentProps}) => {
 
                                             return(
                                                 <Route path={path} key={path} element={
                                                     <AuthNavigation isPrivate={isPrivate}>
                                                         <Layout {...props}>
-                                                            <Component/>
+                                                            <Component {...componentProps}/>
                                                         </Layout>
                                                     </AuthNavigation>
                                                 }/>

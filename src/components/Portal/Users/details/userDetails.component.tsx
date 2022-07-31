@@ -1,7 +1,8 @@
 import { Divider } from "antd";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { dispatchGetUserDetail } from "../../../../redux/dispatchers/portal/users.dispatch";
 import { getUserDetails } from "../../../../redux/selectors/users.selector";
 import { Spinner } from "../../../Common/Spinner.component";
 import { UserDetailsContactForm } from "./userDetailsContactForm.component";
@@ -9,29 +10,35 @@ import { UserDetailsSecurityForm } from "./userDetailSecurityForm.component";
 import { UserDetailsPersonalForm } from "./userDetailsPersonalForm.component";
 import { UserDetailsUploadForm } from "./userDetailsUploadForm.component";
 
-window.scrollTo({top: 0, behavior: 'smooth'});
-
 export const UserDetails = () => {
-
-    const details = useSelector(getUserDetails);
+    window.scrollTo({top: 0, behavior: 'smooth'});
+    const {slug} = useParams();
+    const {userDetail, active} = useSelector(getUserDetails);
     const navigate = useNavigate();
+
     useEffect(() => {
-        if(details === null){
-            navigate('/usuarios');
+        if(!active && !slug) navigate('/usuarios');
+        if(active){
+            dispatchGetUserDetail(active);
+            return;
         }
-    }, [details])
+        if(slug){
+            dispatchGetUserDetail(slug);
+            return;
+        }
+    }, [])
     
 
-    if(details === null) return <Spinner/>;
+    if(userDetail === null) return <Spinner/>;
     return (
         <div className='portal-usuarios__details ani-cont'>
-            <UserDetailsPersonalForm userDetail={details!}/>
+            <UserDetailsPersonalForm userDetail={userDetail!}/>
             <Divider/>
-            <UserDetailsContactForm userDetail={details!}/>
+            <UserDetailsContactForm userDetail={userDetail!}/>
             <Divider/>
-            <UserDetailsSecurityForm userDetail={details!}/>
+            <UserDetailsSecurityForm userDetail={userDetail!}/>
             <Divider/>
-            <UserDetailsUploadForm userDetail={details!}/>
+            <UserDetailsUploadForm userDetail={userDetail!}/>
         </div>
     )
 }
