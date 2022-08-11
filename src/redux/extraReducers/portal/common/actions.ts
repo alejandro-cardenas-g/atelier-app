@@ -16,6 +16,8 @@ export const getCommonFullfilled = (state: IStateCommon, action: PayloadAction<I
 }
 
 export const getCommonPendingRejected = (state: IStateCommon, action: any): void => {
+    const { message = 'Error'} = action.payload;
     state.loading = false;
     state.exists = false;
+    notificationErrorV1 (message || 'Error', 2.1);
 }

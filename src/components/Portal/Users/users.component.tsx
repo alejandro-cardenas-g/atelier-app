@@ -1,6 +1,5 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { USUARIOS_CONTENT } from '../../../layouts/portal/users/userContent.layout';
 import { EUsersContent } from '../../../locales/portal/portalUsers.locals';
 import { UsuariosInfo } from './utils/usersInfo.component';
@@ -8,9 +7,6 @@ import { IUsersContent } from '../../../interfaces/portal/users/contentUsers.int
 import { Nullish } from '../../Common/Nullish.component';
 
 export const Users = ({type}:IProps) => {
-
-    const location = useLocation();
-    const navigate = useNavigate();
 
     const [content, setContent] = useState<IUsersContent | null>(null);
     const [actionType, setActionType] = useState<EUsersContent>(EUsersContent.READ);

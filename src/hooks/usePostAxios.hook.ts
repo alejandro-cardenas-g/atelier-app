@@ -1,9 +1,9 @@
-import { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios"
+import { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosRequestHeaders, AxiosResponse } from "axios"
 import { useState } from "react";
+import { privateApi } from "../api/config";
 import { notificationErrorV1 } from "../utils/notifications/notifications.util";
 
-export const usePostAxios = <T=any,R=any>(
-    api: AxiosInstance,
+export const usePostAxios = <R=any>(
     conf?: {
         messageOnError: boolean
     }
@@ -19,14 +19,17 @@ export const usePostAxios = <T=any,R=any>(
     }
 
     const dispatch = (    
-        endpoint: string,
-        data: T,
         options: AxiosRequestConfig,
+        headers?: AxiosRequestHeaders
     ) => {
         setError(null);
         setResult(null);
         setLoading(true);
-        api.post<R>(endpoint, data, options)
+        const header = headers || {};
+        privateApi<R>({
+            ...options,
+            method: 'POST'
+        }, header)
         .then((r) => {
             setResult(r);
             setLoading(false);

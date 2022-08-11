@@ -6,7 +6,8 @@ import { identifyTypeSession } from "../../../utils/auth/identifyTypeSession.uti
 import { PATHNAMES } from '../../../routers/routes.enum';
 import { ILoginForm } from "../../../interfaces/auth/authLogin.interface";
 import { LoginForm } from "./";
-import { Col, Row, Typography } from "antd";
+import { Row, Typography } from "antd";
+import { dispatchLogin, dispatchUserSession } from "../../../redux/dispatchers/auth/auth.dispatch";
 
 export const LoginContent = () => {
 
@@ -19,21 +20,21 @@ export const LoginContent = () => {
     const [enterAs, setEnterAs] = useState<string>('');
 
     useEffect(() => {
-
         if(typeSession === TYPE_SESSION.ADMIN){
             setRoutePortal(PATHNAMES.AUTH_CLIENTE_LOGIN);
             setRoutePortalText(AUTHLOCALS['portalLink']['admin']['link']);
             setEnterAs(AUTHLOCALS['portalLink']['admin']['role']);
-        } 
+        }
         else{
             setRoutePortal(PATHNAMES.AUTH_LOGIN);
             setRoutePortalText(AUTHLOCALS['portalLink']['client']['link']);
             setEnterAs(AUTHLOCALS['portalLink']['client']['role']);
-        } 
-    }, [typeSession]);
+        }
+        dispatchUserSession(typeSession);
+    }, [typeSession, dispatchUserSession]);
 
     const handleSubmit = ({email, password, remember}: ILoginForm) => {
-
+        dispatchLogin({email, password});
     }
 
     return (

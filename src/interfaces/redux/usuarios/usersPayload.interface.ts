@@ -1,4 +1,4 @@
-import {  IUserDetailSend } from "./reduxUsuarios.interface";
+import {  IUserDetailSend } from "./reduxUsers.interface";
 
 export interface IPatchRequest{
     id?: number;

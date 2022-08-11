@@ -3,13 +3,14 @@ import { RcFile, UploadFile } from "antd/lib/upload/interface"
 import { IRegisterForm } from "../../../../interfaces/portal/users/contentUsers.interface";
 import { UserRegisterForm } from "./userRegisterForm.component";
 import { usePostAxios } from '../../../../hooks/usePostAxios.hook';
-import { privateApi } from '../../../../api/config';
 import { UserInfoConfirmation } from "../utils/usersFormUtils.component";
 import { useState } from "react";
+import { PORTAL_ENDPOINTS } from "../../../../api/endpoint";
+import { converToBase64 } from "../../../../utils/files/convertToBase64.util";
 
 export const UserRegister = () => {
-  window.scrollTo({top: 0, behavior: 'smooth'});
-  const {execute, loading, result, reset} = usePostAxios<FormData, any>(privateApi, {
+  window.scrollTo(0,0);
+  const {execute, loading, result, reset} = usePostAxios<any>({
     messageOnError: true
   });
 
@@ -32,41 +33,45 @@ export const UserRegister = () => {
     address: ''
   }
 
-  const handleSubmit = async(values: IRegisterForm, file: UploadFile | null) => {
+  const handleSubmit = async(values: IRegisterForm) => {
 
     const {
       address,
-      type,
-      email,
-      job,
-      lastname,
-      name,
-      password,
-      phone
+      phone,
+      ...mandatoryFields
     } = values;
 
-    const data = new FormData();
-    (address) && data.append('address',address);
-    (phone) &&  data.append('phone',`${phone}`);
-    data.append('type', `${type}`);
-    data.append('email',email);
-    data.append('job',job);
-    data.append('lastname',lastname);
-    data.append('name',name);
-    data.append('password',password);
-    (file) && data.append('file', file?.originFileObj as RcFile);
+    const data: {[key:string]: any} = {
+      ...mandatoryFields,
+    };
 
-    execute('/data', data, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
+    if(address) data.address = address;
+    if(phone) data.phone = phone;
+    // if(file){
+    //   const base64File = await converToBase64(file?.originFileObj as RcFile);
+    //   data.file = {
+    //     buffer: base64File.split(';base64,')[1],
+    //     size: file.size,
+    //     type: file.type,
+    //     name: file.name
+    //   };
+    // }
+
+    execute(
+      {
+        url: PORTAL_ENDPOINTS.baseUsers,
+        data
+      },
+      {
+          'Content-Type': 'application/json'
       }
-    });
-
+    )
+    
     setModalInfo(prev => ({
       ...prev,
-      name: `${name} ${lastname}`,
-      email,
-      password
+      name: `${mandatoryFields.name} ${mandatoryFields.lastname}`,
+      email: mandatoryFields.email,
+      password: mandatoryFields.password
     }))
 
   }
@@ -87,7 +92,8 @@ export const UserRegister = () => {
         className='portal-usuarios__registry-modal'
         footer={null}
         children={
-          <UserInfoConfirmation 
+          <UserInfoConfirmation
+            textToShow="Detalles del Usuario"
             name={modalInfo.name}
             email={modalInfo.email}
             password={modalInfo.password}
@@ -100,6 +106,7 @@ export const UserRegister = () => {
         form={form}
         handleSubmit={handleSubmit}
         initialValues={initialValues}
+        canReset={!!result}
       />
     </>
   )

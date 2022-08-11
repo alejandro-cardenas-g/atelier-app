@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { FormInstance } from "antd"
 import { UploadChangeParam, UploadFile } from "antd/lib/upload/interface"
 import { generateRandomString } from "../../../../utils/stringTools/generateRandomString.util"
@@ -9,15 +9,24 @@ import { IRegisterForm } from "../../../../interfaces/portal/users/contentUsers.
 import { ComponentForPassword, UploadBody } from "../utils/usersFormUtils.component";
 import { useSelector } from 'react-redux'
 import { getUserTypes } from "../../../../redux/selectors/common.selector";
+import { verifyDocumentTypeAndSizeAction } from "../../../../utils/files/verifyMimeType.util"
 
 export const UserRegisterForm = ({
     form,
-    handleSubmit
+    handleSubmit,
+    canReset,
+    initialValues
 }: IProps) => {
 
     const types = useSelector(getUserTypes);
 
-    const [file, setFile] = useState<UploadFile | null>(null)
+    // const [file, setFile] = useState<UploadFile | null>(null)
+
+    // useEffect(() => {
+    //     if(canReset){
+    //         setFile(null);
+    //     }
+    // }, [canReset])
 
     //HANDLEGENERATEPASSWORD
     const handleGeneratePassword = () => {
@@ -40,13 +49,17 @@ export const UserRegisterForm = ({
         if(item.key === 'divpassword'){
             item.Cop = ComponentForPassword({handleGeneratePassword});
         }
-        if(item.key === 'dragger-file'){
-        item.Cop = UploadBody;
-        item.propsInput = {
-                ...item.propsInput,
-                onChange: (e:UploadChangeParam<UploadFile<any>>) => setFile(e.fileList[0])
-            }
-        }
+        // if(item.key === 'dragger-file'){
+        // item.Cop = UploadBody;
+        // item.propsInput = {
+        //         ...item.propsInput,
+        //         fileList: (file) ? [file] : [],
+        //         onChange: (e:UploadChangeParam<UploadFile<any>>) => {
+        //             const result = verifyDocumentTypeAndSizeAction(e);
+        //             setFile(result);
+        //         }
+        //     }
+        // }
         if(item.key === 'select-area'){
         item.propsInput = {
             ...item.propsInput,
@@ -68,17 +81,8 @@ export const UserRegisterForm = ({
                 form={form}
                 LAYOUT={newLayout}
                 className='form-users'
-                handleSubmit={(values) => handleSubmit(values, file)}
-                initialValues={{
-                    name: '',
-                    lastname: '',
-                    email: '',
-                    password: '',
-                    job: '',
-                    type: null,
-                    address: '',
-                    phone: ''
-                }}
+                handleSubmit={(values) => handleSubmit(values)}
+                initialValues={initialValues}
             />
         </div>
     )
@@ -86,6 +90,7 @@ export const UserRegisterForm = ({
 
 interface IProps{
     form: FormInstance;
-    handleSubmit: (values: IRegisterForm, file: UploadFile | null) => void;
-    initialValues: IRegisterForm
+    handleSubmit: (values: IRegisterForm) => void;
+    initialValues: IRegisterForm;
+    canReset: boolean;
 }

@@ -4,12 +4,15 @@ import { useSelector } from 'react-redux';
 import { getUserType } from '../../../redux/selectors/auth.selector';
 import { getHomeOptionsByUserType } from "../../../utils/portal/home/getHomeOptionsByUserType.util";
 import { useMemo } from "react";
+import { Spinner } from "../../Common/Spinner.component";
 
 export const HomeGrid = () => {
 
     const userType = useSelector(getUserType);
+    
+    if(!getUserType) return <Spinner/>;
 
-    const options = useMemo(() => getHomeOptionsByUserType(userType), [userType]);
+    const options = useMemo(() => getHomeOptionsByUserType(userType!), [userType]);
 
     return (
         <div className='home-grid'>

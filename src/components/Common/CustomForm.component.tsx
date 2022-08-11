@@ -11,7 +11,8 @@ export const CustomForm = ({
     LAYOUT,
     form,
     className = '',
-    onFieldsChange = () => {}
+    onFieldsChange = () => {},
+    disabled
 }:IProps) => {
 
     return (
@@ -24,6 +25,7 @@ export const CustomForm = ({
             form={form}
             onFieldsChange={onFieldsChange}
             onChange={onFieldsChange}
+            disabled = {disabled ? disabled : false}
         >
             {
                 LAYOUT.map((item, index) => {
@@ -114,4 +116,5 @@ interface IProps{
     form: FormInstance;
     className: string;
     onFieldsChange?: () => void;
+    disabled?: boolean;
 }

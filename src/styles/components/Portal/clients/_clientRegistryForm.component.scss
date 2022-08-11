@@ -1,0 +1,127 @@
+.portal-usuarios__registry{
+
+    .form-clients{
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        max-width: 100%;
+
+        &__item{
+            
+            &-name,
+            &-lastname,
+            &-email,
+            &-password,
+            &-phone
+            {
+                max-width: 100%;
+                display: block;
+            }
+
+            &-password{
+                margin-bottom: 1.3rem;
+            }
+
+            &-password--item{
+                margin-bottom: 0.5rem !important;
+            }
+
+            &-submit {
+                width: 100%;
+
+                .ant-form-item-control-input-content{
+                    display: flex;
+                    justify-content: center;
+                    width: 100%;
+                }
+
+                button{
+                    width: 100%;
+                }
+
+            }
+
+        }
+
+        .separator-clients{
+            &__required{
+                color: $dark-title3;
+                font-weight: 300;
+                font-size: 2.2rem;
+                text-align: center;
+            }
+
+            &__required{
+                margin-bottom: 2rem;
+            }
+        }
+
+        @media(min-width: $bk-1000){
+            width: 80%;
+        }
+
+        @media (min-width: $bk-480){
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            grid-template-areas: 
+                "required required"
+                "name lastname"
+                "email password"
+                "phone none"
+                "submit submit";
+    
+            &__item{
+    
+                &-name{
+                    grid-area: name;
+                }
+    
+                &-lastname{
+                    grid-area: lastname; 
+                }
+    
+                &-email{
+                    grid-area: email;
+                }
+    
+                &-password{
+                    margin-bottom: 0rem;
+                    grid-area: password;
+                }
+    
+                &-phone{
+                    grid-area: phone;
+                }
+    
+                &-submit{
+                    grid-area: submit;
+
+                    button{
+                        width: 20rem;
+                    }
+                }
+            }
+    
+            .separator-clients{
+                &__required{
+                    grid-area: required;
+                    font-size: 2.2rem;
+                    text-align: left;
+                    margin: 0;
+                }
+            }
+        }
+
+    }
+
+    .generate-password-link{
+        color: $color3;
+        
+        &:hover{
+            color: darken($color: $color3, $amount: 20);
+        }
+
+    }
+
+}
+

@@ -1,9 +1,11 @@
 import { authReducer } from "./slices/auth/auth.slice"
 import { commonReducer } from "./slices/common/common.slice"
-import { usuariosReducer } from "./slices/portal/users.slice"
+import { clientsReducer } from "./slices/portal/clients.slice"
+import { usersReducer } from "./slices/portal/users.slice"
 
 export const rootReducer = {
     auth: authReducer,
-    users: usuariosReducer,
+    users: usersReducer,
+    clients: clientsReducer,
     common: commonReducer
 }

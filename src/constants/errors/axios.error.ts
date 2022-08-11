@@ -1,0 +1,3 @@
+export enum AXIOS_ERRORS {
+    ERR_NETWORK = "ERR_NETWORK"
+}

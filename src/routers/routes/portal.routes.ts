@@ -4,6 +4,9 @@ import { IRoutes, IS_INDEX_COMPONENT } from "./interfaces";
 import { ROUTES, PATHNAMES } from '../routes.enum';
 import { PortalPage } from "../../pages/portal/portalPage.page";
 
+const UserComponentLazy = lazy(() => import('../../components/Portal/Users/users.component'));
+const ClientsComponentLazy = lazy(() => import('../../components/Portal/Clients/clients.component'));
+
 export const portalRoutes:IRoutes[] = [
     {
         path: ROUTES.PORTAL,
@@ -17,7 +20,7 @@ export const portalRoutes:IRoutes[] = [
             {
                 path: ROUTES.PORTAL_USERS,
                 isPrivate: true,
-                component: lazy(() => import('../../components/Portal/Users/users.component')),
+                component: UserComponentLazy,
                 layout: PortalPage,
                 props: {
 
@@ -29,7 +32,7 @@ export const portalRoutes:IRoutes[] = [
             {
                 path: ROUTES.PORTAL_USER_DETAIL,
                 isPrivate: true,
-                component: lazy(() => import('../../components/Portal/Users/users.component')),
+                component: UserComponentLazy,
                 layout: PortalPage,
                 props: {
                     
@@ -41,7 +44,7 @@ export const portalRoutes:IRoutes[] = [
             {
                 path: ROUTES.PORTAL_USER_REGISTER,
                 isPrivate: true,
-                component: lazy(() => import('../../components/Portal/Users/users.component')),
+                component: UserComponentLazy,
                 layout: PortalPage,
                 props: {
                     
@@ -53,10 +56,37 @@ export const portalRoutes:IRoutes[] = [
             {
                 path: ROUTES.PORTAL_CLIENTS,
                 isPrivate: true,
-                component: Nullish,
+                component: ClientsComponentLazy,
                 layout: PortalPage,
                 props: {
 
+                },
+                componentProps: {
+                    type: 0
+                }
+            },
+            {
+                path: ROUTES.PORTAL_CLIENTS_DETAIL,
+                isPrivate: true,
+                component: ClientsComponentLazy,
+                layout: PortalPage,
+                props: {
+                    
+                },
+                componentProps: {
+                    type: 2
+                }
+            },
+            {
+                path: ROUTES.PORTAL_CLIENTS_REGISTER,
+                isPrivate: true,
+                component: ClientsComponentLazy,
+                layout: PortalPage,
+                props: {
+                    
+                },
+                componentProps: {
+                    type: 1
                 }
             },
             {

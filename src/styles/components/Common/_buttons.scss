@@ -41,13 +41,35 @@
 
         &:hover{
             color: lighten($color: $dark-title3, $amount: 5) !important;
-            background-color: darken($color: $background-gray, $amount: 9) !important;
+            background-color: darken($color: $background-gray, $amount: 7) !important;
             border: none !important;
         }
 
         &--r2{
             border-top-right-radius: 1px;
             border-bottom-right-radius: 1px;
+        }
+    }
+
+    &__logout{
+        border: 1px solid $color2 !important;
+        border-radius: 5px;
+        color: white !important;
+        background-color: transparent !important;
+        &:hover{
+            background-color: rgba(255,255,255, 0.2) !important;
+            border: 1px solid $color2 !important;
+        }
+    }
+    &__delete{
+        color: white !important;
+        background-color: lighten($color: $primary-color, $amount: 18)  !important;
+        border: none;
+
+        &:hover{
+            color: white !important;
+            background-color: lighten($color: $primary-color, $amount: 15) !important;
+            border: none !important;
         }
     }
 

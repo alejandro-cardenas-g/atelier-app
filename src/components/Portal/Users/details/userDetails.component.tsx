@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { dispatchGetUserDetail } from "../../../../redux/dispatchers/portal/users.dispatch";
+import { getIsSuperUser } from "../../../../redux/selectors/auth.selector";
 import { getUserDetails } from "../../../../redux/selectors/users.selector";
 import { Spinner } from "../../../Common/Spinner.component";
 import { UserDetailsContactForm } from "./userDetailsContactForm.component";
@@ -11,10 +12,15 @@ import { UserDetailsPersonalForm } from "./userDetailsPersonalForm.component";
 import { UserDetailsUploadForm } from "./userDetailsUploadForm.component";
 
 export const UserDetails = () => {
-    window.scrollTo({top: 0, behavior: 'smooth'});
+
     const {slug} = useParams();
     const {userDetail, active} = useSelector(getUserDetails);
+    const isSuperUser = useSelector(getIsSuperUser);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        window.scrollTo(0,0);
+    }, [userDetail])
 
     useEffect(() => {
         if(!active && !slug) navigate('/usuarios');
@@ -37,7 +43,7 @@ export const UserDetails = () => {
             <UserDetailsContactForm userDetail={userDetail!}/>
             <Divider/>
             <UserDetailsSecurityForm userDetail={userDetail!}/>
-            <Divider/>
+            <Divider style={{display: `${!isSuperUser ? 'none' : 'block'}`}}/>
             <UserDetailsUploadForm userDetail={userDetail!}/>
         </div>
     )

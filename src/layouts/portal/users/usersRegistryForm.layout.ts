@@ -158,21 +158,21 @@ export const userRegistryFormLayout:IFormLayout[] = [
         },
         inputPrefix: PhoneOutlined,
     },
-    {
-        key: 'dragger-file',
-        type: ETypeFormItem.UPLOAD,
-        props: {
-            className: 'form-users__item-file'
-        },
-        propsInput: {
-            multiple: false,
-            maxCount: 1,
-            beforeUpload: () => {return false},
-            defaultFileList: [],
-            name:"file",
-        },
-        needsDragger: true
-    },
+    // {
+    //     key: 'dragger-file',
+    //     type: ETypeFormItem.UPLOAD,
+    //     props: {
+    //         className: 'form-users__item-file'
+    //     },
+    //     propsInput: {
+    //         multiple: false,
+    //         maxCount: 1,
+    //         beforeUpload: () => {return false},
+    //         defaultFileList: [],
+    //         name:"file",
+    //     },
+    //     needsDragger: true
+    // },
     {
         key: 'button-submit',
         type: ETypeFormItem.BUTTON,

@@ -4,44 +4,58 @@ import { Row, Dropdown } from 'antd'
 import { ColumnsType } from 'antd/lib/table';
 import { MenuTable } from './menuTable.component';
 import { useSelector } from 'react-redux';
+import Modal from 'antd/lib/modal/Modal';
 import { useLocation, useNavigate } from "react-router-dom"
 
 import { IRowUsuarioDataType } from '../../../../interfaces/portal/users/rowDataType.interface';
 import { getUsersPortal } from '../../../../redux/selectors/users.selector';
 import { PORTAL_LOCALS } from '../../../../locales/portal/portal.locals';
-import { dispatchGetUsers, dispatchSetActiveUser } from '../../../../redux/dispatchers/portal/users.dispatch';
+import { dispatchDeleteUser,
+    dispatchGetUsers,
+    dispatchSetActiveUser
+} from '../../../../redux/dispatchers/portal/users.dispatch';
 import { CustomTable } from '../../../Common/CustomTable.component';
 import { getUserTypes } from '../../../../redux/selectors/common.selector';
 import { EDropDownMenuItemsTable } from "../../../../interfaces/portal/users/users.interface";
 import { parse } from 'query-string';
+import { getIsSuperUser } from '../../../../redux/selectors/auth.selector';
+import { ModalDeleteItem } from '../../../Common/modalDeleteItem.component';
 
 const TABLE_COLUMNS_LOCALES = PORTAL_LOCALS['users']['tableColumns'];
 
 export const UsersTable = () => {
 
+    useEffect(() => {
+        window.scrollTo(0,0);
+    }, []);
+
     const navigate = useNavigate();
     const location = useLocation();
-    const { page } = parse(location.search);
+    const { page, search='' } = parse(location.search);
     const {users, total, isLoading} = useSelector(getUsersPortal);
     const userTypes = useSelector(getUserTypes);
-
+    const isSuperUser = useSelector(getIsSuperUser);
+    
     const [ currentPage, setCurrentPage ] = useState<number>((typeof(page) === 'string') ? Number.parseInt(page) : 1);
+    const [userToDelete, setUserToDelete] = useState<null | number>(null);
 
     useEffect(() => {
-        if(total && users.length === 0 && currentPage !== 1){
+        const searching = (search && typeof(search) === 'string') ? `&search=${search}` : '';
+        if(total && users.length === 0 && currentPage !== 1 && searching === ''){
             setCurrentPage(1);
             navigate(`/usuarios?page=${1}`)
+        }
+        if(searching){
+            setCurrentPage(1);
+            navigate(`/usuarios?page=${1}&search=${search}`)
         }
     }, [users, currentPage, total])
 
     useEffect(() => {
-        navigate(`/usuarios?page=${currentPage}`)
-        dispatchGetUsers(currentPage);
-    }, [currentPage]);
-
-    useEffect(() => {
-        window.scrollTo({top: 0, behavior: 'smooth'});
-    }, []);
+        const searching = (search && typeof(search) === 'string') ? `&search=${search}` : '';
+        navigate(`/usuarios?page=${currentPage}${searching}`)
+        dispatchGetUsers(currentPage, searching);
+    }, [currentPage, search]);
 
     const data: IRowUsuarioDataType[] = users.map((user, index) => {
         const userType = userTypes.find((item) => item.id === user.type);
@@ -74,10 +88,28 @@ export const UsersTable = () => {
                     dispatchSetActiveUser(userId);
                     navigate(`/usuarios/${slug}`);
                 }
+                break;
             case EDropDownMenuItemsTable.EVENTS:
                 break;
             case EDropDownMenuItemsTable.DELETE:
+                if(!userId){
+                    navigate('/usuarios');
+                }else{
+                    setUserToDelete(userId);
+                }
                 break;
+        }
+    }
+
+    const handleDelete = (userId: number | null) => {
+        if(userId){
+            dispatchDeleteUser(userId)
+            .then(result => {
+                if(result.meta.requestStatus === 'fulfilled'){
+                    setUserToDelete(null);
+                    navigate('/usuarios');
+                }
+            }).finally(() => setUserToDelete(null))
         }
     }
 
@@ -102,7 +134,7 @@ export const UsersTable = () => {
                 id: number,
                 slug: string
             }) => <Dropdown.Button 
-                    overlay={MenuTable({handleClick, userId: id, slug})} icon={<MoreOutlined/>} placement='bottomLeft'>
+                    overlay={MenuTable({handleClick, userId: id, slug, isSuper: isSuperUser})} icon={<MoreOutlined/>} placement='bottomLeft'>
                 </Dropdown.Button>
         }
     ];
@@ -110,7 +142,23 @@ export const UsersTable = () => {
     return (
 
         <Row className='portal-usuarios__table ani-cont'>
-            
+            <Modal 
+                confirmLoading={isLoading}
+                visible={!!userToDelete}
+                closable={true}
+                maskClosable={false}
+                destroyOnClose
+                className='portal-usuarios__registry-modal'
+                onCancel={() => {setUserToDelete(null)}}
+                footer={null}
+                children={
+                    <ModalDeleteItem 
+                        text={'¿Estas seguro que deseas eliminar a este usuario?'}
+                        handleCancel={() => setUserToDelete(null)}
+                        handleDelete={() => handleDelete(userToDelete)}
+                    />
+                }
+            />
             <CustomTable
                 columns={columns}
                 data={data}

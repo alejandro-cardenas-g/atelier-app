@@ -1,7 +1,10 @@
 import { ActionReducerMapBuilder } from "@reduxjs/toolkit";
 import { IStateUsers } from "../../../slices/portal/users.slice";
-import { getUserDetail, getUsers, patchSimpleUserDetail } from "../../../thunks/users.thunk";
+import { deleteUser, getUserDetail, getUsers, patchSimpleUserDetail, uploadDocument } from "../../../thunks/users.thunk";
 import { 
+    deleteUserPending,
+    deleteUserFullfilled,
+    deleteUserRejected,
     getUserDetailFullfilled,
     getUserDetailPending,
     getUserDetailRejected,
@@ -27,4 +30,12 @@ export const extraReducer = (builder: ActionReducerMapBuilder<IStateUsers>) => {
         .addCase(patchSimpleUserDetail.pending, patchSimpleUserDetailPending)
         .addCase(patchSimpleUserDetail.fulfilled, patchSimpleUserDetailFullfilled)
         .addCase(patchSimpleUserDetail.rejected, patchSimpleUserDetailRejected)
+        // DELETE USER
+        .addCase(deleteUser.pending, deleteUserPending)
+        .addCase(deleteUser.fulfilled, deleteUserFullfilled)
+        .addCase(deleteUser.rejected, deleteUserRejected)
+        // UPLOAD FILE
+        .addCase(uploadDocument.pending, patchSimpleUserDetailPending)
+        .addCase(uploadDocument.fulfilled, patchSimpleUserDetailFullfilled)
+        .addCase(uploadDocument.rejected, patchSimpleUserDetailRejected)  
 }

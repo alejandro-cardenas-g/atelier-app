@@ -132,5 +132,12 @@ export const PORTAL_LOCALS = {
                 description: 'Seguridad'
             }
         }
+    },
+    clients: {
+        info: {
+            title: 'Administración - Clientes',
+            buttonNew: 'Nuevo Cliente',
+            back: 'Atras'
+        },
     }
 }

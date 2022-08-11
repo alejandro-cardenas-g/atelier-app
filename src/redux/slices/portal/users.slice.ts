@@ -1,5 +1,5 @@
 import { createSlice, Reducer, SliceCaseReducers } from '@reduxjs/toolkit';
-import { EUserDetailSection, IUserDetail, IUsers } from '../../../interfaces/redux/usuarios/reduxUsuarios.interface';
+import { EUserDetailSection, IUserDetail, IUsers } from '../../../interfaces/redux/usuarios/reduxUsers.interface';
 import { extraReducer } from '../../extraReducers/portal/users/users.extraReducers';
 
 const usersSlice = createSlice<IStateUsers, SliceCaseReducers<IStateUsers>>({
@@ -26,7 +26,7 @@ const usersSlice = createSlice<IStateUsers, SliceCaseReducers<IStateUsers>>({
     extraReducers: extraReducer
 });
 
-export const usuariosReducer:Reducer<IStateUsers> = usersSlice.reducer;
+export const usersReducer:Reducer<IStateUsers> = usersSlice.reducer;
 
 export const {
     SET_USERS,

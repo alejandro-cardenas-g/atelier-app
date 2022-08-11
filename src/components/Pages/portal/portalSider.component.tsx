@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
-import { Menu, MenuProps } from "antd";
+import { MenuUnfoldOutlined, MenuFoldOutlined, LogoutOutlined } from "@ant-design/icons";
+import { Button, Menu, MenuProps } from "antd";
 
 import { PortalSiderInfo } from "./portalSiderInfo.component";
 import { sideMenuLayout } from "../../../layouts/portal/siderMenu.layout";
 import { PATHNAMES } from "../../../routers/routes.enum";
 import { useLocation, useNavigate } from "react-router-dom";
+import { dispatLogout } from "../../../redux/dispatchers/auth/auth.dispatch";
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -20,6 +21,8 @@ export const PortalSider = () => {
         navigate(route);
     }
 
+    const basePath = `/${pathname.split("/")[1]}`;
+
     const items: MenuItem[] = sideMenuLayout.map(({component:Component,key,label,route, ...rest}) => ({
         key,
         label,
@@ -32,12 +35,19 @@ export const PortalSider = () => {
         setShow(prev => false);
     }, [pathname])
 
+    const handleLogout = () => {
+        dispatLogout();
+    }
+
     return (
         <>
             <div className={`portal__sider ${show ? '' : 'portal__sider--hide'}`}>
                 <div className={'portal__sider-content'}>
                     <PortalSiderInfo/>
-                    <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} selectedKeys={[pathname]}/>
+                    <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} selectedKeys={[basePath]}/>
+                    <Button onClick={handleLogout} className='custom-btn__logout portal__sider-logout' icon={<LogoutOutlined/>}>
+                        Salir
+                    </Button>
                 </div>
             </div>
 

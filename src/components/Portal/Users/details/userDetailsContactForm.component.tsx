@@ -1,10 +1,11 @@
 import { Form } from "antd";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { EUserDetailSection, IUserDetail } from "../../../../interfaces/redux/usuarios/reduxUsuarios.interface";
+import { EUserDetailSection, IUserDetail } from "../../../../interfaces/redux/usuarios/reduxUsers.interface";
 import { userDetailContactFormLayout } from "../../../../layouts/portal/users/userDetailContactForm.layout";
 import { ETypeFormItem } from "../../../../locales/portal/portalUsers.locals";
-import { setUserDetailSection } from "../../../../redux/dispatchers/portal/users.dispatch";
+import { dispatchPatchSimpleUserDetail, setUserDetailSection } from "../../../../redux/dispatchers/portal/users.dispatch";
+import { getIsSuperUser } from "../../../../redux/selectors/auth.selector";
 import { getUserDetailsSection } from "../../../../redux/selectors/users.selector";
 import { CustomForm } from "../../../Common/CustomForm.component";
 
@@ -14,6 +15,7 @@ export const UserDetailsContactForm = ({userDetail}: IProps) => {
         detailSection,
         isLoading
     } = useSelector(getUserDetailsSection);
+    const isSuperUser = useSelector(getIsSuperUser);
 
     const [form] = Form.useForm();
 
@@ -46,6 +48,10 @@ export const UserDetailsContactForm = ({userDetail}: IProps) => {
     })
 
     const handleSubmit = () => {
+        if(!isSuperUser) return;
+        dispatchPatchSimpleUserDetail({id: userDetail.id, data: {
+            ...form.getFieldsValue()
+        }})
         setHasChanged(false);
         setUserDetailSection(null);
     }
@@ -65,6 +71,7 @@ export const UserDetailsContactForm = ({userDetail}: IProps) => {
                 handleSubmit={handleSubmit}
                 LAYOUT={newLayout}
                 onFieldsChange={handleChange}
+                disabled={!isSuperUser}
             />
 
         </div>

@@ -21,8 +21,8 @@ export enum TYPE_SESSION{
 }
 
 export enum TYPE_USER{
-    ADMIN = 0,
-    CLIENT = 1,
-    MANTAINERS = 2,
-    SUPER = 3
+    SUPER = 0,
+    ADMIN = 1,
+    CLIENT = 2,
+    MANTAINERS = 3,
 }

@@ -2,6 +2,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+
+    @media (min-width: $bk-1000){
+        width: 80%;
+    }
 
     .user-details-basic,
     .user-details-contact,
@@ -329,6 +334,19 @@
     }
 
     .user-details-upload{
+        overflow-x: auto;
+        &::-webkit-scrollbar{
+            width: 8px;
+            height: 2px;
+        };
+        &::-webkit-scrollbar-track{
+            background-color: $dark-title2;
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: $color3;
+            border-radius: 20px;
+            border: 2px solid $dark-title2;
+        }
         
         .form-details{
             &__item{
@@ -350,6 +368,10 @@
                 &-actualfile{
                     font-size: 1.05rem;
                     color: $dark-title3;
+
+                    .anticon.anticon-cloud-download{
+                        font-size: 1.05rem;
+                    }
                     // cursor: pointer;
                     // &:hover{
                     //     color: $blue-link;
@@ -364,6 +386,18 @@
                     font-size: 2.2rem;
                     text-align: center;
                     margin-bottom: 2rem;
+                }
+            }
+    
+            @media(min-width: $bk-300){
+                &__item{
+
+                    &-saveButton{
+
+                        .custom-btn__save{
+                            width: 10rem;
+                        }
+                    }
                 }
             }
     
@@ -412,9 +446,18 @@
             @media (min-width: $bk-680){
                 grid-template-areas: 
                 "document document"
-                "actualfile none"
+                "actualfile actualfile"
                 "upload upload"
                 "saveButton saveButton";
+                &__item{
+
+                    &-actualfile{
+
+                        .anticon.anticon-cloud-download{
+                            font-size: 1.3rem;
+                        }
+                    }
+                }
             }
 
         }

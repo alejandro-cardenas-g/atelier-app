@@ -1,10 +1,11 @@
 import { Form, Modal } from "antd";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
-import { EUserDetailSection, IUserDetail } from "../../../../interfaces/redux/usuarios/reduxUsuarios.interface";
+import { EUserDetailSection, IUserDetail } from "../../../../interfaces/redux/usuarios/reduxUsers.interface";
 import { userDetailSecurityFormLayout } from "../../../../layouts/portal/users/userDetailSecurityForm.layout";
 import { ETypeFormItem } from "../../../../locales/portal/portalUsers.locals";
 import { dispatchPatchSimpleUserDetail, setUserDetailSection } from "../../../../redux/dispatchers/portal/users.dispatch";
+import { getIsSuperUser } from "../../../../redux/selectors/auth.selector";
 import { getUserDetailsSection } from "../../../../redux/selectors/users.selector";
 import { generateRandomString } from "../../../../utils/stringTools/generateRandomString.util";
 import { CustomForm } from "../../../Common/CustomForm.component";
@@ -16,6 +17,7 @@ export const UserDetailsSecurityForm = ({userDetail}: IProps) => {
         detailSection,
         isLoading
     } = useSelector(getUserDetailsSection);
+    const isSuperUser = useSelector(getIsSuperUser);
 
     const [form] = Form.useForm();
 
@@ -58,7 +60,8 @@ export const UserDetailsSecurityForm = ({userDetail}: IProps) => {
     })
 
     const handleSubmit = () => {
-        dispatchPatchSimpleUserDetail({id: 1, data: {
+        if(!isSuperUser) return;
+        dispatchPatchSimpleUserDetail({id: userDetail.id, data: {
             password: form.getFieldValue('password')
         }}).then(result => {
             if(result.meta.requestStatus === "fulfilled"){
@@ -80,6 +83,8 @@ export const UserDetailsSecurityForm = ({userDetail}: IProps) => {
         form.resetFields();
     }
 
+    if(!isSuperUser) return null;
+
     return (
         <div className='user-details-security'>
             <CustomForm
@@ -99,7 +104,8 @@ export const UserDetailsSecurityForm = ({userDetail}: IProps) => {
                 className='portal-usuarios__registry-modal'
                 footer={null}
                 children={
-                <UserInfoConfirmation 
+                <UserInfoConfirmation
+                    textToShow="Detalles del Usuario"
                     password={password}
                     email={userDetail.email}
                     name={`${userDetail.name} ${userDetail.lastname}`}

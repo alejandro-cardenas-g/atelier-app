@@ -1,26 +1,36 @@
-import { ReactElement } from "react";
+import { ReactElement, useEffect } from "react";
 import { useSelector } from "react-redux"
-import { Navigate } from "react-router-dom";
-import { getIsLogged } from '../../redux/selectors/auth.selector';
-import { PATHNAMES } from "../../routers/routes.enum";
+import { dispatchRefreshToken } from "../../redux/dispatchers/auth/auth.dispatch";
+import { getAuthVerify} from '../../redux/selectors/auth.selector';
+import { Spinner } from "../Common/Spinner.component";
+import { WaitingRedirect } from "./waitingRedirect.component";
 
 export const AuthNavigation = ({children, isPrivate}:IProps) => {
 
-    const isLogged = useSelector(getIsLogged);
+    useEffect(() => {
+        dispatchRefreshToken();
+    }, [dispatchRefreshToken])
+
+    const {isLogged, loading, checked} = useSelector(getAuthVerify);
+
+    if(loading) return <Spinner/>;
 
     if(isPrivate){
-        if(isLogged){ 
+        if(isLogged){
+            if(checked === false) return <WaitingRedirect to='/auth/login'/>
             return (
                 <>
                     {children}
                 </>
             )
         }else{
-            return <Navigate to={PATHNAMES.AUTH_LOGIN}/>
+            if(!localStorage.getItem('token')) return <WaitingRedirect to='/auth/login'/>
+            return <Spinner/>;
         }
     }else{
         if(isLogged){
-            return <Navigate to={PATHNAMES.PORTAL}/>
+            if(checked === true) return <WaitingRedirect to='/'/>
+            return <Spinner/>;
         }else{
             return <>
                 {children}

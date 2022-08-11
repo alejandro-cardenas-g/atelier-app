@@ -19,13 +19,15 @@ export const dropDownMenuItems: IDropDownMenuItems[] = [
         label: 'Eliminar',
         key: EDropDownMenuItemsTable.DELETE,
         icon: DeleteOutlined,
-        danger: true
+        danger: true,
+        isSuper: true
     },
 ]
 
-interface IDropDownMenuItems{
+export interface IDropDownMenuItems{
     label: string;
     key: string | number;
     icon: JSXElementConstructor<any>,
     danger: boolean;
+    isSuper?: boolean;
 }

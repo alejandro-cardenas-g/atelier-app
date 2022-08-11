@@ -6,6 +6,7 @@ import { AuthNavigation } from "../components/Routing/authNavigation.component";
 import { routes } from './routes';
 
 export const AppRouter = () => {
+
     return (
         <Suspense fallback={<Spinner/>}>
 

@@ -23,6 +23,7 @@ export const UploadBody = () => {
 }
 
 export const UserInfoConfirmation = ({
+    textToShow = '',
     name = null,
     email = null,
     password = null,
@@ -31,15 +32,15 @@ export const UserInfoConfirmation = ({
     name?: string | null;
     email?: string | null;
     password: string | null;
-    onClose: () => void
+    onClose: () => void;
+    textToShow: string;
   }) => {
 
     const handleCopy = () => {
-        let text = `Detalles  de usuario\n`;
+        let text = `${textToShow}\n`;
         if(name) text = text.concat(`\nNombre: ${name}`);
         if(email) text = text.concat(`\nEmail: ${email}`);
         if(password) text = text.concat(`\nContraseña: ${password}`);
-        console.log(text)
 
         navigator.clipboard.writeText(text.trim());
         message.success(modalLocals['copied']);

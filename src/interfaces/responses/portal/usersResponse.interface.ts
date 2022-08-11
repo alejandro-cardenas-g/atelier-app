@@ -1,4 +1,4 @@
-import { IUsers } from "../../redux/usuarios/reduxUsuarios.interface";
+import { IUsers } from "../../redux/usuarios/reduxUsers.interface";
 
 export interface IUsersResponse{
     users: IUsers[],
@@ -17,3 +17,7 @@ export interface IUserDetailResponse{
     filename: string | null;
     fileUrl: string | null;
 }
+
+export interface IGetDocumentFile{
+    publicUrl: string
+};
