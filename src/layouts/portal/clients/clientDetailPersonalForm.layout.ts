@@ -1,4 +1,4 @@
-import { MailOutlined, PhoneOutlined, ReconciliationOutlined, UserOutlined } from "@ant-design/icons";
+import { GoldOutlined, MailOutlined, PhoneOutlined, ReconciliationOutlined, UserOutlined } from "@ant-design/icons";
 import { IFormLayout } from "../../../interfaces/layouts/formLayout.interface";
 import { PORTAL_LOCALS } from "../../../locales/portal/portal.locals";
 import { ETypeFormItem } from "../../../locales/portal/portalUsers.locals";
@@ -46,18 +46,6 @@ export const clientDetailPersonalFormLayout:IFormLayout[] = [
         inputPrefix: UserOutlined
     },
     {
-        key: 'button-save-basic',
-        type: ETypeFormItem.SAVE_BUTTON,
-        props: {
-            className: 'form-details__item-saveButton',
-        },
-        propsInput: {
-            'aria-label': detailsLocals['form']['saveButton'],
-            htmlType: "submit",
-            text: detailsLocals['form']['saveButton']
-        }
-    },
-    {
         key: 'input-email',
         type: ETypeFormItem.INPUT,
         props: {
@@ -77,6 +65,20 @@ export const clientDetailPersonalFormLayout:IFormLayout[] = [
         inputPrefix: MailOutlined
     },
     {
+        key: 'input-company',
+        type: ETypeFormItem.INPUT,
+        props: {
+            className: 'form-details__item-company',
+            name:"company",
+            rules:[{ required: true, message: 'La compañia es obligatoria' }],
+        },
+        propsInput: {
+            placeholder: 'Companía*',
+            'aria-label': 'Compañía'
+        },
+        inputPrefix: GoldOutlined
+    },
+    {
         key: 'input-phone',
         type: ETypeFormItem.INPUT,
         props: {
@@ -90,5 +92,17 @@ export const clientDetailPersonalFormLayout:IFormLayout[] = [
             min: 0
         },
         inputPrefix: PhoneOutlined
+    },
+    {
+        key: 'button-save-basic',
+        type: ETypeFormItem.SAVE_BUTTON,
+        props: {
+            className: 'form-details__item-saveButton',
+        },
+        propsInput: {
+            'aria-label': detailsLocals['form']['saveButton'],
+            htmlType: "submit",
+            text: detailsLocals['form']['saveButton']
+        }
     },
 ]

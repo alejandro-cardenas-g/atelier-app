@@ -52,6 +52,7 @@
                 &-name,
                 &-lastname
                 &-email,
+                &-company,
                 &-phone{
                     max-width: 100%;
                     display: block;
@@ -91,7 +92,8 @@
                 grid-template-areas: 
                     "basic basic"
                     "name lastname"
-                    "email phone"
+                    "email company"
+                    "phone none"
                     "saveButton saveButton";
     
                 &__item{
@@ -106,6 +108,10 @@
         
                     &-email{
                         grid-area: email;
+                    }
+
+                    &-company{
+                        grid-area: company;
                     }
         
                     &-phone{

@@ -1,16 +1,21 @@
 import { useEffect, useState } from "react";
 import { MenuUnfoldOutlined, MenuFoldOutlined, LogoutOutlined } from "@ant-design/icons";
 import { Button, Menu, MenuProps } from "antd";
+import { useSelector } from 'react-redux';
 
 import { PortalSiderInfo } from "./portalSiderInfo.component";
 import { sideMenuLayout } from "../../../layouts/portal/siderMenu.layout";
 import { PATHNAMES } from "../../../routers/routes.enum";
 import { useLocation, useNavigate } from "react-router-dom";
 import { dispatLogout } from "../../../redux/dispatchers/auth/auth.dispatch";
+import { getIsSuperUser, getUserType } from "../../../redux/selectors/auth.selector";
 
 type MenuItem = Required<MenuProps>['items'][number];
 
 export const PortalSider = () => {
+
+    const isSuper = useSelector(getIsSuperUser);
+    const userType = useSelector(getUserType);
 
     const { pathname } = useLocation();
     const navigate = useNavigate();
@@ -23,7 +28,12 @@ export const PortalSider = () => {
 
     const basePath = `/${pathname.split("/")[1]}`;
 
-    const items: MenuItem[] = sideMenuLayout.map(({component:Component,key,label,route, ...rest}) => ({
+    let layout = sideMenuLayout;
+    if(!isSuper){
+        layout = layout.filter(({permissions}) => permissions.includes(userType!))
+    }
+
+    let items: MenuItem[] = layout.map(({component:Component,key,label,route, ...rest}) => ({
         key,
         label,
         icon: <Component/>,

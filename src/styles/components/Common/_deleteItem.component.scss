@@ -1,0 +1,14 @@
+.delete-item{
+    color: $dark-title3;
+    &__group{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        @media (min-width: $bk-380){
+            flex-direction: row;
+        }
+
+    }
+
+}

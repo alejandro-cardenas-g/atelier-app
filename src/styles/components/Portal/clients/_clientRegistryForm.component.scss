@@ -12,7 +12,8 @@
             &-lastname,
             &-email,
             &-password,
-            &-phone
+            &-phone,
+            &-company
             {
                 max-width: 100%;
                 display: block;
@@ -67,7 +68,7 @@
                 "required required"
                 "name lastname"
                 "email password"
-                "phone none"
+                "company phone"
                 "submit submit";
     
             &__item{
@@ -87,6 +88,10 @@
                 &-password{
                     margin-bottom: 0rem;
                     grid-area: password;
+                }
+
+                &-company{
+                    grid-area: company;
                 }
     
                 &-phone{

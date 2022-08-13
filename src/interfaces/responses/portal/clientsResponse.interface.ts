@@ -11,4 +11,5 @@ export interface IClientDetailResponse{
     lastname: string;
     email: string;
     phone: string | null;
+    company: string;
 }

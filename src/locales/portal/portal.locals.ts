@@ -51,34 +51,34 @@ export const PORTAL_LOCALS = {
             form: {
                 infoRequired: 'Información requerida',
                 name: {
-                    placeholder: 'Nombre(s)',
+                    placeholder: 'Nombre(s)*',
                     ariaLabel: 'Nombres',
                     validators: {
                         required: 'El nombre es obligatorio'
                     }
                 },
                 lastname: {
-                    placeholder: 'Apellido(s)',
+                    placeholder: 'Apellido(s)*',
                     ariaLabel: 'Apellidos',
                     validators: {
                         required: 'Los apellidos son obligatorios'
                     }
                 },
                 area: {
-                    placeholder: 'Seleccione el Área',
+                    placeholder: 'Seleccione el Área*',
                     validators: {
                         required: 'El área es obligatoria'
                     }
                 },
                 job: {
-                    placeholder: 'Cargo',
+                    placeholder: 'Cargo*',
                     ariaLabel: 'Cargo',
                     validators: {
                         required: 'El cargo es obligatorio'
                     }
                 },
                 email: {
-                    placeholder: 'Email',
+                    placeholder: 'Email*',
                     ariaLabel: 'Email',
                     validators: {
                         required: 'El Correo es obligatorio',
@@ -86,7 +86,7 @@ export const PORTAL_LOCALS = {
                     }
                 },
                 password: {
-                    placeholder: 'Contraseña',
+                    placeholder: 'Contraseña*',
                     ariaLabel: 'Contraseña',
                     validators: {
                         required: 'La contraseña es obligatoria',

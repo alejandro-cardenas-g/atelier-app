@@ -4,9 +4,9 @@ import { useSelector } from "react-redux";
 import { EClientDetailSection, IClientDetail } from "../../../../interfaces/redux/clients/reduxClient.interface";
 import { EUserDetailSection } from "../../../../interfaces/redux/usuarios/reduxUsers.interface";
 import { clientDetailPersonalFormLayout } from "../../../../layouts/portal/clients/clientDetailPersonalForm.layout";
-import { userDetailPersonalFormLayout } from "../../../../layouts/portal/users/userDetailPersonalForm.layout";
 import { ETypeFormItem } from "../../../../locales/portal/portalUsers.locals";
-import { dispatchPatchSimpleUserDetail, setUserDetailSection } from "../../../../redux/dispatchers/portal/users.dispatch";
+import { dispatchPatchSimpleClientDetail } from "../../../../redux/dispatchers/portal/clients.dispatch";
+import { setUserDetailSection } from "../../../../redux/dispatchers/portal/users.dispatch";
 import { getIsSuperUser } from "../../../../redux/selectors/auth.selector";
 import { getClientDetailsSection } from "../../../../redux/selectors/clients.selector";
 import { CustomForm } from "../../../Common/CustomForm.component";
@@ -27,7 +27,8 @@ export const ClientDetailsPersonalForm = ({clientDetail}: IProps) => {
         name: clientDetail.name || '',
         lastname: clientDetail.lastname || '',
         email: clientDetail.email || '',
-        phone: clientDetail.phone || ''
+        phone: clientDetail.phone || '',
+        company: clientDetail.company || ''
     }
 
     //BUILDING NEW LAYOUT
@@ -52,7 +53,7 @@ export const ClientDetailsPersonalForm = ({clientDetail}: IProps) => {
 
     const handleSubmit = () => {
         if(!isSuperUser) return;
-        dispatchPatchSimpleUserDetail({id: clientDetail.id, data: {
+        dispatchPatchSimpleClientDetail({id: clientDetail.id, data: {
             ...form.getFieldsValue()
         }})
         setHasChanged(false);
@@ -90,4 +91,5 @@ interface IInitialValues{
     lastname: string;
     email: string;
     phone: string;
+    company: string;
 }

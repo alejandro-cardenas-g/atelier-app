@@ -1,4 +1,4 @@
-import { LockOutlined, MailOutlined, PhoneOutlined, UserOutlined } from "@ant-design/icons";
+import { GoldOutlined, LockOutlined, MailOutlined, PhoneOutlined, UserOutlined } from "@ant-design/icons";
 import { ETypeFormItem } from "../../../locales/portal/portalUsers.locals";
 import { IFormLayout } from "../../../interfaces/layouts/formLayout.interface";
 import { validateEmail, validatePassword } from '../../../utils/portal/users/userRegistryForm.validator.util';
@@ -10,7 +10,7 @@ export const clientsRegistryFormLayout:IFormLayout[] = [
     {
         key: 'separator-required',
         type: ETypeFormItem.TYPOGRAPHY_TITLE,
-        textTypegraphy: formLocals['infoRequired'],
+        textTypegraphy: 'Información necesaria',
         props: {
             level: 4,
             className: 'separator-clients__required',
@@ -25,7 +25,7 @@ export const clientsRegistryFormLayout:IFormLayout[] = [
             rules:[{ required: true, message: formLocals['name']['validators']['required'] }],
         },
         propsInput: {
-            placeholder: formLocals['name']['placeholder'],
+            placeholder: `${formLocals['name']['placeholder']}`,
             'aria-label': formLocals['name']['ariaLabel']
         },
         inputPrefix: UserOutlined
@@ -39,7 +39,7 @@ export const clientsRegistryFormLayout:IFormLayout[] = [
             rules:[{ required: true, message: formLocals['lastname']['validators']['required'] }],
         },
         propsInput: {
-            placeholder: formLocals['lastname']['placeholder'],
+            placeholder: `${formLocals['lastname']['placeholder']}`,
             'aria-label': formLocals['lastname']['ariaLabel']
         },
         inputPrefix: UserOutlined
@@ -58,7 +58,7 @@ export const clientsRegistryFormLayout:IFormLayout[] = [
             ],
         },
         propsInput: {
-            placeholder: formLocals['email']['placeholder'],
+            placeholder: `${formLocals['email']['placeholder']}`,
             'aria-label': formLocals['email']['ariaLabel']
         },
         inputPrefix: MailOutlined
@@ -80,11 +80,24 @@ export const clientsRegistryFormLayout:IFormLayout[] = [
             ],
         },
         propsInput: {
-            placeholder: formLocals['password']['placeholder'],
+            placeholder: `${formLocals['password']['placeholder']}`,
             'aria-label': formLocals['password']['ariaLabel']
         },
         inputPrefix: LockOutlined,
         needsPassword: true,
+    },
+    {
+        key: 'input-company',
+        type: ETypeFormItem.INPUT,
+        props: {
+            className: 'form-clients__item-company',
+            name:"company"
+        },
+        propsInput: {
+            placeholder: 'Compañía*',
+            'aria-label': 'Compañía'
+        },
+        inputPrefix: GoldOutlined,
     },
     {
         key: 'input-phone',

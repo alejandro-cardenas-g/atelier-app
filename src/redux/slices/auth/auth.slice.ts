@@ -1,6 +1,6 @@
 import { createSlice, Reducer, SliceCaseReducers } from '@reduxjs/toolkit'
 import { IAuthDetails } from '../../../interfaces/auth/authLogin.interface';
-import { TYPE_SESSION, TYPE_USER } from '../../../locales/auth/auth.locals';
+import { TYPE_SESSION } from '../../../locales/auth/auth.locals';
 import { extraReducer } from '../../extraReducers/auth/auth.extraReducer';
 
 const authSlice = createSlice<IStateAuth, SliceCaseReducers<IStateAuth>>({
@@ -10,7 +10,8 @@ const authSlice = createSlice<IStateAuth, SliceCaseReducers<IStateAuth>>({
         isLogged: false,
         session_type: 1,
         user: null,
-        checked: null
+        checked: null,
+        role: 1
     },
     reducers: {
         SET:(state,action) => {
@@ -18,6 +19,7 @@ const authSlice = createSlice<IStateAuth, SliceCaseReducers<IStateAuth>>({
         },
         ON_FORBIDDEN: (state, action) => {
             localStorage.removeItem('token');
+            localStorage.removeItem('role');
             state.checked = false;
             state.isLogged = false;
             state.user = null;
@@ -28,6 +30,7 @@ const authSlice = createSlice<IStateAuth, SliceCaseReducers<IStateAuth>>({
         },
         LOGOUT: (state, action) => {
             localStorage.removeItem('token');
+            localStorage.removeItem('role');
             state.checked = false;
             state.isLogged = false;
             state.user = null;
@@ -51,4 +54,5 @@ export interface IStateAuth {
     session_type: TYPE_SESSION;
     user: null | IAuthDetails;
     checked: boolean | null;
+    role: TYPE_SESSION;
 }

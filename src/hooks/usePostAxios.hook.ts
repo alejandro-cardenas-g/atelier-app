@@ -38,7 +38,7 @@ export const usePostAxios = <R=any>(
             if(e instanceof AxiosError) {
                 setError(e)
                 if(conf?.messageOnError){
-                    notificationErrorV1(e.response?.data.error, 2.1);
+                    notificationErrorV1(e.response?.data.message, 2.1);
                 }
             }else{
                 notificationErrorV1('Error', 2.1);

@@ -16,7 +16,11 @@ export const authLogin = createAsyncThunk('auth/login', async(payload: ILogin, t
     try{
         const { auth } = thunkApi.getState() as (RootState);
         let url = AUTH_ENDPOINTS.login;
-        if(auth.session_type === TYPE_SESSION.CLIENT) url = AUTH_ENDPOINTS.loginClient;
+        let role: string = TYPE_SESSION.ADMIN.toString();
+        if(auth.session_type === TYPE_SESSION.CLIENT){
+            url = AUTH_ENDPOINTS.loginClient;
+            role = TYPE_SESSION.CLIENT.toString();
+        }
         const response = await publicApi<{token: string}>({
             url: url,
             method: 'POST',
@@ -24,6 +28,7 @@ export const authLogin = createAsyncThunk('auth/login', async(payload: ILogin, t
         });
         const { data } = response;
         localStorage.setItem('token', data.token);
+        localStorage.setItem('role', role);
         const userSessionDetail = await validateJwt<IAuthDetails>(localStorage.getItem('token')!);
         return userSessionDetail;
     }catch(error) {
@@ -41,8 +46,12 @@ export const authLogin = createAsyncThunk('auth/login', async(payload: ILogin, t
 
 export const refreshToken = createAsyncThunk('auth/refreshToken', async(_, thunkApi) => {
     try{
+        let url = AUTH_ENDPOINTS.refresh;
+        if(localStorage.getItem('role') === TYPE_SESSION.CLIENT.toString()){
+            url = AUTH_ENDPOINTS.refreshClient;
+        }
         const response = await privateApi<{token: string}>({
-            url: `${AUTH_ENDPOINTS.refresh}`,
+            url: `${url}`,
             method: 'GET',
         });
         const { data } = response;
@@ -57,6 +66,7 @@ export const refreshToken = createAsyncThunk('auth/refreshToken', async(_, thunk
             }
         }
         localStorage.removeItem('token');
+        localStorage.removeItem('role');
         const payload = reduxRejectedHandler(error);
         if(payload.code === 401) dispatchForbidden();
         return thunkApi.rejectWithValue(payload);
@@ -64,7 +74,8 @@ export const refreshToken = createAsyncThunk('auth/refreshToken', async(_, thunk
 },
 {
     condition: (_, api) => {
-        if(localStorage.getItem('token')) return true;
+        if(localStorage.getItem('token') && localStorage.getItem('role')) return true;
+        dispatchForbidden()
         return false;
     }
 });

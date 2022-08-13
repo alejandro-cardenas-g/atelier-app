@@ -6,10 +6,12 @@ export const ModalDeleteItem = ({
   text
 }: IProps) => {
   return (
-    <div>
+    <div className='delete-item'>
         <p>{text}</p>
-        <Button className='custom-btn__delete' onClick={() => handleDelete()}>Si, Eliminar</Button>
-        <Button className='custom-btn__green' onClick={() => handleCancel()}>No</Button>
+        <div className='delete-item__group'>
+          <Button className='custom-btn__delete' onClick={() => handleDelete()}>Si, Eliminar</Button>
+          <Button className='custom-btn__green' onClick={() => handleCancel()}>No</Button>
+        </div>
     </div>
   )
 }

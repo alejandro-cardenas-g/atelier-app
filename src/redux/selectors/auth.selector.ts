@@ -24,3 +24,12 @@ export const getIsSuperUser = (state:RootState) => {
     const { isSuperUser } = state.auth.user!;
     return isSuperUser;
 }
+
+export const getPermissions = (state: RootState) => {
+    const { type, isSuperUser } = state.auth.user!;
+    return {
+        type,
+        isSuperUser
+    }
+    
+}

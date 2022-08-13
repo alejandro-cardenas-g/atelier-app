@@ -1,8 +1,10 @@
 import { ActionReducerMapBuilder } from "@reduxjs/toolkit";
 import { IStateClients } from "../../../slices/portal/clients.slice";
 import {
+    deleteClient,
     getClientDetail,
-    getClients 
+    getClients, 
+    patchSimpleClientDetail
 } from "../../../thunks/clients.thunk";
 import { 
     getClientsPending, 
@@ -10,7 +12,10 @@ import {
     getClientsRejected,
     getClientDetailFullfilled,
     getClientDetailPending,
-    getClientDetailRejected
+    getClientDetailRejected,
+    deleteClientPending,
+    deleteClientFullfilled,
+    deleteClientRejected
 } from "./actions";
 
 export const extraReducer = (builder: ActionReducerMapBuilder<IStateClients>) => {
@@ -23,4 +28,12 @@ export const extraReducer = (builder: ActionReducerMapBuilder<IStateClients>) =>
         .addCase(getClientDetail.pending, getClientDetailPending) 
         .addCase(getClientDetail.fulfilled, getClientDetailFullfilled)
         .addCase(getClientDetail.rejected, getClientDetailRejected)
+        // PATCH SIMPLE CLIENT DETAIL
+        .addCase(patchSimpleClientDetail.pending, getClientDetailPending) 
+        .addCase(patchSimpleClientDetail.fulfilled, getClientDetailFullfilled)
+        .addCase(patchSimpleClientDetail.rejected, getClientDetailRejected) 
+        // DELETE CLIENT
+        .addCase(deleteClient.pending, deleteClientPending) 
+        .addCase(deleteClient.fulfilled, deleteClientFullfilled)
+        .addCase(deleteClient.rejected, deleteClientRejected) 
 }

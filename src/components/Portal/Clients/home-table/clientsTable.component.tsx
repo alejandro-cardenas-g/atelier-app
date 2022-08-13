@@ -7,9 +7,6 @@ import Modal from 'antd/lib/modal/Modal';
 import { useLocation, useNavigate } from "react-router-dom"
 
 import { PORTAL_LOCALS } from '../../../../locales/portal/portal.locals';
-import {
-    dispatchDeleteUser,
-} from '../../../../redux/dispatchers/portal/users.dispatch';
 import { MenuTable } from './menuTable.component';
 import { CustomTable } from '../../../Common/CustomTable.component';
 import { EDropDownMenuItemsTable } from "../../../../interfaces/portal/users/users.interface";
@@ -17,7 +14,11 @@ import { parse } from 'query-string';
 import { getIsSuperUser } from '../../../../redux/selectors/auth.selector';
 import { ModalDeleteItem } from '../../../Common/modalDeleteItem.component';
 import { IRowClientDataType } from '../../../../interfaces/portal/clients/rowDataType.interface';
-import { dispatchGetClients, dispatchSetActiveClient } from '../../../../redux/dispatchers/portal/clients.dispatch';
+import { 
+    dispatchDeleteClient,
+    dispatchGetClients,
+    dispatchSetActiveClient
+} from '../../../../redux/dispatchers/portal/clients.dispatch';
 import { getClientsPortal } from '../../../../redux/selectors/clients.selector';
 
 const TABLE_COLUMNS_LOCALES = PORTAL_LOCALS['users']['tableColumns'];
@@ -60,6 +61,7 @@ export const ClientsTable = () => {
             key: index,
             name: `${user.name} ${user.lastname}`,
             email: `${user.email}`,
+            company: `${user.company}`,
             dropdown: {
                 id: user.id,
                 slug: user.slug
@@ -75,33 +77,34 @@ export const ClientsTable = () => {
         console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
     }
 
-    const handleClick = (key: string, userId:number, slug: string) => {
+    const handleClick = (key: string, clientId:number, slug: string) => {
         switch(key){
             case EDropDownMenuItemsTable.DETAIL:
-                if(!slug || !userId){
+                if(!slug || !clientId){
                     navigate('/clientes');
                 }else{
-                    dispatchSetActiveClient(userId);
+                    dispatchSetActiveClient(clientId);
                     navigate(`/clientes/${slug}`);
                 }
                 break;
             case EDropDownMenuItemsTable.DELETE:
-                if(!userId){
+                if(!clientId){
                     navigate('/clientes');
                 }else{
-                    setClientToDelete(userId);
+                    setClientToDelete(clientId);
                 }
                 break;
         }
     }
 
-    const handleDelete = (userId: number | null) => {
-        if(userId){
-            dispatchDeleteUser(userId)
+    const handleDelete = (clientId: number | null) => {
+        if(clientId){
+            dispatchDeleteClient(clientId)
             .then(result => {
                 if(result.meta.requestStatus === 'fulfilled'){
                     setClientToDelete(null);
-                    navigate('/clientes');
+                    const searching = (search && typeof(search) === 'string') ? `&search=${search}` : '';
+                    navigate(`/clientes?page=${currentPage}${searching}`)
                 }
             }).finally(() => setClientToDelete(null))
         }
@@ -111,11 +114,15 @@ export const ClientsTable = () => {
         {
             title: TABLE_COLUMNS_LOCALES['name']['title'],
             dataIndex: TABLE_COLUMNS_LOCALES['name']['dataIndex'],
-            render: (text: string) => <p>{text}</p>,
+            render: (text: string) => <p style={{margin: 0}}>{text}</p>,
         },
         {
             title: TABLE_COLUMNS_LOCALES['email']['title'],
             dataIndex: TABLE_COLUMNS_LOCALES['email']['dataIndex'],
+        },
+        {
+            title: 'Compañía',
+            dataIndex: 'company',
         },
         {
             title: TABLE_COLUMNS_LOCALES['dropdown']['title'],

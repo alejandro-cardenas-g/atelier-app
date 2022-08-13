@@ -107,7 +107,8 @@ export const UsersTable = () => {
             .then(result => {
                 if(result.meta.requestStatus === 'fulfilled'){
                     setUserToDelete(null);
-                    navigate('/usuarios');
+                    const searching = (search && typeof(search) === 'string') ? `&search=${search}` : '';
+                    navigate(`/usuarios?page=${currentPage}${searching}`)
                 }
             }).finally(() => setUserToDelete(null))
         }
@@ -117,7 +118,7 @@ export const UsersTable = () => {
         {
             title: TABLE_COLUMNS_LOCALES['name']['title'],
             dataIndex: TABLE_COLUMNS_LOCALES['name']['dataIndex'],
-            render: (text: string) => <p>{text}</p>,
+            render: (text: string) => <p style={{margin: 0}}>{text}</p>,
         },
         {
             title: TABLE_COLUMNS_LOCALES['type']['title'],

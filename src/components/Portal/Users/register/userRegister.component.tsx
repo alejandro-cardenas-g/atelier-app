@@ -1,15 +1,20 @@
 import { Form, Modal, Spin } from "antd"
-import { RcFile, UploadFile } from "antd/lib/upload/interface"
 import { IRegisterForm } from "../../../../interfaces/portal/users/contentUsers.interface";
 import { UserRegisterForm } from "./userRegisterForm.component";
 import { usePostAxios } from '../../../../hooks/usePostAxios.hook';
 import { UserInfoConfirmation } from "../utils/usersFormUtils.component";
 import { useState } from "react";
 import { PORTAL_ENDPOINTS } from "../../../../api/endpoint";
-import { converToBase64 } from "../../../../utils/files/convertToBase64.util";
+import { UseVerifyModulePermission } from "../../../../hooks/useVerifyModulePermission.hook";
 
 export const UserRegister = () => {
   window.scrollTo(0,0);
+
+  UseVerifyModulePermission(
+    [],
+    '/'
+  );
+
   const {execute, loading, result, reset} = usePostAxios<any>({
     messageOnError: true
   });

@@ -5,9 +5,16 @@ import { usePostAxios } from '../../../../hooks/usePostAxios.hook';
 import { UserInfoConfirmation } from "../../Users/utils/usersFormUtils.component";
 import { PORTAL_ENDPOINTS } from "../../../../api/endpoint";
 import { IRegisterForm } from "../../../../interfaces/portal/clients/contentUsers.interface";
+import { UseVerifyModulePermission } from "../../../../hooks/useVerifyModulePermission.hook";
 
 export const ClientRegister = () => {
   window.scrollTo(0,0);
+
+  UseVerifyModulePermission(
+    [],
+    '/'
+  );
+
   const {execute, loading, result, reset} = usePostAxios<any>({
     messageOnError: true
   });
@@ -25,7 +32,8 @@ export const ClientRegister = () => {
     lastname: '',
     email: '',
     password: '',
-    phone: ''
+    phone: '',
+    company: ''
   }
 
   const handleSubmit = async(values: IRegisterForm) => {

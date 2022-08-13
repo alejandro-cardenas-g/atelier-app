@@ -5,6 +5,7 @@ export interface IClients{
     type: number;
     id: number;
     slug: string;
+    company: string;
 }
 
 export interface IClientDetail{
@@ -13,6 +14,7 @@ export interface IClientDetail{
     lastname: string;
     email: string;
     phone: string | null;
+    company: string;
 }
 
 export enum EClientDetailSection {
@@ -20,6 +22,6 @@ export enum EClientDetailSection {
     PRIVACY = 2
 }
 
-export interface IUserDetailSend extends IClientDetail{
+export interface IClientDetailSend extends IClientDetail{
     password: string
 };

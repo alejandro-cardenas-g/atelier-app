@@ -5,11 +5,18 @@ import { EUsersContent } from '../../../locales/portal/portalUsers.locals';
 import { UsuariosInfo } from './utils/usersInfo.component';
 import { IUsersContent } from '../../../interfaces/portal/users/contentUsers.interface';
 import { Nullish } from '../../Common/Nullish.component';
+import { USERS_MODULE_PERMISSIONS } from '../../../constants/permissions/permissions.constants';
+import { UseVerifyModulePermission } from '../../../hooks/useVerifyModulePermission.hook';
 
 export const Users = ({type}:IProps) => {
 
     const [content, setContent] = useState<IUsersContent | null>(null);
     const [actionType, setActionType] = useState<EUsersContent>(EUsersContent.READ);
+
+    UseVerifyModulePermission(
+        USERS_MODULE_PERMISSIONS,
+        '/'
+    );
 
     useEffect(() => {
 

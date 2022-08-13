@@ -4,9 +4,9 @@ import { useSelector } from "react-redux";
 import { EClientDetailSection, IClientDetail } from "../../../../interfaces/redux/clients/reduxClient.interface";
 import { EUserDetailSection } from "../../../../interfaces/redux/usuarios/reduxUsers.interface";
 import { clientDetailSecurityFormLayout } from "../../../../layouts/portal/clients/clientDetailSecurityForm.layout";
-import { userDetailSecurityFormLayout } from "../../../../layouts/portal/users/userDetailSecurityForm.layout";
 import { ETypeFormItem } from "../../../../locales/portal/portalUsers.locals";
-import { dispatchPatchSimpleUserDetail, setUserDetailSection } from "../../../../redux/dispatchers/portal/users.dispatch";
+import { dispatchPatchSimpleClientDetail } from "../../../../redux/dispatchers/portal/clients.dispatch";
+import { setUserDetailSection } from "../../../../redux/dispatchers/portal/users.dispatch";
 import { getIsSuperUser } from "../../../../redux/selectors/auth.selector";
 import { getClientDetailsSection } from "../../../../redux/selectors/clients.selector";
 import { generateRandomString } from "../../../../utils/stringTools/generateRandomString.util";
@@ -63,7 +63,7 @@ export const ClientDetailsSecurityForm = ({clientDetail}: IProps) => {
 
     const handleSubmit = () => {
         if(!isSuperUser) return;
-        dispatchPatchSimpleUserDetail({id: clientDetail.id, data: {
+        dispatchPatchSimpleClientDetail({id: clientDetail.id, data: {
             password: form.getFieldValue('password')
         }}).then(result => {
             if(result.meta.requestStatus === "fulfilled"){
