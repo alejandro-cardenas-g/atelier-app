@@ -6,6 +6,7 @@ import { PortalPage } from "../../pages/portal/portalPage.page";
 
 const UserComponentLazy = lazy(() => import('../../components/Portal/Users/users.component'));
 const ClientsComponentLazy = lazy(() => import('../../components/Portal/Clients/clients.component'));
+const EquipmentsComponentLazy = lazy(() => import('../../components/Portal/Equipments/equipments.component'));
 
 export const portalRoutes:IRoutes[] = [
     {
@@ -92,7 +93,7 @@ export const portalRoutes:IRoutes[] = [
             {
                 path: ROUTES.PORTAL_EQUIPOS,
                 isPrivate: true,
-                component: Nullish,
+                component: EquipmentsComponentLazy,
                 layout: PortalPage,
                 props: {
 

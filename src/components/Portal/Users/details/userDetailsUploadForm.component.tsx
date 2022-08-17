@@ -17,6 +17,7 @@ import { PORTAL_ENDPOINTS } from "../../../../api/endpoint";
 import { IGetDocumentFile } from "../../../../interfaces/responses/portal/usersResponse.interface";
 import { reduxRejectedHandler } from "../../../../utils/redux/reduxRejected.util";
 import { dispatchForbidden } from "../../../../redux/dispatchers/auth/auth.dispatch";
+import { verifyDocumentTypeAndSizeAction } from "../../../../utils/files/verifyMimeType.util";
 
 export const UserDetailsUploadForm = ({userDetail}: IProps) => {
 
@@ -31,9 +32,12 @@ export const UserDetailsUploadForm = ({userDetail}: IProps) => {
     const [form] = Form.useForm();
 
     const handleChange = (e:UploadChangeParam<UploadFile<any>>) => {
-        setFile(e.fileList[0]);
-        setHasChanged(true);
-        setUserDetailSection(EUserDetailSection.UPLOAD); 
+        const result = verifyDocumentTypeAndSizeAction(e)
+        setFile(result);
+        if(result){
+            setHasChanged(true);
+            setUserDetailSection(EUserDetailSection.UPLOAD); 
+        }
     }
 
     const handleDownloadFile = async() => {
@@ -58,7 +62,10 @@ export const UserDetailsUploadForm = ({userDetail}: IProps) => {
         item.Cop = UploadBody;
         item.propsInput = {
                 ...item.propsInput,
-                onChange: (e:UploadChangeParam<UploadFile<any>>) => handleChange(e),
+                fileList: (file) ? [file] : [],
+                onChange: (e:UploadChangeParam<UploadFile<any>>) => {
+                    handleChange(e)
+                },
                 style: {
                     display: `${isSuperUser ? 'block' :  'none'}`
                 }

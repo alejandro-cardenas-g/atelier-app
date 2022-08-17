@@ -53,7 +53,8 @@ export const patchSimpleClientDetail = createAsyncThunk<IClientDetail, IPatchReq
     {   
         id,
         token,
-        data
+        data,
+        step
     }: IPatchRequest,
     thunkApi
 ) => {
@@ -63,7 +64,10 @@ export const patchSimpleClientDetail = createAsyncThunk<IClientDetail, IPatchReq
             response = await privateApi<IClientDetailResponse>({
                 url: `${PORTAL_ENDPOINTS.baseClients}/`,
                 method: 'PATCH',
-                data
+                data: {
+                    ...data,
+                    step
+                }
             });
             const { data:dataResponse } = response;
             return dataResponse;
@@ -71,7 +75,10 @@ export const patchSimpleClientDetail = createAsyncThunk<IClientDetail, IPatchReq
             response = await privateApi<IClientDetail>({
                 url: `${PORTAL_ENDPOINTS.baseClients}/${id}`,
                 method: 'PATCH',
-                data
+                data: {
+                    ...data,
+                    step
+                }
             });
         }
         const { data:dataResponse } = response;

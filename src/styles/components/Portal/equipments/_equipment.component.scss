@@ -1,0 +1,17 @@
+.portal-equipment{
+
+    &__main{
+        .pagination{
+            width: 100%;
+            @media (min-width: $bk-1000){
+                padding: 0 8rem;
+            }
+        
+            @media(min-width: 1200px){
+                padding: 0 10rem;
+            }
+        }
+
+    }
+
+}

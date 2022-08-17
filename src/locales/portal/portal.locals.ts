@@ -139,5 +139,12 @@ export const PORTAL_LOCALS = {
             buttonNew: 'Nuevo Cliente',
             back: 'Atras'
         },
+    },
+    equipments: {
+        info: {
+            title: 'Administración - Equipos',
+            buttonNew: 'Nuevo Equipo',
+            back: 'Atras'
+        },
     }
 }

@@ -64,11 +64,18 @@ export const UserDetailsPersonalForm = ({userDetail}: IProps) => {
 
     const handleSubmit = () => {
         if(!isSuperUser) return;
-        dispatchPatchSimpleUserDetail({id: userDetail.id, data: {
+        dispatchPatchSimpleUserDetail({
+            id: userDetail.id,
+            data: {
             ...form.getFieldsValue()
-        }})
-        setHasChanged(false);
-        setUserDetailSection(null);
+            },
+            step: EUserDetailSection.BASIC
+        }).then(result => {
+            if(result.meta.requestStatus === 'fulfilled'){
+                setHasChanged(false);
+                setUserDetailSection(null);
+            }
+        })
     }
 
     const handleChange = () => {

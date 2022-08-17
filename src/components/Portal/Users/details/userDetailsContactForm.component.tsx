@@ -49,11 +49,18 @@ export const UserDetailsContactForm = ({userDetail}: IProps) => {
 
     const handleSubmit = () => {
         if(!isSuperUser) return;
-        dispatchPatchSimpleUserDetail({id: userDetail.id, data: {
-            ...form.getFieldsValue()
-        }})
-        setHasChanged(false);
-        setUserDetailSection(null);
+        dispatchPatchSimpleUserDetail({
+            id: userDetail.id,
+            data: {
+                ...form.getFieldsValue()
+            },
+            step: EUserDetailSection.CONTACT
+        }).then(result => {
+            if(result.meta.requestStatus === 'fulfilled'){
+                setHasChanged(false);
+                setUserDetailSection(null);
+            }
+        })
     }
 
     const handleChange = () => {

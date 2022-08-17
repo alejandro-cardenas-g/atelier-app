@@ -20,14 +20,6 @@ export const UserRegisterForm = ({
 
     const types = useSelector(getUserTypes);
 
-    // const [file, setFile] = useState<UploadFile | null>(null)
-
-    // useEffect(() => {
-    //     if(canReset){
-    //         setFile(null);
-    //     }
-    // }, [canReset])
-
     //HANDLEGENERATEPASSWORD
     const handleGeneratePassword = () => {
         form.setFieldsValue({
@@ -49,17 +41,6 @@ export const UserRegisterForm = ({
         if(item.key === 'divpassword'){
             item.Cop = ComponentForPassword({handleGeneratePassword});
         }
-        // if(item.key === 'dragger-file'){
-        // item.Cop = UploadBody;
-        // item.propsInput = {
-        //         ...item.propsInput,
-        //         fileList: (file) ? [file] : [],
-        //         onChange: (e:UploadChangeParam<UploadFile<any>>) => {
-        //             const result = verifyDocumentTypeAndSizeAction(e);
-        //             setFile(result);
-        //         }
-        //     }
-        // }
         if(item.key === 'select-area'){
         item.propsInput = {
             ...item.propsInput,

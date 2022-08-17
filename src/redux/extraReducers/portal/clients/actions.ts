@@ -45,6 +45,14 @@ export const getClientDetailRejected = (state: IStateClients, action: any): void
     notificationErrorV1 (message || 'Error', 2.1);
 }
 
+// Path simple client
+
+export const patchSimpleClientDetailFullfilled = (state: IStateClients, action: PayloadAction<IClientDetailResponse,any>): void => {
+    state.isLoading = false;
+    state.clientDetail = action.payload;
+    message.success('El cliente ha sido actualizado');
+}
+
 // Delete client
 
 export const deleteClientPending = (state: IStateClients, action: PayloadAction<any>): void => {

@@ -7,3 +7,11 @@ export const Spinner = () => {
       </div>
     )
 }
+
+export const SpinnerScreen = () => {
+  return (
+    <div className='spinner-screen'>
+      <Spin size='large'/>
+    </div>
+  )
+}

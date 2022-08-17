@@ -15,4 +15,8 @@ export const PORTAL_ENDPOINTS = {
     // Clients
     baseClients: 'api/v1/clients',
     searchClients: 'api/v1/clients/search',
+    // Equipments
+    baseEquipments: 'api/v1/equipments',
+    searchEquipmentsClient: 'api/v1/equipments/clients/search',
+    searchEquipmentsUsers: 'api/v1/equipments/search'
 }

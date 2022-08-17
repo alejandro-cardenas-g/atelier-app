@@ -5,3 +5,10 @@
     height: 100vh;
     background-color: $background-gray;
 }
+
+.spinner-screen{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    background-color: transparent;
+}

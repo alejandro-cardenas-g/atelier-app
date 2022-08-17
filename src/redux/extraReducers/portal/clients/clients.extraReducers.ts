@@ -15,7 +15,8 @@ import {
     getClientDetailRejected,
     deleteClientPending,
     deleteClientFullfilled,
-    deleteClientRejected
+    deleteClientRejected,
+    patchSimpleClientDetailFullfilled
 } from "./actions";
 
 export const extraReducer = (builder: ActionReducerMapBuilder<IStateClients>) => {
@@ -30,7 +31,7 @@ export const extraReducer = (builder: ActionReducerMapBuilder<IStateClients>) =>
         .addCase(getClientDetail.rejected, getClientDetailRejected)
         // PATCH SIMPLE CLIENT DETAIL
         .addCase(patchSimpleClientDetail.pending, getClientDetailPending) 
-        .addCase(patchSimpleClientDetail.fulfilled, getClientDetailFullfilled)
+        .addCase(patchSimpleClientDetail.fulfilled, patchSimpleClientDetailFullfilled)
         .addCase(patchSimpleClientDetail.rejected, getClientDetailRejected) 
         // DELETE CLIENT
         .addCase(deleteClient.pending, deleteClientPending) 

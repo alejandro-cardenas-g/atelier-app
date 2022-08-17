@@ -61,9 +61,13 @@ export const UserDetailsSecurityForm = ({userDetail}: IProps) => {
 
     const handleSubmit = () => {
         if(!isSuperUser) return;
-        dispatchPatchSimpleUserDetail({id: userDetail.id, data: {
-            password: form.getFieldValue('password')
-        }}).then(result => {
+        dispatchPatchSimpleUserDetail({
+            id: userDetail.id,
+            data: {
+                password: form.getFieldValue('password')
+            },
+            step: EUserDetailSection.PRIVACY
+        }).then(result => {
             if(result.meta.requestStatus === "fulfilled"){
                 setPassword(form.getFieldValue('password'));
                 setShowModal(true);
