@@ -5,7 +5,13 @@ export interface IClients{
     type: number;
     id: number;
     slug: string;
-    company: string;
+    company: number;
+    institution: IInstitution;
+}
+
+export interface IInstitution{
+    name: string;
+    id: number;
 }
 
 export interface IClientDetail{
@@ -14,7 +20,8 @@ export interface IClientDetail{
     lastname: string;
     email: string;
     phone: string | null;
-    company: string;
+    company: number;
+    institution: IInstitution;
 }
 
 export enum EClientDetailSection {

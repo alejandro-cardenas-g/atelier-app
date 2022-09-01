@@ -146,5 +146,37 @@ export const PORTAL_LOCALS = {
             buttonNew: 'Nuevo Equipo',
             back: 'Atras'
         },
+        registry: {
+            form: {
+                infoRequired: 'Información del equipo',
+                infoDocumentos: 'Documentos relacionados',
+                save: 'Guardar',
+                name: {
+                    placeholder: 'Nombre del equipo*',
+                    ariaLabel: 'Nombre del equipo',
+                    validators: {
+                        required: 'El nombre del equipo es obligatorio'
+                    }
+                },
+                serial: {
+                    placeholder: 'Serie*',
+                    ariaLabel: 'Serie',
+                    validators: {
+                        required: 'El número de serie es obligatorio'
+                    }
+                },
+                activeFixedNumber: {
+                    placeholder: 'Número activo fijo*',
+                    ariaLabel: 'Número activo fijo',
+                    validators: {
+                        required: 'El número activo fijo es obligatorio'
+                    }
+                },
+                description: {
+                    placeholder: 'Descripción',
+                    ariaLabel: 'Descripción',
+                }
+            }
+        }
     }
 }

@@ -14,5 +14,5 @@ export interface IRegisterForm{
     email: string,
     password: string,
     phone: string | null,
-    company: string
+    company: string | null
 }

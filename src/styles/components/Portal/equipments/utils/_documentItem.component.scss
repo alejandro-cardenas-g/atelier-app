@@ -1,0 +1,49 @@
+.document-item{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: $color2;
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    cursor: default;
+
+    .document-title{
+        color: $dark-title3;
+        &-icon{
+            color: lighten($color: $primary-color, $amount: 18);
+            font-size: 1.7rem;
+        }
+    }
+    .document-actions{
+
+        display: flex;
+        gap: 1rem;
+
+        .document-icon{
+            &-edit,
+            &-delete{
+                cursor: pointer;
+                font-size: 1.6rem;
+            }
+    
+            &-edit{
+                color: darken($color: $color1, $amount: 8);
+            }
+            &-delete{
+                color: lighten($color: $primary-color, $amount: 18);
+            }
+        }
+    }
+
+
+}
+
+.document-form{
+    &-title{
+        color: $dark-title3 !important;
+        font-weight: 300;
+        font-size: 2.2rem;
+        text-align: left;
+        margin-bottom: 2rem;
+    }
+}

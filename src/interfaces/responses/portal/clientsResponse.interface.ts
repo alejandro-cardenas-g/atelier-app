@@ -1,4 +1,4 @@
-import { IClients } from "../../redux/clients/reduxClient.interface";
+import { IClients, IInstitution } from "../../redux/clients/reduxClient.interface";
 
 export interface IClientsResponse{
     clients: IClients[],
@@ -12,4 +12,5 @@ export interface IClientDetailResponse{
     email: string;
     phone: string | null;
     company: string;
+    institution: IInstitution;
 }

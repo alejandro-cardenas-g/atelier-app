@@ -1,9 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { privateApi } from "../../api/config";
 import { PORTAL_ENDPOINTS } from "../../api/endpoint";
-import { IEquipmentsResponse } from "../../interfaces/responses/portal/equipmentsResponse.interface";
-import { IUsersResponse } from "../../interfaces/responses/portal/usersResponse.interface";
-import { TYPE_SESSION, TYPE_USER } from "../../locales/auth/auth.locals";
+import { IDocumentEquipmentsResponse, IEquipmentsResponse, ISingleEquipmentResponse } from "../../interfaces/responses/portal/equipmentsResponse.interface";
 import { RootState } from "../../store/store";
 import { reduxRejectedHandler } from "../../utils/redux/reduxRejected.util";
 import { dispatchForbidden } from "../dispatchers/auth/auth.dispatch";
@@ -24,5 +22,51 @@ export const getEquipments = createAsyncThunk('equipments/fetchequipments', asyn
         const payload = reduxRejectedHandler(error);
         if(payload.code === 401) dispatchForbidden();
         return thunkApi.rejectWithValue(payload);
+    }
+});
+
+export const getSingleEquipment = createAsyncThunk('equipments/getSingle', async(
+    id:number,
+    thunkApi
+) => {
+    try{
+        const endpoint = `${PORTAL_ENDPOINTS.baseEquipments}/${id}`;
+        const response = await privateApi<ISingleEquipmentResponse>({
+            url: endpoint,
+            method: 'GET',
+        });
+        const { data } = response;
+        return data;
+    }catch(error) {
+        const payload = reduxRejectedHandler(error);
+        if(payload.code === 401) dispatchForbidden();
+        return thunkApi.rejectWithValue(payload);
+    }
+});
+
+export const getEquipmentTags = createAsyncThunk('equipments/fetch-types', async(
+    _,
+    thunkApi
+) => {
+    try{
+        const response = await privateApi<IDocumentEquipmentsResponse>({
+            url: PORTAL_ENDPOINTS.getDocumentEquipmentTags,
+            method: 'GET',
+        });
+        const { data } = response;
+        return data;
+    }catch(error) {
+        const payload = reduxRejectedHandler(error);
+        if(payload.code === 401) dispatchForbidden();
+        return thunkApi.rejectWithValue(payload);
+    }
+},
+{
+    condition: (_, api) => {
+        const { equipments } = api.getState() as (RootState);
+        if(equipments.docTags.length > 0){
+            return false;
+        }
+        return true;
     }
 });

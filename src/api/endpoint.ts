@@ -18,5 +18,9 @@ export const PORTAL_ENDPOINTS = {
     // Equipments
     baseEquipments: 'api/v1/equipments',
     searchEquipmentsClient: 'api/v1/equipments/clients/search',
-    searchEquipmentsUsers: 'api/v1/equipments/search'
+    searchEquipmentsUsers: 'api/v1/equipments/search',
+    getDocumentEquipmentTags: 'api/v1/common/equipments/tags',
+    searchInstitutions: 'api/v1/institutions',
+    searchIps: 'api/v1/ips/institution',
+    searchLocations: 'api/v1/equipments-locations/ips',
 }

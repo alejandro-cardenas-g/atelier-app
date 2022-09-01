@@ -35,6 +35,8 @@ export enum ROUTES{
         // PORTAL EQUIPMENTS ROUTES
         PORTAL_EQUIPOS = 'equipos',
         PORTAL_EQUIPOS_REGISTER = 'equipos/register',
+        PORTAL_EQUIPOS_DETAILS_READ = 'equipos/:id/read',
+        PORTAL_EQUIPOS_DETAILS_EDIT = 'equipos/:id/edit',
         PORTAL_EVENTOS = 'eventos'
         
 }

@@ -12,6 +12,7 @@ export const getCommonPending = (state: IStateCommon, action: PayloadAction<any>
 export const getCommonFullfilled = (state: IStateCommon, action: PayloadAction<ICommonResponse,any>): void => {
     state.loading = false;
     state.userTypes = action.payload.userTypes;
+    state.institutions = action.payload.institutions;
     state.exists = true;
 }
 

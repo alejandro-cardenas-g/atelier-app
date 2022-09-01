@@ -9,6 +9,7 @@ import { dispatchPatchSimpleClientDetail } from "../../../../redux/dispatchers/p
 import { setUserDetailSection } from "../../../../redux/dispatchers/portal/users.dispatch";
 import { getIsSuperUser } from "../../../../redux/selectors/auth.selector";
 import { getClientDetailsSection } from "../../../../redux/selectors/clients.selector";
+import { getInstitutions } from "../../../../redux/selectors/common.selector";
 import { CustomForm } from "../../../Common/CustomForm.component";
 
 export const ClientDetailsPersonalForm = ({clientDetail}: IProps) => {
@@ -18,6 +19,11 @@ export const ClientDetailsPersonalForm = ({clientDetail}: IProps) => {
         isLoading
     } = useSelector(getClientDetailsSection);
     const isSuperUser = useSelector(getIsSuperUser);
+    const institutions = useSelector(getInstitutions).map(item => ({
+        children: item.name,
+        label: item.name,
+        value: item.id
+    }));
 
     const [form] = Form.useForm();
 
@@ -28,7 +34,7 @@ export const ClientDetailsPersonalForm = ({clientDetail}: IProps) => {
         lastname: clientDetail.lastname || '',
         email: clientDetail.email || '',
         phone: clientDetail.phone || '',
-        company: clientDetail.company || ''
+        company: clientDetail.company || null
     }
 
     //BUILDING NEW LAYOUT
@@ -46,6 +52,12 @@ export const ClientDetailsPersonalForm = ({clientDetail}: IProps) => {
                 ...item.propsInput,
                 visible: hasChanged,
                 loading: isLoading && EClientDetailSection.BASIC === detailSection
+            }
+        }
+        if(item.type === ETypeFormItem.SELECT){
+            item.propsInput = {
+                ...item.propsInput,
+                options: institutions,
             }
         }
         return item;
@@ -98,5 +110,5 @@ interface IInitialValues{
     lastname: string;
     email: string;
     phone: string;
-    company: string;
+    company: number | null;
 }

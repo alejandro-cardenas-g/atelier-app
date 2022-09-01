@@ -7,6 +7,7 @@ import { PortalPage } from "../../pages/portal/portalPage.page";
 const UserComponentLazy = lazy(() => import('../../components/Portal/Users/users.component'));
 const ClientsComponentLazy = lazy(() => import('../../components/Portal/Clients/clients.component'));
 const EquipmentsComponentLazy = lazy(() => import('../../components/Portal/Equipments/equipments.component'));
+const EquipmentsRegisterComponentLazy = lazy(() => import('../../components/Portal/Equipments/register/equipmentsRegisterMain.component'));
 
 export const portalRoutes:IRoutes[] = [
     {
@@ -97,6 +98,33 @@ export const portalRoutes:IRoutes[] = [
                 layout: PortalPage,
                 props: {
 
+                }
+            },
+            {
+                path: ROUTES.PORTAL_EQUIPOS_REGISTER,
+                isPrivate: true,
+                component: EquipmentsRegisterComponentLazy,
+                layout: PortalPage,
+                props: {
+
+                }
+            },
+            {
+                path: ROUTES.PORTAL_EQUIPOS_DETAILS_READ,
+                isPrivate: true,
+                component: lazy(() => import('../../components/Portal/Equipments/details/equipmentDetails.component')),
+                layout: PortalPage,
+                props: {
+                    permission: 0
+                }
+            },
+            {
+                path: ROUTES.PORTAL_EQUIPOS_DETAILS_EDIT,
+                isPrivate: true,
+                component: lazy(() => import('../../components/Portal/Equipments/details/equipmentDetails.component')),
+                layout: PortalPage,
+                props: {
+                    permission: 1
                 }
             },
             {

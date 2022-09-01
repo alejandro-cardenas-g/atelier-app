@@ -6,3 +6,8 @@ export interface IEquipments{
     id: number;
     photoUrl: string;
 }
+
+export interface IDocTags{
+    value: string,
+    id: number
+}

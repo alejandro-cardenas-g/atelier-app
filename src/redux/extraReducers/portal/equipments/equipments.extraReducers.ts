@@ -1,12 +1,18 @@
 import { ActionReducerMapBuilder } from "@reduxjs/toolkit";
 import { IStateEquipments } from "../../../slices/portal/equipments.slice";
 import {
-    getEquipments
+    getEquipments,
+    getEquipmentTags,
+    getSingleEquipment
 } from "../../../thunks/equipments.thunk";
 import {
+    getDocumentEquipmentsTagsFullfilled,
+    getDocumentEquipmentsTagsRejected,
     getEquipmentsFullfilled,
     getEquipmentsPending,
-    getEquipmentsRejected
+    getEquipmentsRejected,
+    getSingleEquipmentFullFilled,
+    getSingleEquipmentRejected
 } from "./actions";
 
 export const extraReducer = (builder: ActionReducerMapBuilder<IStateEquipments>) => {
@@ -15,4 +21,12 @@ export const extraReducer = (builder: ActionReducerMapBuilder<IStateEquipments>)
         .addCase(getEquipments.pending, getEquipmentsPending) 
         .addCase(getEquipments.fulfilled, getEquipmentsFullfilled)
         .addCase(getEquipments.rejected, getEquipmentsRejected)
+        // GET DOC-EQ-TYPES
+        .addCase(getEquipmentTags.pending, getEquipmentsPending) 
+        .addCase(getEquipmentTags.fulfilled, getDocumentEquipmentsTagsFullfilled)
+        .addCase(getEquipmentTags.rejected, getDocumentEquipmentsTagsRejected)
+        // GET SINGLE EQUIPMENT
+        .addCase(getSingleEquipment.pending, getEquipmentsPending) 
+        .addCase(getSingleEquipment.fulfilled, getSingleEquipmentFullFilled)
+        .addCase(getSingleEquipment.rejected, getSingleEquipmentRejected)
 }

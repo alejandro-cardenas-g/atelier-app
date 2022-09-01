@@ -23,6 +23,13 @@ export const userDetailUploadFormLayout:IFormLayout[] = [
         }
     },
     {
+        key: 'actual-file-actions',
+        type: ETypeFormItem.CUSTOM,
+        props: {
+            className: 'form-details__item-actualfile-actions',
+        }
+    },
+    {
         key: 'dragger-file',
         type: ETypeFormItem.UPLOAD,
         props: {

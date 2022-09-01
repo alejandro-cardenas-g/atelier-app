@@ -33,7 +33,7 @@ export const ClientRegister = () => {
     email: '',
     password: '',
     phone: '',
-    company: ''
+    company: null
   }
 
   const handleSubmit = async(values: IRegisterForm) => {

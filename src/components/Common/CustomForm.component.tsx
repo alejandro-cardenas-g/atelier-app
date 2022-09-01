@@ -12,7 +12,8 @@ export const CustomForm = ({
     form,
     className = '',
     onFieldsChange = () => {},
-    disabled
+    disabled,
+    onValuesChange = (_:any) => {}
 }:IProps) => {
 
     return (
@@ -26,6 +27,7 @@ export const CustomForm = ({
             onFieldsChange={onFieldsChange}
             onChange={onFieldsChange}
             disabled = {disabled ? disabled : false}
+            onValuesChange={onValuesChange}
         >
             {
                 LAYOUT.map((item, index) => {
@@ -97,6 +99,18 @@ export const CustomForm = ({
                             </Form.Item>
                         </React.Fragment>
 
+                        case ETypeFormItem.DESCRIPTION:
+                            return <React.Fragment key={item.key}>
+                                <Form.Item {...item.props}>
+                                    <Input.TextArea {...item.propsInput}/>
+                                </Form.Item>
+                            </React.Fragment>
+
+                        case  ETypeFormItem.CUSTOM:
+                            return <React.Fragment key={item.key}>
+                            {item.Cop && <item.Cop {...item.props}/>}
+                        </React.Fragment>
+
                         default:
                             return null;
                     }
@@ -115,6 +129,7 @@ interface IProps{
     LAYOUT: IFormLayout[];
     form: FormInstance;
     className: string;
-    onFieldsChange?: () => void;
+    onFieldsChange?: (...args:any) => void;
     disabled?: boolean;
+    onValuesChange?: (valuesChange: any, values: any) => void;
 }

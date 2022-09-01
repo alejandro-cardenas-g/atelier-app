@@ -61,7 +61,7 @@ export const ClientsTable = () => {
             key: index,
             name: `${user.name} ${user.lastname}`,
             email: `${user.email}`,
-            company: `${user.company}`,
+            company: `${user.institution.name}`,
             dropdown: {
                 id: user.id,
                 slug: user.slug
@@ -121,7 +121,7 @@ export const ClientsTable = () => {
             dataIndex: TABLE_COLUMNS_LOCALES['email']['dataIndex'],
         },
         {
-            title: 'Compañía',
+            title: 'Institución',
             dataIndex: 'company',
         },
         {

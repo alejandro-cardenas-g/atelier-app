@@ -47,7 +47,7 @@ export const WritOptionInfo = () => {
 
     return (
 
-        <div className='portal-usuarios__info-actions ani-cont'>
+        <div className='portal-equipment__info-actions ani-cont'>
 
             <Button className='custom-btn__black' onClick={handleNavigate}><RollbackOutlined /> {OPTION_LOCALES['back']}</Button>
 

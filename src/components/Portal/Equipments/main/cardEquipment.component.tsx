@@ -1,6 +1,7 @@
 import { DeleteFilled, EditFilled, FundFilled } from "@ant-design/icons"
 import { Image, Typography } from "antd"
 import { useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
 import { IEquipments } from "../../../../interfaces/redux/equipments/reduxEquipments.interface"
 import { getPermissions } from "../../../../redux/selectors/auth.selector"
 import { Nullish } from "../../../Common/Nullish.component"
@@ -9,6 +10,7 @@ export const CardEquipment = ({
     equipment
 }:IProps) => {
     const { type, isSuperUser } = useSelector(getPermissions);
+    const navigate = useNavigate()
     return (
         <div
             className='equipment-card'
@@ -23,16 +25,16 @@ export const CardEquipment = ({
             />
             <div className='card-description'>
                 <Typography.Title className='description-title' level={5}>{equipment.name}</Typography.Title>
-                <Typography.Text className='description-serial'><span>Serial:</span> {equipment.serial}</Typography.Text>
+                <Typography.Text className='description-serial'><span>Serie</span> {equipment.serial}</Typography.Text>
                 <Typography.Text className='description-serial'><span>No.</span> {equipment.fixedActiveNumber}</Typography.Text>
                 <Typography.Text className='description-text'>{equipment.description}</Typography.Text>
             </div>
             <div className='card-actions'>
-                <FundFilled className='icon-details' />
+                <FundFilled className='icon-details' onClick={() => navigate(`/equipos/${equipment.id}/read`)}/>
                 {
                     (isSuperUser) &&
                     <>
-                        <EditFilled className='icon-edit'/>
+                        <EditFilled className='icon-edit'onClick={() => navigate(`/equipos/${equipment.id}/edit`)}/>
                         <DeleteFilled className='icon-delete'/>
                     </>
                 }

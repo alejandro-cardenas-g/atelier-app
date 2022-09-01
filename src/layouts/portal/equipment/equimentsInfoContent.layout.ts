@@ -10,7 +10,7 @@ export const EquipmentInfoContentLayout:IEquipmentInfoContentLayout[] = [
     },
     {
         type: EClientsContent.WRITE,
-        Component: Nullish
+        Component: WritOptionInfo
     },
     {
         type: EClientsContent.UPDATE,

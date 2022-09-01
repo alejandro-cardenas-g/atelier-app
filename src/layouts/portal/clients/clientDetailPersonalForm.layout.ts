@@ -64,19 +64,40 @@ export const clientDetailPersonalFormLayout:IFormLayout[] = [
         },
         inputPrefix: MailOutlined
     },
+    // {
+    //     key: 'input-company',
+    //     type: ETypeFormItem.INPUT,
+    //     props: {
+    //         className: 'form-details__item-company',
+    //         name:"company",
+    //         rules:[{ required: true, message: 'La compañia es obligatoria' }],
+    //     },
+    //     propsInput: {
+    //         placeholder: 'Companía*',
+    //         'aria-label': 'Compañía'
+    //     },
+    //     inputPrefix: GoldOutlined
+    // },
     {
+        //SELECT RED, SELECT IPS, SELECT LOCATION
         key: 'input-company',
-        type: ETypeFormItem.INPUT,
+        type: ETypeFormItem.SELECT,
         props: {
             className: 'form-details__item-company',
             name:"company",
             rules:[{ required: true, message: 'La compañia es obligatoria' }],
         },
         propsInput: {
-            placeholder: 'Companía*',
-            'aria-label': 'Compañía'
+            showSearch: true,
+            placeholder: 'Institución',
+            optionFilterProp: "children",
+            filterOption: (input: string, option: {
+                label: string;
+                value: number;
+                children: string;
+            } | undefined) => (option!.children as unknown as string).toLowerCase().includes(input.toLowerCase()),
+            options: []
         },
-        inputPrefix: GoldOutlined
     },
     {
         key: 'input-phone',

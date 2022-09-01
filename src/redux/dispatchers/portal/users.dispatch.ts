@@ -1,6 +1,6 @@
 import { store } from "../../../store/store";
 import { deleteUser, getUserDetail, getUsers, patchSimpleUserDetail, uploadDocument } from "../../thunks/users.thunk";
-import { SET_ACTIVE_USER, SET_USER_DETAIL_SECTION } from "../../slices/portal/users.slice";
+import { REMOVE_FILE, SET_ACTIVE_USER, SET_USER_DETAIL_SECTION } from "../../slices/portal/users.slice";
 import { EUserDetailSection } from "../../../interfaces/redux/usuarios/reduxUsers.interface";
 import { IPatchRequest } from "../../../interfaces/redux/usuarios/usersPayload.interface";
 import { ICommonProps } from "../../../interfaces/common/common.interface";
@@ -16,3 +16,4 @@ export const dispatchDeleteUser = (id: number) =>
     store.dispatch(deleteUser(id));
 export const dispatchUploadDocument = (data: {id:number, data: ICommonProps}) =>
     store.dispatch(uploadDocument(data))
+export const dispatchRemoveFile = () => store.dispatch(REMOVE_FILE('REMOVE'));

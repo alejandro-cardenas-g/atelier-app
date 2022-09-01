@@ -1,5 +1,6 @@
 import { createSlice, Reducer, SliceCaseReducers } from '@reduxjs/toolkit';
-import { IEquipments } from '../../../interfaces/redux/equipments/reduxEquipments.interface';
+import { IDocTags, IEquipments } from '../../../interfaces/redux/equipments/reduxEquipments.interface';
+import { ISingleEquipmentResponse } from '../../../interfaces/responses/portal/equipmentsResponse.interface';
 import { extraReducer } from '../../extraReducers/portal/equipments/equipments.extraReducers';
 
 const equipmentsSlice = createSlice<IStateEquipments, SliceCaseReducers<IStateEquipments>>({
@@ -7,7 +8,9 @@ const equipmentsSlice = createSlice<IStateEquipments, SliceCaseReducers<IStateEq
     initialState: {
         equipments: [],
         isLoading: false,
-        total: null
+        total: null,
+        docTags: [],
+        equipmentDetail: null
     },
     reducers: {
 
@@ -25,4 +28,6 @@ export interface IStateEquipments {
     equipments: IEquipments[];
     isLoading: boolean;
     total: number | null;
+    docTags: IDocTags[];
+    equipmentDetail: ISingleEquipmentResponse | null
 }

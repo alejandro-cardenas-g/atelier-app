@@ -22,6 +22,13 @@ const usersSlice = createSlice<IStateUsers, SliceCaseReducers<IStateUsers>>({
         SET_ACTIVE_USER: (state, action: {payload: number}) => {
             state.active = action.payload;
         },
+        REMOVE_FILE: (state, action: any) => {
+            state.userDetail = {
+                ...state.userDetail!,
+                filename: null,
+                fileUrl: null
+            }
+        }
     },
     extraReducers: extraReducer
 });
@@ -31,7 +38,8 @@ export const usersReducer:Reducer<IStateUsers> = usersSlice.reducer;
 export const {
     SET_USERS,
     SET_ACTIVE_USER,
-    SET_USER_DETAIL_SECTION
+    SET_USER_DETAIL_SECTION,
+    REMOVE_FILE
 } = usersSlice.actions;
 
 export interface IStateUsers {

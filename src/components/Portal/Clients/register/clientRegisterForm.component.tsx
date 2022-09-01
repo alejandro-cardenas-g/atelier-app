@@ -3,7 +3,7 @@ import { generateRandomString } from "../../../../utils/stringTools/generateRand
 import { CustomForm } from "../../../Common/CustomForm.component"
 import { ETypeFormItem } from "../../../../locales/portal/portalUsers.locals"
 import { useSelector } from 'react-redux'
-import { getUserTypes } from "../../../../redux/selectors/common.selector";
+import { getInstitutions, getUserTypes } from "../../../../redux/selectors/common.selector";
 import { ComponentForPassword } from "../../Users/utils/usersFormUtils.component"
 import { IRegisterForm } from "../../../../interfaces/portal/clients/contentUsers.interface"
 import { clientsRegistryFormLayout } from "../../../../layouts/portal/clients/clientsRegistryForm.layout"
@@ -16,6 +16,11 @@ export const ClientRegisterForm = ({
 }: IProps) => {
 
     const types = useSelector(getUserTypes);
+    const institutions = useSelector(getInstitutions).map(item => ({
+        children: item.name,
+        label: item.name,
+        value: item.id
+    }));
 
     //HANDLEGENERATEPASSWORD
     const handleGeneratePassword = () => {
@@ -48,6 +53,12 @@ export const ClientRegisterForm = ({
                         children: item.value
                     }
                 })
+            }
+        }
+        if(item.type === ETypeFormItem.SELECT){
+            item.propsInput = {
+                ...item.propsInput,
+                options: institutions,
             }
         }
         return item;

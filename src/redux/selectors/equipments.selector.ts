@@ -14,3 +14,14 @@ export const getEquipmentsPortal = (state:RootState) => {
         isLoading
     }
 };
+
+export const getDocTagsSelector = (state:RootState) => {
+
+    const { 
+        docTags
+    } = state.equipments;
+
+    return docTags;
+};
+
+export const getSingleEquipment = (state: RootState) => state.equipments.equipmentDetail;

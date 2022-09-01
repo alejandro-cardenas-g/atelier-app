@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { dispatchGetEquipments } from "../../../redux/dispatchers/portal/equipments.dispatch";
-import { getIsSuperUser } from "../../../redux/selectors/auth.selector";
 import { getEquipmentsPortal } from "../../../redux/selectors/equipments.selector";
 import { SpinnerScreen } from "../../Common/Spinner.component";
 import { CardGrid } from "./main/cardGrid.component";

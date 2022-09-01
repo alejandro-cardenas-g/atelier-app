@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { Form, message } from "antd";
 import { RcFile, UploadChangeParam, UploadFile } from "antd/lib/upload/interface";
-import { CloudDownloadOutlined } from "@ant-design/icons";
+import { CloudDownloadOutlined, DeleteOutlined } from "@ant-design/icons";
 import { userDetailUploadFormLayout } from "../../../../layouts/portal/users/userDetailUploadForm.layout";
 import { CustomForm } from "../../../Common/CustomForm.component"
 import { UploadBody } from "../utils/usersFormUtils.component";
 import { ETypeFormItem } from "../../../../locales/portal/portalUsers.locals";
 import { useSelector } from "react-redux";
 import { getUserDetailsSection } from "../../../../redux/selectors/users.selector";
-import { dispatchUploadDocument, setUserDetailSection } from "../../../../redux/dispatchers/portal/users.dispatch";
+import { dispatchRemoveFile, dispatchUploadDocument, setUserDetailSection } from "../../../../redux/dispatchers/portal/users.dispatch";
 import { EUserDetailSection, IUserDetail } from "../../../../interfaces/redux/usuarios/reduxUsers.interface";
 import { converToBase64 } from "../../../../utils/files/convertToBase64.util";
 import { getIsSuperUser } from "../../../../redux/selectors/auth.selector";
@@ -52,7 +52,23 @@ export const UserDetailsUploadForm = ({userDetail}: IProps) => {
             if(result.code === 401) dispatchForbidden();
             message.error(result.message);
         }
-
+    }
+    const handleDeleteFile = async() => {
+        try{
+            const response = await privateApi<IGetDocumentFile>({
+                url: `${PORTAL_ENDPOINTS.getPublicUrlUserDocument}/${userDetail.id}`,
+                method: 'DELETE'
+            });
+            if(response.status === 200){
+                message.success('El usuario ha sido actualizado');
+                dispatchRemoveFile();
+                setFile(null);
+            }
+        }catch(e){
+            const result = reduxRejectedHandler(e);
+            if(result.code === 401) dispatchForbidden();
+            message.error(result.message);
+        }
     }
 
     //BUILDING NEW LAYOUT
@@ -83,16 +99,16 @@ export const UserDetailsUploadForm = ({userDetail}: IProps) => {
             item.props = {
                 ...item.props,
                 style: {
-                    display: userDetail.filename ? 'block' : 'none',
+                    display: userDetail.filename ? 'flex' : 'none',
                     cursor: 'pointer'
-                },
-                editable: {
-                    icon: <CloudDownloadOutlined />,
-                    tooltip: 'Descargar',
-                    onStart: () => handleDownloadFile(),
-                    editing: false
                 }
             }
+        }
+        if(item.key === 'actual-file-actions'){
+            item.Cop = () => <div className='form-details__item-actualfile-actions' style={{display: userDetail.filename ? 'flex' : 'none'}}>
+                    <CloudDownloadOutlined className='icon-download' onClick={handleDownloadFile}/>
+                    <DeleteOutlined className='icon-delete' onClick={handleDeleteFile}/>
+                </div>
         }
         return item;
     });
@@ -112,7 +128,11 @@ export const UserDetailsUploadForm = ({userDetail}: IProps) => {
               name: file.name
             };
         }
-        dispatchUploadDocument({id: userDetail.id, data});
+        dispatchUploadDocument({id: userDetail.id, data}).then(result => {
+            if(result.meta.requestStatus === 'fulfilled'){
+                setFile(null);
+            }
+        });
     }
 
     return (

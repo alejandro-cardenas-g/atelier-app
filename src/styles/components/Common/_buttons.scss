@@ -72,6 +72,21 @@
             border: none !important;
         }
     }
+    &__white{
+        color: $dark-title3;
+        background-color: $color2;
+        border: none;
+        transition: background-color 0s ease;
+
+        &:hover, &:focus{
+            color: $dark-title3;
+            background-color: darken($color: $color2, $amount: 3) !important;
+        } 
+
+        &--border{
+            border: 1px solid darken($color: $color2, $amount: 9) !important;
+        }
+    }
 
 }
 

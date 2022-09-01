@@ -1,0 +1,152 @@
+.portal-equipments__registry{
+
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    padding: 0 0rem;
+    width: 100%;
+
+    @media (min-width: $bk-1000){
+        padding: 0 8rem;
+    }
+
+    @media(min-width: $bk-1200){
+        padding: 0 10rem;
+    }
+    
+    @media (min-width: $bk-1400){
+        width: 80%;
+    }
+
+    // @media( min-width: )
+    
+    .form-equipments{
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        width: 100%;
+        
+        @media (min-width: $bk-867){
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-areas: 
+            "required documents"
+            "name multiple"
+            "serial multiple"
+            "fixednumber multiple"
+            "description multiple"
+            "photo multiple"
+            "text-location multiple"
+            "network multiple"
+            "ips multiple"
+            "location multiple"
+            "saveButton saveButton";
+            gap: 1rem 6rem;
+        }
+
+        &__item{
+            &-name,
+            &-serial,
+            &-fixednumber,
+            &-description,
+            &-photo,
+            &-ips,
+            &-network,
+            &-location,
+            &-multiple-files{
+                max-width: 100%;
+                display: block;
+            }
+            &-saveButton{
+                max-width: 100%;
+                width: 100%;
+                display: block;
+                margin-top: 2rem;
+                .custom-btn__save{
+                    width: 100%;
+                    @media(min-width: $bk-480){
+                        width: 30rem;
+                    }
+                }
+            }
+
+            @media (min-width: $bk-867){
+                &-name{
+                    grid-area: name;
+                }
+                &-serial{
+                    grid-area: serial;
+                }
+                &-fixednumber{
+                    grid-area: fixednumber;
+                }
+                &-description{
+                    grid-area: description;
+                }
+                &-photo{
+                    grid-area: photo;
+                }
+                &-network{
+                    grid-area: network;
+                }
+                &-ips{
+                    grid-area: ips;
+                }
+                &-location{
+                    grid-area: location;
+                }
+                &-multiple-files{
+                    grid-area: multiple;
+                }
+                &-saveButton{
+                    grid-area: saveButton;
+                }
+            }
+
+        }
+        .separator-equipments{
+            &__required,
+            &__documents,
+            &__location{
+                color: $dark-title3;
+                font-weight: 300;
+                font-size: 2.2rem;
+                text-align: center;
+                margin-bottom: 2rem;
+            }
+
+            &__documents{
+                margin-top: 2rem;
+            }
+
+            @media (min-width: $bk-867){
+                &__required{
+                    text-align: left;
+                    grid-area: required;
+                }
+                &__documents{
+                    margin-top: 0;
+                    text-align: left;
+                    grid-area: documents;
+                }
+                &__location{
+                    text-align: left;
+                    grid-area: text-location;
+                }
+            }
+
+        }
+    }
+
+    & .form-equipments__item-saveButton .ant-form-item-control-input-content{
+        display: flex;
+        flex-direction: row !important;
+        justify-content: center !important;
+    }
+
+    .document-list-tags{
+        &-title{
+            color: $color1 !important;
+        }
+    }
+
+}
