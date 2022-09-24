@@ -1,7 +1,11 @@
 import { Tabs } from "antd"
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { dispatchGetSingleEquipment } from "../../../../redux/dispatchers/portal/equipments.dispatch";
+import { dispatchGetDocTagsEquipment, dispatchGetSingleEquipment } from "../../../../../redux/dispatchers/portal/equipments.dispatch";
+import { isLoadingEquipments } from "../../../../../redux/selectors/equipments.selector";
+import { SpinnerScreen } from "../../../../Common/Spinner.component";
+import { EquipmentInfo } from "../../utils/EquipmentInfo.component";
 import { CommonDetails } from "./commonDetails.component";
 import { DocumentDetails } from "./documentDetails.component";
 import { LocationDetails } from "./locationDetails.component";
@@ -9,8 +13,11 @@ import { LocationDetails } from "./locationDetails.component";
 export const EquipmentDetails = ({
     permission
 }: IProps) => {
-
+    useEffect(() => {
+        dispatchGetDocTagsEquipment()
+      }, [dispatchGetDocTagsEquipment])
     const { id } = useParams();
+    const isLoading = useSelector(isLoadingEquipments);
     const navigate = useNavigate();
     useEffect(() => {
         if(!id) navigate('/equipos');
@@ -19,18 +26,19 @@ export const EquipmentDetails = ({
         if(id){
             dispatchGetSingleEquipment(Number(id));
         }
-    }, [dispatchGetSingleEquipment])
+    }, [dispatchGetSingleEquipment, id])
+
+    if(isLoading) return <><SpinnerScreen/></>
 
     return (
         <div className="portal-equipments__details ani-cont">
-            <Tabs defaultActiveKey="1" onChange={console.log} className="equipments-details-tabs">
+            <EquipmentInfo type={3}/>
+            <Tabs defaultActiveKey="1" className="equipments-details-tabs">
                 <Tabs.TabPane tab="Detalles" key="1">
                     <CommonDetails/>
-                </Tabs.TabPane>
-                <Tabs.TabPane tab="Ubicacion" key="2">
                     <LocationDetails/>
                 </Tabs.TabPane>
-                <Tabs.TabPane tab="Documentos" key="3">
+                <Tabs.TabPane tab="Documentos" key="2">
                     <DocumentDetails/>
                 </Tabs.TabPane>
             </Tabs>

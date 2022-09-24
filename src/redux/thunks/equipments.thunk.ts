@@ -70,3 +70,34 @@ export const getEquipmentTags = createAsyncThunk('equipments/fetch-types', async
         return true;
     }
 });
+
+export const getParametersDrawer = createAsyncThunk('equipments/drawer-conf', async(
+    {
+        action,
+        id
+    }: {
+        action: 1 | 2,
+        id: number
+    },
+    thunkApi
+) => {
+    try{
+        let endpoint: string = PORTAL_ENDPOINTS.searchIps;
+        let field: "ips" | "location" = "ips";
+        if(action === 2){
+            endpoint = PORTAL_ENDPOINTS.searchLocations;
+            field = "location";
+        };
+
+        const response = await privateApi<{id: number, name: string}[]>({
+            url: `${endpoint}/${id}`,
+            method: 'GET',
+        });
+        const { data } = response;
+        return { data, field };
+    }catch(error) {
+        const payload = reduxRejectedHandler(error);
+        if(payload.code === 401) dispatchForbidden();
+        return thunkApi.rejectWithValue(payload);
+    }
+});

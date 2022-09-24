@@ -3,7 +3,8 @@ import { IStateEquipments } from "../../../slices/portal/equipments.slice";
 import {
     getEquipments,
     getEquipmentTags,
-    getSingleEquipment
+    getSingleEquipment,
+    getParametersDrawer
 } from "../../../thunks/equipments.thunk";
 import {
     getDocumentEquipmentsTagsFullfilled,
@@ -14,6 +15,7 @@ import {
     getSingleEquipmentFullFilled,
     getSingleEquipmentRejected
 } from "./actions";
+import { getDrawerActionsFulfilled, getDrawerActionsPending, getDrawerActionsRejected } from "./drawer.actions";
 
 export const extraReducer = (builder: ActionReducerMapBuilder<IStateEquipments>) => {
     builder
@@ -29,4 +31,8 @@ export const extraReducer = (builder: ActionReducerMapBuilder<IStateEquipments>)
         .addCase(getSingleEquipment.pending, getEquipmentsPending) 
         .addCase(getSingleEquipment.fulfilled, getSingleEquipmentFullFilled)
         .addCase(getSingleEquipment.rejected, getSingleEquipmentRejected)
+        // GET DRAWER CONF
+        .addCase(getParametersDrawer.pending, getDrawerActionsPending) 
+        .addCase(getParametersDrawer.fulfilled, getDrawerActionsFulfilled)
+        .addCase(getParametersDrawer.rejected, getDrawerActionsRejected)
 }

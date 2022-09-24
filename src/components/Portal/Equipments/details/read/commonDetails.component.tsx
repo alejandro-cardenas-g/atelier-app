@@ -1,10 +1,11 @@
 import { Form, Image } from 'antd'
+import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { equipmentsCommonDetailsFormLayout } from '../../../../layouts/portal/equipment/equipmentsCommonDetails.layout'
-import { ETypeFormItem } from '../../../../locales/portal/portalUsers.locals'
-import { getSingleEquipment } from '../../../../redux/selectors/equipments.selector'
-import { CustomForm } from '../../../Common/CustomForm.component'
-import { Nullish } from '../../../Common/Nullish.component'
+import { equipmentsCommonDetailsFormLayout } from '../../../../../layouts/portal/equipment/equipmentsCommonDetails.layout'
+import { ETypeFormItem } from '../../../../../locales/portal/portalUsers.locals'
+import { getSingleEquipment } from '../../../../../redux/selectors/equipments.selector'
+import { CustomForm } from '../../../../Common/CustomForm.component'
+import { Nullish } from '../../../../Common/Nullish.component'
 
 const inputs: (string|number)[] = [
   'dragger-photo',
@@ -15,13 +16,20 @@ export const CommonDetails = () => {
   const equipment = useSelector(getSingleEquipment);
 
   const [form] = Form.useForm();
-
   const initialValues = {
-    name: equipment?.name || '',
-    serial: equipment?.serial || '',
-    activeFixedNumber: equipment?.fixedActiveNumber || '',
-    description: equipment?.description || '',
+    name: equipment?.name,
+    serial: equipment?.serial,
+    activeFixedNumber: equipment?.fixedActiveNumber,
+    description: equipment?.description,
   }
+
+  useEffect(() => {
+    form.setFieldsValue(initialValues);
+  }, [equipment])
+
+
+
+  console.log(initialValues)
 
   let layout = equipmentsCommonDetailsFormLayout.map( (item) => {
     if(item.type === ETypeFormItem.INPUT){

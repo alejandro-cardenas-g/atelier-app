@@ -1,7 +1,7 @@
-import { RollbackOutlined } from "@ant-design/icons"
+import { DeleteFilled, EditFilled, FundFilled, RollbackOutlined } from "@ant-design/icons"
 import { Button } from "antd"
 import { useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { PORTAL_LOCALS } from "../../../../locales/portal/portal.locals"
 import { getIsSuperUser } from "../../../../redux/selectors/auth.selector"
 import { PATHNAMES } from "../../../../routers/routes.enum"
@@ -55,4 +55,48 @@ export const WritOptionInfo = () => {
 
     )
 
+}
+
+export const ReadListOptionInfo = () => {
+
+    const navigate = useNavigate();
+    const {id} = useParams();
+
+    const handleNavigate = () => {
+        navigate('/equipos');
+    }
+
+    return (
+
+        <div className='portal-equipment__info-actions ani-cont'>
+            <Button className='custom-btn__black' onClick={handleNavigate}><RollbackOutlined /> {OPTION_LOCALES['back']}</Button>
+            <div className="details-actions">
+                <EditFilled className="edit" onClick={() => navigate(`/equipos/${id}/edit`)}/>
+                <DeleteFilled className="delete"/>
+            </div>
+        </div>
+
+    )
+}
+
+export const EditListOptions = () => {
+
+    const navigate = useNavigate();
+    const {id} = useParams();
+
+    const handleNavigate = () => {
+        navigate('/equipos');
+    }
+
+    return (
+
+        <div className='portal-equipment__info-actions ani-cont'>
+            <Button className='custom-btn__black' onClick={handleNavigate}><RollbackOutlined /> {OPTION_LOCALES['back']}</Button>
+            <div className="details-actions">
+                <FundFilled className='edit' onClick={() => navigate(`/equipos/${id}/read`)}/>
+                <DeleteFilled className="delete"/>
+            </div>
+        </div>
+
+    )
 }

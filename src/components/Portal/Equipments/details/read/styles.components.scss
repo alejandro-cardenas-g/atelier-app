@@ -1,0 +1,84 @@
+@import '../../../../../styles/settings/variables';
+@import '../../../../../styles/components/Common/buttons';
+
+.location-details{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    margin-top: 5rem;
+    justify-content: center;
+    gap: 2rem;
+
+    @media(min-width: $bk-480){
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+
+    @media(min-width: $bk-680){
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .location-details-item{
+        text-align: center;
+        .ant-statistic-content-value{
+            font-size: 1.4rem !important;
+            
+            @media(min-width: $bk-480){
+                font-size: 1.8rem !important; 
+            }
+        }
+        .ant-statistic-title{
+            
+        }
+    }
+
+}
+
+.documents-details{
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    @media(min-width: $bk-480){
+        width: 60%;
+    }
+
+    .content{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        @media(min-width: $bk-480){
+            align-items: center;
+            justify-content: space-between;
+        }
+        @media(min-width: $bk-300){
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        .title{
+            cursor: pointer;
+            padding: 1rem;
+            color: $dark-title3;
+        }
+        .icon{
+            cursor: pointer;
+            color: red;
+        }
+
+        .custom-btn__blue{
+            margin-top: 1rem;
+            width: 100%;
+            @media(min-width: $bk-300){
+                margin-top: 0;
+                width: 8rem;
+            }
+        }
+    }
+    .divider{
+        margin: 1rem 0;
+    }
+}

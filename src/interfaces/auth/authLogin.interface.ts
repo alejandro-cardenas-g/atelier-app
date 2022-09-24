@@ -17,5 +17,5 @@ export interface IAuthDetails{
     iat: number;
     exp: number;
     isSuperUser: boolean;
-    company: null | string;
+    company: null | number;
 }

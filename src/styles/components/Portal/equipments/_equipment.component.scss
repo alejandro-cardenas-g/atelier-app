@@ -11,7 +11,22 @@
                 padding: 0 10rem;
             }
         }
-
+        .filter_button{
+            font-size: 2rem;
+            color: $dark-title3;
+            transition: color 0.3s ease;
+            cursor: pointer;
+            &:hover{
+                color: $green1;
+            }
+        }
     }
 
+}
+
+.ant-drawer-right.ant-drawer-open .ant-drawer-content-wrapper{
+    width: 20rem !important;
+    @media (min-width: $bk-680){
+        width: 30rem !important;
+    }
 }

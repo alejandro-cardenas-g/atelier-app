@@ -31,5 +31,8 @@ export const getPermissions = (state: RootState) => {
         type,
         isSuperUser
     }
-    
+}
+
+export const AuthUserSelector = (state: RootState) => {
+    return state.auth.user?.company;
 }

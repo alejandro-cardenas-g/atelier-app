@@ -25,3 +25,5 @@ export const getDocTagsSelector = (state:RootState) => {
 };
 
 export const getSingleEquipment = (state: RootState) => state.equipments.equipmentDetail;
+export const isLoadingEquipments = (state: RootState) => state.equipments.isLoading;
+export const getDrawerSelector = (state: RootState) => state.equipments.drawer;

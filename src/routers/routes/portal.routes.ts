@@ -112,7 +112,7 @@ export const portalRoutes:IRoutes[] = [
             {
                 path: ROUTES.PORTAL_EQUIPOS_DETAILS_READ,
                 isPrivate: true,
-                component: lazy(() => import('../../components/Portal/Equipments/details/equipmentDetails.component')),
+                component: lazy(() => import('../../components/Portal/Equipments/details/read/equipmentDetails.component')),
                 layout: PortalPage,
                 props: {
                     permission: 0
@@ -121,7 +121,7 @@ export const portalRoutes:IRoutes[] = [
             {
                 path: ROUTES.PORTAL_EQUIPOS_DETAILS_EDIT,
                 isPrivate: true,
-                component: lazy(() => import('../../components/Portal/Equipments/details/equipmentDetails.component')),
+                component: lazy(() => import('../../components/Portal/Equipments/details/edit/equipmentDetailsEdit.component')),
                 layout: PortalPage,
                 props: {
                     permission: 1

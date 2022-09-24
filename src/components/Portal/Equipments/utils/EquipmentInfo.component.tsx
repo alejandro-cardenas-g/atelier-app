@@ -1,8 +1,8 @@
 import { Col, Row, Typography } from 'antd'
-import { EClientsContent } from '../../../../locales/portal/portalClients.locals'
 import { useEffect, useState } from 'react';
 import { PORTAL_LOCALS } from '../../../../locales/portal/portal.locals';
 import { EquipmentInfoContentLayout } from '../../../../layouts/portal/equipment/equimentsInfoContent.layout';
+import { EEquipmentsContent } from '../../../../locales/portal/portalEquipment.locals';
 
 const OPTION_LOCALES = PORTAL_LOCALS['equipments']['info'];
 
@@ -34,5 +34,5 @@ export const EquipmentInfo = ({type}: IProps) => {
 }
 
 interface IProps{
-    type: EClientsContent
+    type: EEquipmentsContent
 }

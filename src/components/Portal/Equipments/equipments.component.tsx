@@ -1,4 +1,5 @@
-import { Pagination } from "antd";
+import { FilterOutlined } from "@ant-design/icons";
+import { Drawer, Pagination } from "antd";
 import { parse } from "query-string";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -8,6 +9,7 @@ import { getEquipmentsPortal } from "../../../redux/selectors/equipments.selecto
 import { SpinnerScreen } from "../../Common/Spinner.component";
 import { CardGrid } from "./main/cardGrid.component";
 import { EquipmentInfo } from "./utils/EquipmentInfo.component";
+import { DrawerFilters } from "./utils/filterModule/DrawerFilters.component";
 
 export const Equipments = () => {
 
@@ -22,6 +24,7 @@ export const Equipments = () => {
   const {equipments, total, isLoading} = useSelector(getEquipmentsPortal);
 
   const [ currentPage, setCurrentPage ] = useState<number>((typeof(page) === 'string') ? Number.parseInt(page) : 1);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
       const searching = (search && typeof(search) === 'string') ? `&search=${search}` : '';
@@ -47,26 +50,37 @@ export const Equipments = () => {
 
   return (
     <div className='portal-equipment portal-equipment__main portal-container ani-cont'>
+      <DrawerFilters visible={visible} closeFunction={() => setVisible(false)}/>
       <EquipmentInfo type={0}/>
-      {
-        isLoading ?
-          <SpinnerScreen/>
-        :
-          <React.Fragment>
+      <div className="">
+        <div style={{
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'end',
+          marginBottom: '1rem'
+        }} className="equipment-card-row">
+          <FilterOutlined className="filter_button" onClick={() => setVisible(true)}/>
+        </div>
+        {
+          isLoading ?
+            <SpinnerScreen/>
+          :
+            <React.Fragment>
 
-            <CardGrid equipments={equipments}/>
-            <Pagination
-              className='pagination'
-              total={total || 0}
-              onChange={(pageNumber) => handlePageNumber(pageNumber)}
-              pageSize={15}
-              showSizeChanger={false}
-              current={currentPage}
-              hideOnSinglePage
-            />
-          </React.Fragment>
+              <CardGrid equipments={equipments}/>
+              <Pagination
+                className='pagination'
+                total={total || 0}
+                onChange={(pageNumber) => handlePageNumber(pageNumber)}
+                pageSize={15}
+                showSizeChanger={false}
+                current={currentPage}
+                hideOnSinglePage
+              />
+            </React.Fragment>
 
-      }
+        }
+      </div>
 
     </div>
   )

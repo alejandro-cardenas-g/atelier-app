@@ -1,6 +1,36 @@
 .portal-equipments__details{
     display: flex;
+    flex-direction: column;
     width: 100%;
+
+    .portal-equipment__info{
+        margin-bottom: 2rem;
+        &-actions{
+            .details-actions{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 2rem;
+                font-size: 1.5rem;
+                .edit{
+                    color: lighten($color: $color3, $amount: 1);
+                    transition: color 0.3s ease;
+                    &:hover{
+                        color: lighten($color: $color3, $amount: 8);
+                        transform: scale(1.1);
+                    }
+                }
+                .delete{
+                    color: lighten($color: $primary-color, $amount: 18);
+                    transition: color 0.3s ease;
+                    &:hover{
+                        color: lighten($color: $primary-color, $amount: 14);
+                        transform: scale(1.1);
+                    }
+                }
+            }
+        }
+    }
     
     .equipments-details-tabs{
         width: 100%;
@@ -100,6 +130,103 @@
                     grid-row: 1/2;
                     grid-column: 3/4;
                     justify-content: end;
+                }
+            }
+        }
+    }
+
+    .form-common--edit{
+        display: grid;
+        grid-template-columns: 1fr;
+        width: 100%;
+
+        @media (min-width: $bk-680){
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-areas: 
+            "lname name name none"
+            "lserial serial serial none"
+            "lfixednumber fixednumber fixednumber none"
+            "ldescription description description none"
+            "photo photo image none"
+            "button button button none";
+            gap: 1rem 0rem;
+        }
+        
+        .form-common__item{
+            &-name,
+            &-name-label,
+            &-serial,
+            &-serial-label,
+            &-fixednumber,
+            &-fixednumber-label,
+            &-description,
+            &-description-label,
+            &-image,
+            &-saveButton,
+            &-photo{
+                max-width: 100%;
+                display: flex;
+                align-items: center;
+                margin: 0.5rem 0rem;
+                &-label{
+                    color: $dark-title3;
+                    font-size: 1.4rem;
+                }
+                @media(min-width: $bk-680){
+                    margin: 0 !important;
+                }
+            }
+
+            &-image{
+                // justify-content: flex-start;
+                // grid-row: 1/2;
+                .photo{ 
+                    height: 10rem;
+                    width: 10rem;
+                    @media(min-width: $bk-680){
+                        height: 6rem;
+                        width: 6rem;
+                    } 
+                }
+            }
+
+            &-photo{
+                height: 100%;
+            }
+
+            @media (min-width: $bk-680){
+                &-name{
+                    grid-area: name;
+                    &-label{
+                        grid-area: lname;
+                    }
+                }
+                &-serial{
+                    grid-area: serial;
+                    &-label{
+                        grid-area: lserial;
+                    }
+                }
+                &-fixednumber{
+                    grid-area: fixednumber;
+                    &-label{
+                        grid-area: lfixednumber;
+                    }
+                }
+                &-description{
+                    grid-area: description;
+                    &-label{
+                        grid-area: ldescription;
+                    }
+                }
+                &-photo{
+                    grid-area: photo;
+                }
+                &-image{
+                    grid-area: image;
+                }
+                &-saveButton{
+                    grid-area: button;
                 }
             }
         }

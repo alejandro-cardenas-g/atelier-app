@@ -116,7 +116,6 @@ export const UserDetailsUploadForm = ({userDetail}: IProps) => {
     const handleSubmit = async() => {
         if(!isSuperUser) return;
         const data:{[key:string]: any} = {};
-        console.log(file)
         setHasChanged(false);
         setUserDetailSection(null);
         if(file){

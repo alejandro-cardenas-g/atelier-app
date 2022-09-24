@@ -1,24 +1,28 @@
 import { Nullish } from "../../../components/Common/Nullish.component";
-import { ReadOptionInfo, WritOptionInfo } from "../../../components/Portal/Equipments/utils/equipmentsInfoOption.component";
+import { EditListOptions, ReadListOptionInfo, ReadOptionInfo, WritOptionInfo } from "../../../components/Portal/Equipments/utils/equipmentsInfoOption.component";
 import { JSXComponent } from '../../../interfaces/common/common.interface';
-import { EClientsContent } from "../../../locales/portal/portalClients.locals";
+import { EEquipmentsContent } from "../../../locales/portal/portalEquipment.locals";
 
 export const EquipmentInfoContentLayout:IEquipmentInfoContentLayout[] = [
     {
-        type: EClientsContent.READ,
+        type: EEquipmentsContent.READ,
         Component: ReadOptionInfo
     },
     {
-        type: EClientsContent.WRITE,
+        type: EEquipmentsContent.WRITE,
         Component: WritOptionInfo
     },
     {
-        type: EClientsContent.UPDATE,
-        Component: Nullish
-    }
+        type: EEquipmentsContent.UPDATE,
+        Component: EditListOptions
+    },
+    {
+        type: EEquipmentsContent.READ_LIST,
+        Component: ReadListOptionInfo
+    },
 ]
 
 interface IEquipmentInfoContentLayout{
-    type: EClientsContent;
+    type: EEquipmentsContent;
     Component: JSXComponent
 }
